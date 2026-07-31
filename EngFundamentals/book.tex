@@ -6,7 +6,7 @@
 \usepackage{tikz,pgfplots,wrapfig}
 \usepackage{tikz-3dplot}
 \usepackage{arydshln}
-\usepackage{makeidx}
+\usepackage{makeidx,xspace}
 \makeindex
 
 \usepackage[hyperindex]{hyperref}
@@ -24,6 +24,19 @@
 \evensidemargin     0.5in
 \textheight         8.5in
 \textwidth          5.5in
+
+\newif\ifcomments
+\commentstrue
+
+\ifcomments
+\newcommand{\gpt}[1]{\textcolor{blue!90!black}{#1}}
+\newcommand{\HP}[1]{\textcolor{green!70!black}{#1}}
+\newcommand{\JC}[1]{\textcolor{cyan!90!black}{#1}}
+\else
+\newcommand{\gpt}[1]{}
+\newcommand{\HP}[1]{}
+\newcommand{\JC}[1]{}
+\fi
 
 \iftrue
 \newtheorem{theorem}{Theorem}[section]
@@ -101,6 +114,10 @@
 \def\nostarchapter[#1]#2{\edef\@mychapter{\thechapter}\stdchapter[{#1}]{#2}\splitchapter{\@mychapter}}
 \makeatother
 
+%\newcommand{\univ}{Texas A\&M University\xspace}
+%\newcommand{\mascot}{an Aggie\xspace}
+\newcommand{\univ}{Duke University\xspace}
+\newcommand{\mascot}{a Blue Devil\xspace}
 
 \begin{document}
 

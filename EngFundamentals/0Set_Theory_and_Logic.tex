@@ -17,7 +17,7 @@ An unproven proposition for which there is some sort of empirical evidence is kn
 Mathematical logic is the framework upon which rigorous proofs are built.
 It is the study of the principles and criteria of valid inference and demonstrations.
 
-Logicians have analyzed set theory in great details, formulating a collection of axioms that affords a broad enough and strong enough foundation to mathematical reasoning.
+Logicians have analyzed set theory in great detail, formulating collections of axioms that provide a sufficiently broad and strong foundation for mathematical reasoning.
 The standard form of axiomatic set theory is denoted ZFC and it consists of the Zermelo-Fraenkel (ZF) axioms combined with the axiom of choice (C).
 Each of the axioms included in this theory expresses a property of sets that is widely accepted by mathematicians.
 It is unfortunately true that careless use of set theory can lead to contradictions.
@@ -27,7 +27,10 @@ A rigorous analysis of set theory belongs to the foundations of mathematics and 
 The study of these topics is, in itself, a formidable task.
 For our purposes, it will suffice to approach basic logical concepts informally.
 That is, we adopt a naive point of view regarding set theory and assume that the meaning of a set as a collection of objects is intuitively clear.
-While informal logic is not itself rigorous, it provides the underpinning for rigorous proofs.
+%While informal logic is not itself rigorous, it provides the underpinning for rigorous proofs.
+Although our treatment of logic and set theory will be informal, the logical arguments we make can still be rigorous.
+We will simply not develop their formal axiomatic foundations.
+
 The rules we follow in dealing with sets are derived from established axioms.
 At some point of your academic career, you may wish to study set theory and logic in greater detail.
 Our main purpose here is to learn how to state mathematical results clearly and how to prove them.
@@ -35,11 +38,11 @@ Our main purpose here is to learn how to state mathematical results clearly and 
 
 \section{Statements}
 
-A proof in mathematics demonstrates the truth of certain \textbf{statement}.
+A proof in mathematics demonstrates the truth of a certain \textbf{statement}.
 It is therefore natural to begin with a brief discussion of statements.
-A statement, or \textbf{proposition}, is the content of an assertion.
-It is either true or false, but cannot be both true and false at the same time.
-For example, the expression ``There are no classes at Texas A\&M University today'' is a statement since it is either true or false.
+In classical logic, a statement, or \textbf{proposition}, is a declarative assertion that has exactly one truth value: true or false.
+For example, the expression ``There were no classes at \univ on January 1, 2024'' is a statement since it is either true or false.
+
 The expression ``Do not cheat and do not tolerate those who do'' is not a statement.
 Note that an expression being a statement does not depend on whether we personally can verify its validity.
 The expression ``The base of the natural logarithm, denoted $e$, is an irrational number'' is a statement that most of us cannot prove.
@@ -98,7 +101,8 @@ F & T \tabularnewline
 %Thus, its truth table is given by
 
 The next method of combining mathematical statements is slightly more subtle than the preceding ones.
-The \defn{logic}{conditional connective} $P \rightarrow Q$ is a logical statement that is read ``if $P$ then $Q$" and defined by the truth table
+The \defn{logic}{conditional connective} $P \rightarrow Q$ is a logical statement that is read ``if $P$ then $Q$'' and defined by the truth table
+
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -118,7 +122,7 @@ Although the given definition may seem strange at first glance, this truth table
 
 To motivate this definition, one can think of $P \rightarrow Q$ as a promise that $Q$ is true whenever $P$ is true.
 When $P$ is false, the promise is kept by default.
-For example, suppose your friend promises ``if it is sunny tomorrow, I will ride my bike".
+For example, suppose your friend promises ``if it is sunny tomorrow, I will ride my bike''.
 We will call this a true statement if they keep their promise.
 If it rains and they don't ride their bike, most people would agree that they have still kept their promise.
 Therefore, this definition allows one to combine many statements together and detect broken promises without being distracted by uninformative statements.
@@ -154,7 +158,7 @@ We wish to make a truth table for the following statement,
 \begin{equation} \label{equation:LogicStatement}
 (P \rightarrow R) \wedge (Q \vee \neg R) .
 \end{equation}
-We can form the true table for this statement, using simple steps, as follows
+Using simple steps, we can form the true table for this statement.
 \begin{center}
 \begin{tabular}{|c|c|c|c:c:c:c:c:c:c|}
 \hline
@@ -221,8 +225,9 @@ is a tautology, a contradiction, or neither.
 Strictly speaking, relations between statements are not formal statements themselves.
 They are \emph{meta-statements} about some propositions.
 We study two types of relations between statements, \emph{implication} and \emph{equivalence}.
-An example of an implication meta-statement is the observation that ``if the statement `Robert graduated from Texas A\&M University' is true, then it implies that the statement `Robert is an Aggie' is also true.''
-Another example of a meta-statement is ``the statement `Fred is an Aggie and Fred is honest' being true is equivalent to the statement `Fred is honest and Fred is an Aggie' being true.''
+An example of an implication meta-statement is the observation that ``if the statement `Robert graduated from \univ' is true, then it implies that the statement `Robert is \mascot' is also true.''
+
+Another example of a meta-statement is ``the statement `Fred is \mascot and Fred is honest' being true is equivalent to the statement `Fred is honest and Fred is \mascot' being true.''
 These two examples illustrate how meta-statements describe the relationship between statements.
 It is also instructive to note that implications and equivalences are the meta-statement analogs of conditionals and biconditionals.
 
@@ -232,7 +237,7 @@ Necessity is the key aspect of this sentence; the fact that $P$ and $Q$ both hap
 %$P \Rightarrow Q$ is read as ``$P$ implies $Q$'' and this means that $Q$ cannot be false if $P$ is true.
 To state that $P$ implies $Q$, denoted by $P \Rightarrow Q$, one needs the conditional $P \rightarrow Q$ to be true under all possible circumstances.
 
-Meta-statements, such as ``$P$ implies Q'', can be defined formally only when $P$ and $Q$ are both logical functions of other propositions.
+In the propositional setting considered here, where $P$ and $Q$ are formulas built from propositional variables, the meta-statement `$P$ implies $Q$' means that every truth assignment satisfying $P$ also satisfies $Q$.
 For example, consider $P=R \wedge (R \to S)$ and $Q=S$.
 Then, the truth of the statement $P \to Q$ depends only on the truth of external propositions $R$ and $S$.
 
@@ -253,7 +258,9 @@ Let $P$, $Q$, $R$ and $S$ be statements.
 \item $(P \vee Q) \wedge \neg P \Rightarrow Q$.
 \item $P \leftrightarrow Q \Rightarrow P \rightarrow Q$.
 \item $(P \rightarrow Q) \wedge (Q \rightarrow P) \Rightarrow P \rightarrow Q$.
-\item $(P \rightarrow Q) \wedge (Q \rightarrow R) \Rightarrow P \rightarrow R$
+
+\item $(P \rightarrow Q) \wedge (Q \rightarrow R) \Rightarrow P \rightarrow R$.
+
 \item $(P \rightarrow Q) \wedge (R \rightarrow S) \wedge (P \vee R) \Rightarrow Q \vee S$.
 \end{enumerate}
 \end{fact}
@@ -303,7 +310,8 @@ More precisely, $P$ is equivalent to $Q$ if the statement $P \leftrightarrow Q$ 
 We denote the sentence ``$P$ is equivalent to $Q$'' by simply writing ``$P \Leftrightarrow Q$.''
 The meta-statement $P \Leftrightarrow Q$ holds if and only if $P \Rightarrow Q$ and $Q \Rightarrow P$ are both true.
 Being able to recognize that two statements are equivalent will become handy.
-It is sometime possible to demonstrate a result by finding an alternative, equivalent form of the statement that is easier to prove than the original form.
+It is sometimes possible to prove a result by finding an equivalent form of the statement that is easier to establish.
+
 A list of important equivalences appears below.
 
 \begin{fact}
@@ -335,8 +343,8 @@ Given a conditional statement of the form $P \rightarrow Q$, we call $\neg Q \ri
 The equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$ noted above is used extensively in constructing mathematical proofs.
 
 One must be careful not to allow contradictions in logical arguments because, starting from a contradiction, anything can be proven true.
-For example, one can verify that $P \wedge \neg P \Rightarrow Q$ is a valid logical equivalence.
-But, $Q$ doesn't appear on the LHS.
+For example, one can verify that $P \wedge \neg P \Rightarrow Q$ is a valid logical implication.
+This is true even though $Q$ doesn't appear on the LHS.
 Thus, a contradiction in your assumptions can lead to a ``correct'' proof for an arbitrary statement.
 
 Fortunately, propositional logic has an axiomatic formulation that is consistent, complete, and decidable.
@@ -374,48 +382,51 @@ Let $U$ be a specific collection of elements and let $P(x)$ be a statement that 
 In first-order predicate logic, quantifiers are applied to predicates in order to make statements about collections of elements.
 Later, we will see that quantifiers are of paramount importance in rigorous proofs.
 
-The \defn{logic}{universal quantifier} is typically denoted by $\forall$ and it is informally read ``for all.''
+The \defn{logic}{universal quantifier} is denoted by $\forall$ which is read ``for all.''
 It follows that the statement ``$\forall x \in U, P(x)$'' is true if $P(x)$ is true for all values of $x$ in $U$.
-It can be seen as shorthand for an iterated conjunction because
+Thus, it is analogous to an iterated conjunction.
+If $U=\{u_1,\ldots,u_n\}$ is finite, then $\forall x\in U,\,P(x)$ is equivalent to $P(u_1)\wedge\cdots\wedge P(u_n)$.
+In general, we have
 \[ \forall x \in U, P(x) \Leftrightarrow \bigwedge_{x\in U} P(x), \]
 where $\Leftrightarrow$ indicates that these statements are equivalent for all sets $U$ and predicates $P$.
 If $U=\emptyset$ is the empty set, then $\forall x \in U, P(x)$ is vacuously true by convention because there are no elements in $U$ to test with $P(x)$.
 
 Returning to the motivating example, let us also define $Q(x)=$``$x$ is mortal''.
 With these definitions, we can write the statement ``Every person is mortal'' as $\forall x, ( P(x) \to Q(x) )$.
-In logic, this usage implies that $x$ ranges over the universal set.
+In logic, an unqualified variable $x$ is assumed to range over the domain of discourse (or universal set).
 In engineering mathematics, however, the range of free variables is typically stated explicitly.
  
-The other type of quantifier often seen in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$.
+The other type of quantifier seen in mathematical proofs is the \defn{logic}{existential quantifier}, denoted $\exists$, which is read ``there exists''.
 The statement ``$\exists x \in U, P(x)$'' is true if $P(x)$ is true for at least one value of $x$ in $U$.
-It can be seen as shorthand for an iterated disjunction because
-\[ \exists x \in U, P(x) \Leftrightarrow \bigvee_{x\in U} P(x), \]
+Thus, the existential quantifier is an iterated disjunction.
+If $U=\{u_1,\ldots,u_n\}$ is finite, then $\exists x\in U,\,P(x)$ is equivalent to $P(u_1)\vee\cdots\vee P(u_n)$.
+More generally, we write
+\[ \exists x \in U, P(x) \Leftrightarrow \bigvee_{x\in U} P(x). \]
 If $U=\emptyset$ is the empty set, then $\exists x \in U, P(x)$ is false by convention because there are no elements in $U$.
 
-The idea of \defn{logic}{universal instantiation} is that, if a statement $P(x)$ is true for all $x\in U$, then there must exist some $x_0 \in U$ such that $P(x_0)$ is true.
-However, this implicitly assumes that $U$ is not empty.
-In fact, universal instantiation does not hold when $U$ is empty.
+The term \defn{logic}{universal instantiation} identifies the inference from $\forall x\in U,\,P(x)$ to $P(x_0)$ for some specified $x_0\in U$. This rule does not assert that such an $x_0$ exists but rather the conditional that, if a statement $P(x)$ is true for all $x\in U$ and $U$ is not empty, then we can find $x_0 \in U$ such that $P(x_0)$ is true.
+A common mistake is to neglect the required condition $U$ is not empty, but universal instantiation does not imply anything when $U$ is empty.
 If $U$ is not empty though, then universal instantiation implies that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
 
-
-Based on the meaning of these quantifiers, one can infer the logical implications
+Based on the meaning of these quantifiers, one can infer the logical equivalences
 \begin{gather*}
 \neg \left( \forall x \in U, P(x) \right)
 \Leftrightarrow \exists x \in U, \neg P(x) \\
 \neg \left( \exists x \in U,  P(x) \right)
 \Leftrightarrow \forall x \in U,  \neg P(x) .
 \end{gather*}
+
 Using the connection to conjunction and disjunction, these rules are actually equivalent to De Morgan's law for iterated conjunctions and disjunctions.
 
 % Proof P->Q by contradiction: Suppose P AND NOT Q
-% Suppose "exist x, NOT P(x) AND forall x, P(x)"
+% Suppose ``exist x, NOT P(x) AND forall x, P(x)''
 % exist x, NOT P(x) => NOT P(x0)
 % forall x, P(x) => P(x0)
 % Contradiction implies P->Q
 
 One can also define predicates with multiple free variables such as $P(x,y)=$``$x$ contains $y$''.
 Once again, these statements are assumed to be true or false for every choice of $x,y$.
-There are 8 possible quantifiers for a 2-variable predicate and they can be arranged according based on some natural implications.
+There are 8 possible quantifiers for a 2-variable predicate and they are typically organized around some natural implications.
 Assuming that $x,y$ are taken from non-empty sets, one finds that
 \[ \begin{array}{ccccccc}
   \forall x, \forall y, P(x,y) & \Rightarrow & \exists x, \forall y, P(x,y) & \Rightarrow & \forall y, \exists x, P(x,y) & \Rightarrow & \exists y, \exists x, P(x,y) \\
@@ -423,20 +434,25 @@ Assuming that $x,y$ are taken from non-empty sets, one finds that
   \forall y, \forall x, P(x,y) & \Rightarrow & \exists y, \forall x, P(x,y) & \Rightarrow & \forall x, \exists y, P(x,y) & \Rightarrow & \exists x, \exists y, P(x,y)
   \end{array}
 \]
-All of these implications follow from $\forall x \forall y = \forall y \forall x$, $\exists x \exists y = \exists y \exists x$, and the single variable inference rule $\forall x, P(x) \Rightarrow \exists x, P(x)$ except for two: $\exists x, \forall y, P(x,y) \Rightarrow \forall y, \exists x, P(x,y)$ and its symmetric pair.
+All of these implications follow from a few natural rules.
+First, we have the reversibility of both $\forall x, \forall y$ and $\exists x, \exists y$.
+Then, we have logical implication of universal instantiation: $\forall x, P(x) \Rightarrow \exists x, P(x)$.
+Lastly, we have $\exists x, \forall y, P(x,y) \Rightarrow \forall y, \exists x, P(x,y)$ and its symmetric pair.
 
-To understand this last implication, consider an example where $x$ is in a set $I$ of images and $y$ is in a set $C$ of colors.
+To understand the last implication, consider an example where $x$ is in a set $I$ of images and $y$ is in a set $C$ of colors.
 Then, $\exists x, \forall y, P(x,y)$ means ``there is an image that contains all the colors'' (e.g., an image of a rainbow) and $\forall y, \exists x, P(x,y)$ means ``for each color there is an image containing that color''.
 The first statement implies the second because, in the second, the rainbow image satisfies the $\exists x$ quantifier for all $y$.
 To see that the implication is not an equivalence, consider a set of pictures where each image contains exactly one color and there is one such image for each color.
-In this case, it is true that ``for each color there is an image containing that color'' but it is not true that `there is an image that contains all the colors''.
+In this case, it is true that ``for each color there is an image containing that color'' but it is not true that ``there is an image that contains all the colors''.
 
 In quantified statements, such as $\exists x\in U, P(x)$, the variable $x$ is called a \textbf{bound variable} because its value cannot be chosen freely.
 Similarly, in the statement $\exists y \in U, P(x,y)$, $x$ is a free variable and $y$ is a bound variable.
 
 Finally, we note that first-order predicate logic has an axiomatic formulation that is consistent, complete, and semidecidable.
-In this context, \defn{logic}{semidecidable} means that there is an algorithm that, if it terminates, correctly determines the truth of any postulated implication.
-But, it is only guaranteed to terminate for true postulates.
+Completeness means that every logically valid first-order formula is provable in this deductive system.
+It does not mean that every sentence is decidable in other theories such as ZFC.
+Here, \defn{logic}{semidecidable} means that there is an algorithm that halts and accepts every logically valid formula, but may run forever when given an invalid formula.
+Thus, validity in first-order logic is semidecidable but not decidable.
 
 %In mathematics, a \textbf{free variable} is a notation for a place or places in an expression into which some definite substitution may take place, or with respect to which some operation (e.g. quantification) may take place. 
 %A \textbf{bound variable} is a variable for which we have no ability to choose the value.
@@ -451,16 +467,18 @@ Ultimately, a mathematical proof is a convincing argument that starts from some 
 Most proofs do not mention the logical rules of inference used in the derivation.
 Rather, they focus on the mathematical justification of each step, leaving to the reader the task of filling the logical gaps.
 The mathematics is the major issue.
-Yet, it is essential that you understand the underlying logic behind the derivation as to not get confused while reading or writing a proof.
+Yet it is essential to understand the logic underlying the derivation so as not to become confused while reading or writing a proof.
 
-True statements in mathematics have different names.
-They can be called theorems, propositions, lemmas, corollaries and exercises.
+Claimed statements in mathematics have different names.
+They can be called theorems, propositions, lemmas, and corollaries.
 A \defn{logic}{theorem} is a statement that can be proved on the basis of explicitly stated or previously agreed assumptions.
 A \defn{logic}{proposition} is a statement not associated with any particular theorem; this term sometimes connotes a statement with a simple proof.
 A \defn{logic}{lemma} is a proven proposition which is used as a stepping stone to a larger result rather than an independent statement in itself.
 A \defn{logic}{corollary} is a mathematical statement which follows easily from a previously proven statement, typically a mathematical theorem. 
 The distinction between these names and their definitions is somewhat arbitrary.
-Ultimately, they are all synonymous to a true statement.
+Ultimately, these are labels for mathematical claims distinguished mainly by their role and perceived importance.
+One may also separate conceptually the statement of a mathematical claim from its proof.
+Each statement must be proved before it is accepted as a true but the terms above are only used when the author believes a correct proof exists.
 
 A proof should be written in grammatically correct English.
 Complete sentences should be used, with full punctuation.
@@ -473,14 +491,27 @@ One way to learn to construct proofs is to read a lot of well written proofs, to
 
 The simplest form of proof for a statement of the form $P \rightarrow Q$ is the \textbf{direct proof}.
 First assume that $P$ is true.
-Produce a series of steps, each one following from the previous ones, that eventually leads to conclusion $Q$.
-It warrants the name ``direct proof'' only to distinguish it from other, more intricate, methods of proof.
+Produce a sequence of justified steps, each following from the assumptions and previously established results, that eventually leads to the conclusion $Q$.
+
+\begin{example}
+``If an integer $n$ is odd, then $n^2$ is odd.''
+
+ An integer $n$ is called odd if $n=2k+1$ for some integer $k$.
+ Working directly, we compute $n^2 = 2 (2k^2+2k)+1$ and observe that it satisfies the definition of odd.
+\end{example}
 
 \paragraph{Proof by Contrapositive:}
 A proof by contrapositive takes advantage of the mathematical equivalence $P \rightarrow Q \Leftrightarrow \neg Q \rightarrow \neg P$.
 That is, a proof by contrapositive begins by assuming that $Q$ is false (i.e., $\neg Q$ is true).
 It then produces a series of direct implications leading to the conclusion that $P$ is false (i.e., $\neg P$ is true).
 It follows that $Q$ cannot be false when $P$ is true, so $P \rightarrow Q$.
+
+\begin{example} \label{example:even_square}
+``If an integer $n$ has an even square, then $n$ is even.''
+
+Its contrapositive is: ``If $n$ is odd, then $n^2$ is odd.'' because ``$n$ is odd'' is the logical negation of ``$n$ is even''.
+Thus, our desired statement follows as the contrapositive of our direct proof example.
+\end{example}
 
 \paragraph{Proof by Contradiction:}
 A proof by contradiction is based on the mathematical equivalence $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$.
@@ -489,15 +520,15 @@ Then, a series of direct implications are given that lead to a logical contradic
 Hence, $P \wedge \neg Q$ cannot be true and $P \rightarrow Q$.
 
 \begin{example} \label{example:SquareRoot2}
-We wish to show that $\sqrt{2}$ is an irrational number.
+``$\sqrt{2}$ is an irrational number.''
 
-First, suppose that $\sqrt{2}$ is a rational number.
-This would imply that there exist integers $p$ and $q$ with $q \neq 0$ such that $p/q = \sqrt{2}$.
+First, suppose that $\sqrt{2}$ is not an irrational number.
+Then, it is a rational number and there exist integers $p$ and $q$ with $q \neq 0$ such that $p/q = \sqrt{2}$.
 In fact, we can further assume that the fraction $p/q$ is irreducible.
 That is, $p$ and $q$ are coprime integers (they have no common factor greater than 1).
 From $p/q = \sqrt{2}$, it follows that $p = \sqrt{2} q$, and so $p^2 = 2 q^2$.
-Thus $p^2$ is an even number, which implies that $p$ itself is even (only even numbers have even squares).
-Because $p$ is even, there exists an integer $r$ satisfying $p = 2r$.
+Thus, $p^2$ is an even number which implies that $p$ is even by our contrapositive example.
+Since $p$ is even, there exists an integer $r$ satisfying $p = 2r$.
 We then obtain the equation $(2r)^2 = 2q^2$, which is equivalent to $2r^2 = q^2$ after simplification.
 Because $2r^2$ is even, it follows that $q^2$ is even, which means that $q$ is also even.
 We conclude that $p$ and $q$ are both even.
@@ -506,48 +537,46 @@ Hence, the initial assumption that $\sqrt{2}$ is a rational number must be false
 That is to say, $\sqrt{2}$ is irrational.
 \end{example}
 
-\begin{example}
-Consider the following statement, which is related to Example~\ref{example:SquareRoot2}.
-``If $\sqrt{2}$ is rational, then $\sqrt{2}$ can be expressed as an irreducible fraction.''
-The contrapositive of this statement is ``If $\sqrt{2}$ cannot be expressed as an irreducible fraction, then $\sqrt{2}$ is not rational.''
-Above, we proved that $\sqrt{2}$ cannot be expressed as an irreducible fraction and therefore $\sqrt{2}$ is not a rational number.
-\end{example}
-
 The final proof strategy we discuss is finite induction.
 
 \begin{definition}
 Let $P(n)$ be a logical statement for each $n\in \mathbb{N}$.
-The principle of \defn{logic}{mathematical induction} states that $P(n)$ is true all $n\in \mathbb{N}$ if:
+The principle of \defn{logic}{mathematical induction} states that $P(n)$ is true for all $n\in \mathbb{N}$ if:
+
 \begin{enumerate}
 \item $P(1)$ is true, and
 \item $P(n)\to P(n+1)$ for all $n\in \mathbb{N}$.
 \end{enumerate}
 \end{definition}
 
-From a foundational perspective, this statement is essentially equivalent to the existence and uniqueness of the natural numbers.
-It is taken as an axiom in the Peano axiomatic formulation of arithmetic.
-In contrast, the ZF axiomatic formulation of set theory defines the natural numbers as the smallest inductive set and the existence of an inductive set is taken as an axiom.
+From a foundational perspective, induction is built into standard foundations in different ways.
+In the original Peano arithmetic, induction is included as an axiom and used to identify the natural numbers.
+In ZF set theory, the axiom of infinity guarantees an inductive set, $\mathbb N$ is constructed as the least inductive set, and the induction principle is then proved from that construction.
 
 \begin{example}
 Let $S_n = \sum_{i=1}^n i$.
 We wish to show that the statement $P(n)=$ ``$S_n = \frac{n^2 + n}{2}$'' is true for all $n\in \mathbb{N}$.
 For $n=1$, this is true because both expressions equal $1$.
-For $P(n+1)$, we are given $P(n)$ and can write
+For the inductive step, fix $n\in\mathbb N$ and assume $P(n)$ so that
 \[ S_{n+1} = S_n + (n+1) = \frac{n^2 + n}{2} + n+1 = \frac{n^2 + 3n + 2}{2} = \frac{(n+1)^2+(n+1)}{2}. \]
-Thus, the result follows from mathematical induction.
+Thus, we have $P(n+1)$ and the result follows from mathematical induction.
 \end{example}
 
-More general forms of finite induction are also quite common but they can reduced to the original form.
-For example, let $Q(m)$ be a predicate for $m\in \mathbb{N}$ and define $P(n) =$``$\forall m\in S_n, Q(m)$'' for a sequence nested finite sets $S_1 \subset S_2 \subset \cdots \subseteq \mathbb{N}$.
-Defining $S_\infty = \cup_{n\in \mathbb{N}} S_n$, we see that ``$\forall n\in\mathbb{N}, P(n)$''$\Leftrightarrow$``$\forall m\in S_\infty, Q(m)$'' follows from $P(1)=$``$\forall m\in S_1, Q(m)$'' and ``$P(n)\to P(n+1)$''$\Leftrightarrow$``$\forall m\in S_n, Q(m) \rightarrow \forall {m} \in S_{n+1}, Q(m)$''.
+More general-looking forms of finite induction can often be reduced to the standard form.
+For example, let $S_1\subseteq S_2\subseteq\cdots$ be a sequence of nested finite subsets of $\mathbb N$ and define $S_\infty=\bigcup_{n\in\mathbb N}S_n$
+Next, define $P(n)$ to be the statement $\forall m\in S_n,\,Q(m)$.
+If one proves $P(1)$ and $P(n)\to P(n+1)$ for every $n\in \mathbb{N}$, then induction gives $P(n)$ for all $n\in \mathbb{N}$.
+Since every $m\in S_\infty$ belongs to some $S_n$, it follows that $Q(m)$ holds for every $m\in S_\infty$.
 
 \section{Set Theory}
 Set theory is generally considered to be the foundation of all modern mathematics.
 This means that most mathematical objects (numbers, relations, functions, etc.) are defined in terms of sets.
+
 Unfortunately for engineers, set theory is not quite as simple as it seems.
-It turns out that simple approaches to set theory include paradoxes (e.g., statements which are both true and false).
-These paradoxes can be resolved by putting set theory in a firm axiomatic framework, but that exercise is rather unproductive for engineers.
-Instead, we adopt what is called \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
+It turns out that simple approaches to set theory with unrestricted set formation include paradoxes (e.g., statements which are both true and false).
+Axiomatic set theories avoid these contradictions by specifying which sets may be formed, but that exercise is rather unproductive for engineers.
+Instead, we will use the operations of \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
+Of course, we will restrict ourselves to standard constructions known to be justified in ZFC.
 This approach is sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
 
 A \defn{set theory}{set} is taken to be any collection of objects, mathematical or otherwise.
@@ -557,7 +586,8 @@ The logical statement ``$a$ is a member of the set $A$'' is written
 \[ a \in A. \]
 Likewise, its logical negation ``$a$ is not a member of the set $A$'' is written $a \notin A$.
 Therefore, exactly one of these two statements is true.
-In naive set theory, one assumes the existence of any set that can be described in words.
+An unrestricted version of naive set theory assumes that every property $P(x)$ determines a set $\{x\mid P(x)\}$.
+%In naive set theory, one assumes the existence of any set that can be described in words.
 Later, we will see that this can be problematic when one considers objects like the ``set of all sets''.
 
 One may present a set by listing its elements.
@@ -579,6 +609,7 @@ Using set-builder notation, we can also recreate the \defn{set theory}{natural n
 \mathbb{N} & = \{ n\in \mathbb{Z} | n\geq 1 \} \\
 \mathbb{Q} & = \{ q\in \mathbb{R} | q=a/b, a\in \mathbb{Z}, b\in \mathbb{N} \}.
 \end{align*}
+
 The following standard notation is used for interval subsets of the real numbers:
 \begin{align*}
 \textrm{Open interval:} \; &  (a,b) \triangleq \{ x\in \mathbb{R} | a<x<b \} \\
@@ -588,7 +619,7 @@ The following standard notation is used for interval subsets of the real numbers
 \end{align*}
 
 \begin{definition}
-For a finite set $A$, the \defn{set theory}{cardinality} $|A|$ equals the number of elements in $A$.
+For a finite set $A$, the \defn{set theory}{cardinality} $|A|$ is the number of elements in $A$.
 If there is a bijective mapping between the set $A$ and the natural numbers $\mathbb{N}$, then $|A| = \infty$ and the set is called \defn{set theory}{countably infinite}.
 If $|A| = \infty$ and the set is not countably infinite, then $A$ is called \defn{set theory}{uncountably infinite}.
 \end{definition}
@@ -598,18 +629,18 @@ The set of rational numbers is countably infinite while the set of real numbers 
 \end{example}
 
 \begin{example}[\defn{set theory}{Russell's Paradox}]
-Let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
-Such a set is said to exist in naive set theory (though it may empty) simply because it can be described in words.
+Under unrestricted comprehension, let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
+Such a set is said to exist in naive set theory simply because the property $S \not in S$ can be evaluated for any set.
 The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \leftrightarrow R\notin R$.
 \end{example}
 
 What this proves is that \emph{naive set theory is not consistent} because it allows constructions that lead to contradictions.
-Axiomatic set theory eliminates this paradox by disallowing self-referential and other problematic constructions.
-Thus, another reasonable conclusion is that Russell's paradox shows that the set $R$ cannot exist in any consistent theory of sets.
+Axiomatic set theory eliminates this paradox by not allowing unrestricted comprehension and other problematic constructions.
+Another reasonable conclusion is that Russell's paradox shows that the set $R$ cannot exist in any consistent theory of sets.
 
-Another common question is whether there are sets that contains themselves.
+Another common question is whether there are sets that contain themselves.
 In naive set theory, the answer is yes and some examples are the ``set of all sets'' and the ``set of all abstract ideas''.
-On the other hand, in the ZF axiomatic formulation of set theory, it is a theorem that no set contains itself.
+On the other hand, in the ZF axiomatic formulation of set theory, these sets are not allowed and it can be shown that no set contains itself.
 
 There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
@@ -626,10 +657,13 @@ It is a \textbf{proper subset} (denoted $A\subset B$) if $A\subseteq B$ and $A\n
 \end{definition}
 
 There are also a number of operations between sets.
+
+\gpt{\textbf{Suggestion:} Before introducing the operations, consider defining the \textbf{power set}: ``For a set $A$, its power set is $\mathcal P(A)=\{B\mid B\subseteq A\}$, the set of all subsets of $A$.'' \textbf{Reason:} The power set is a basic set-theoretic construction and makes the later preimage-operator notation $f^{-1}:\mathcal P(Y)\to\mathcal P(X)$ self-contained.}
+
 Let $A,B$ be any two sets.
 \begin{definition}
 The \defn{set theory}{union} of $A$ and $B$ (denoted $A\cup B$) is the set of elements in either $A$ or $B$.
-This means that $A \cup B = \{ x\in A \textrm{ or } x\in B \}$ is also defined by
+This means that $A \cup B = \{ x \mid x\in A \textrm{ or } x\in B \}$ is also defined by
 \[ x\in A\cup B \Leftrightarrow (x\in A)\vee (x\in B). \]
 \end{definition}
 
@@ -644,7 +678,8 @@ Two sets are said to be \defn{set theory}{disjoint} if $A\cap B = \emptyset$.
 The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus \!B$) is the set of elements in $A$ but not in $B$.
 This means that
 \[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B). \]
-If there is some implied universal set $U$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
+If there is some implied ambient set $U$ containing $A$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
+
 \end{definition}
 
 One can apply De Morgan's Law in set theory to verify that
@@ -652,7 +687,7 @@ One can apply De Morgan's Law in set theory to verify that
 (A \cup B)^c & = A^c \cap B^c \\
 (A \cap B)^c & = A^c \cup B^c,
 \end{align*}
-which allows us to interchange union or intersection with set difference.
+which shows how taking the complement interchanges unions and intersections.
 
 We can also form the union or the intersection of arbitrarily many sets.
 This is defined in a straightforward way,
@@ -663,6 +698,8 @@ This is defined in a straightforward way,
 &= \{ x | x \in S_{\alpha} \text{ for all } \alpha \in I \} .
 \end{align*}
 It is worth noting that the definitions apply whether the index set is finite, countably infinite, or even uncountably infinite.
+If $I=\emptyset$, then $\bigcup_{\alpha\in I}S_\alpha=\emptyset$.
+The empty intersection is defined relative to the ambient set $U$, in which case $\bigcap_{\alpha\in\emptyset}S_\alpha=U$.
 
 Another way to build sets is by grouping elements into pairs, triples, and vectors.
 \begin{definition}
@@ -676,33 +713,34 @@ A^3 = \{ (a,a,a),(a,a,b),(a,b,a),(a,b,b),(b,a,a),(b,a,b),(b,b,a),(b,b,b) \}.
 \end{equation*}
 \end{example}
 The countably infinite product of $X$, denoted $X^\omega$, is the set of infinite sequences $(x_1,x_2,x_3,\ldots)$ where $x_n \in X$ is arbitrary for $n\in \mathbb{N}$.
-If the sequences are restricted to have only a finite number of non-zero terms, then the set is usually denoted $X^\infty$.
+If $X$ has a distinguished zero element, then we denote the set of sequences in $X^\omega$ with finite support by $X^\infty$ though other choices are also common.
 
 One can also formalize relationships between elements of a set.
 A \textbf{relation} $\sim$ between elements of the set $A$ is defined by the pairs $(x,y)\in A\times A$ for which the relation holds.
-Specifically, the relation is defined by the subset of ordered pairs $E\subseteq A\times A$ where the relation $a\sim b$ holds; so $x\sim y$ if and only if $(x,y)\in E$.
+Specifically, a relation is defined by the subset of ordered pairs $E\subseteq A\times A$ and we write $x\sim y$ if and only if $(x,y)\in E$.
 A relation on $A$ is said to be:
 \begin{enumerate}
-\item Reflexive if $x\sim x$ holds for all $x\in A$
-\item Symmetric if $x\sim y$ implies $y\sim x$ for all $x,y\in A$
-\item Transitive if $x\sim y$ and $y\sim z$, then $x\sim z$ for all $x,y,z\in A$
+\item Reflexive if $x\sim x$ holds for all $x\in A$;
+\item Symmetric if $x\sim y$ implies $y\sim x$ for all $x,y\in A$;
+\item Transitive if, for all $x,y,z\in A$, $x\sim y$ and $y\sim z$ imply $x\sim z$.
+
 \end{enumerate}
 
 A relation is called an \defn{set theory}{equivalence relation} if it is reflexive, symmetric, and transitive.
 For example, let $A$ be a set of people and $P(x,y)$ be the statement ``$x$ has the same birthday (month and day) as $y$.''
-Then, we can define $\sim$ such that $a\sim b$ holds if and only if $P(x,y)$ is true.
+Then, we say $x\sim y$ if and only if $P(x,y)$ is true.
 In this case, the set $E$ is given by $E = \{ (x,y)\in A\times A | P(x,y) \}$.
 One can verify that this is an equivalence relation by checking that it is reflexive, symmetric, and transitive.
 
 One important characteristic of an equivalence relation is that it partitions the entire set $A$ into disjoint \defn{set theory}{equivalence classes}.
 The equivalence class associated with $a\in A$ is given by  $[a] = \left\{x\in A | x \sim a\right\}$.
-In the birthday example, there is a natural equivalence class associated with each day of the year.
+In the birthday example, each birthday represented among the people in $A$ determines one equivalence class.
 The set of all equivalence classes is called the \defn{set theory}{quotient set} and is denoted $A / \!\! \sim \, \triangleq \{ \,[a]\, | a\in A \}$.
 
 In fact, there is a natural equivalence relation defined by any disjoint partition of a set.
 For example, let $A_{i,j}$ be the set of people in $A$ whose birthday was on the $j$-th day of the $i$-th month.
 It follows that $x\sim y$ if and only if there exists a unique pair $i,j$ such that $x,y \in A_{i,j}$.
-In this case, the days of year are used as equivalence classes to define the equivalence relation.
+In this case, the nonempty sets $A_{i,j}$ are the equivalence classes and the days of the year are used to index them.
 
 \begin{example}
 Consider the set $\mathbb{N}^2 = \{ (a,b) | a,b\in\mathbb{N} \}$ of ordered pairs of natural numbers.
@@ -715,7 +753,7 @@ The quotient set $\mathbb{N}^2 / \!\! \sim$ can therefore be associated with the
 Unfortunately, this section will not end on a happy note by saying that the ZFC axiomatic formulation of set theory is consistent.
 Instead, we observe that Kurt G\"{o}del's Incompleteness Theorems imply that, if ZFC is consistent, then this cannot be proven using statements in ZFC and, moreover, it cannot be complete.
 On the other hand, if ZFC is inconsistent, then it contains a paradox and one can prove anything using statements in ZFC.
-Since ZFC manages to avoid all known paradoxes and no contradictions have been so far, it is still the most popular formal system in which to define mathematics.
+Since ZFC avoids the classical set-theoretic paradoxes and no contradiction has been found in it so far, it remains the most widely used foundational system for mathematics.
 
 
 \section{Functions}
@@ -729,10 +767,11 @@ Nowadays, every teacher warns their students that one must be careful because th
 The modern approach to defining functions is based on set theory.
 A \textbf{function} $f \colon X\rightarrow Y$ is a rule that assigns a single value $f(x)\in Y$ to each element $x\in X$.
 The notation $f \colon X \rightarrow Y$ is used to emphasize the role of the \defn{functions}{domain} $X$ and the \defn{functions}{codomain} $Y$.
-The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$, $\{f(x) \in Y | x\in X \}$.
+The \textbf{range} of $f$ is the subset of $Y$ which is actually achieved by $f$, namely $\{y \in Y | \exists x\in X, y=f(x) \}$.
 Since the term codomain is somewhat uncommon, people often use the term range instead of codomain either intentionally (for simplicity) or unintentionally (due to confusion).
+
 \begin{definition}
-Formally, a \textbf{function} $f \colon X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
+Formally, a \textbf{function} $f \colon X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subseteq X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
 The \textbf{value} of $f$ at $x\in X$, denoted $f(x)$, is the unique element of $Y$ contained in $A_x$.
 \end{definition}
 
@@ -749,13 +788,17 @@ In fact, any one-to-one function $f \colon X\rightarrow Y$ can be transformed in
 Functions can also be applied to sets in a natural way.
 For a function $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
 \[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
-Using this definition, we see that the range of $f$ is simply $f(X)$.
-One benefit of allowing functions to have set-valued images is that a set-valued inverse function always exists.
-The \defn{functions}{inverse image} or \defn{functions}{preimage} of a subset $B\subseteq Y$ is
+Using this definition, the range of $f$ is simply $f(X)$.
+One benefit of allowing functions to have set-valued images is that a set-valued inverse always exists.
+
+For every function $f:X\to Y$, whether or not it has an inverse function, there is a \defn{functions}{preimage} operator $f^{-1}:\mathcal P(Y)\to\mathcal P(X)$.
+In particular, the preimage of a subset $B\subseteq Y$ is
 \[ f^{-1}(B) \triangleq \{ x\in X | f(x)\in B\}. \]
-For a one-to-one function $f$, the inverse image of any singleton set $\{ f(x) \}$ is the singleton set $\{ x \}$.
+This result may also be called the \defn{functions}{inverse image} of $B$.
+For a one-to-one function $f$, the preimage of any singleton set $\{ f(x) \}$ is the singleton set $\{ x \}$.
 It is worth noting that the notation $f^{-1}(B)$ for the preimage of $B$ can be somewhat misleading because, in some cases, $f^{-1}(f(A)) \neq A$.
-In general, a function gives rise to the following property, $f(f^{-1}(B)) \subseteq B$ and $f^{-1}(f(A)) \supseteq A$.
+In general, $f(f^{-1}(B))=B\cap f(X)\subseteq B$ and $f^{-1}(f(A))\supseteq A$.
+The second inclusion is an equality for every $A\subseteq X$ if and only if $f$ is injective.
 
 \begin{example}
 Let the function $f \colon \mathbb{R} \rightarrow \mathbb{R}$ be defined by $f(x)=x^2$. Let $A=[1,2]$ and notice that $B = f(A) = [1,4]$.  Then,
@@ -794,5 +837,6 @@ Show that the following expressions hold:
 (3) & \; f^{-1} \left( \bigcup_{i\in I} B_i \right) = \bigcup_{i\in I} f^{-1} \left( B_i \right) &
 (4) & \; f^{-1} \left( \bigcap_{i\in I} B_i \right) = \bigcap_{i\in I} f^{-1} \left( B_i \right). 
 \end{align*}
+Next, assume $I\ne\emptyset$ and give an example in which the inclusion in (2) is strict.
+Then, show that equality holds in (2) when $f$ is injective.
 \end{problem}
-
