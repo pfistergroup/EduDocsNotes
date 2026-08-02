@@ -116,14 +116,26 @@
 \newif\ifslow
 \slowtrue
 
+% GPT review comments are hidden in production builds. Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 \newcommand{\vecnot}[1]{#1}
+\input{institution}
 
 \begin{document}
 
 \ifslow
 
 \title{ECE 586: Vector Space Methods \\ Lecture 4 Flip Video: Relations and Functions}
-\author{Henry D. Pfister \\ Duke University}
+\author{Henry D. Pfister \\ \univ}
 \date{}
 %\date{August 20th, 2020}
 %\maketitle
@@ -229,6 +241,8 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 		\item Read.
 		\item Read.  The quotient set can be seen as the collection of subsets that partition $A$.
 	\end{enumerate}
+	\gpt{The claim that no element can lie in two different equivalence classes is not due to transitivity alone; the standard proof uses reflexivity, symmetry, and transitivity.  Suggested replacement: ``If two equivalence classes overlap, symmetry and transitivity show that each is contained in the other, so the classes are equal.''}
+	\gpt{The birthday example has one equivalence class for each birthday represented among the people in $A$, not necessarily for every possible day of the year.  Suggested replacement: ``Ex. $\sim$ has an equivalence class for each birthday represented in $A$.''}
 }
 
 \end{frame}
@@ -262,6 +276,7 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \end{itemize}
 
 \end{itemize}
+\note{\gpt{In the formal definition, consider replacing $F\subset X\times Y$ by $F\subseteq X\times Y$ unless a proper subset is intended.  Also replace ``is unique element in $A_x$'' by ``is the unique element of $A_x$.''  A student-friendly equivalent definition could follow: ``For every $x\in X$, there exists exactly one $y\in Y$ such that $(x,y)\in F$.''}}
 \end{frame}  
 
 \begin{frame}{1.5: Properties of Functions}
@@ -291,6 +306,7 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \end{itemize}
 
 \end{itemize}
+\note{\gpt{This frame has three rendered overlays but no speaker notes.  Suggested narration should distinguish carefully among codomain and range: surjectivity means the range equals the declared codomain, while injectivity means each attained value has at most one preimage.  This distinction also explains why restricting an injective function's codomain to its range makes it bijective.}}
 \end{frame}    
 
 
@@ -320,6 +336,7 @@ For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{im
 		\item Read.  Here ...
 		\item Read.
 	\end{enumerate}
+	\gpt{The second cue ends with the unfinished phrase ``Here ...''.  The production script preserves that phrase rather than inventing a description of the diagram.  Replace it with the exact explanation you want spoken after the image appears.}
 }
 
 \end{frame}  
@@ -356,6 +373,8 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
 		\item Read.  Here ...
 		\item Read.
 	\end{enumerate}
+	\gpt{This frame has four rendered overlays but only three note cues, and the second cue ends with the unfinished phrase ``Here ...''.  The production script preserves that phrase and reads only the fourth reveal on the final beat.  Add the intended diagram explanation and a fourth note item to make the embedded script explicit.}
+	\gpt{The notation $f^{-1}(C)$ here denotes a preimage and does not require an inverse function.  Suggested replacement for ``the set-valued inverse always exists'': ``The preimage operator is defined for every function, even when the function is not invertible.''  This prevents students from conflating a preimage with the inverse function introduced earlier.}
 }
 
 \end{frame}  
@@ -411,6 +430,7 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
 		\color{red}
 		\item Here are some options to continue learning this material.
 	\end{enumerate}
+	\gpt{Grammar: replace ``And also looking at problems in Assignment 2'' by ``Also, look at the problems in Assignment 2.''  Consider adding a one-sentence synthesis before the reading list: ``Relations group elements by shared properties, while functions assign outputs and carry sets forward or backward through images and preimages.''}
 }
 
 \end{frame}

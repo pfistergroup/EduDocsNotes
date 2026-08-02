@@ -130,7 +130,7 @@ Therefore, this definition allows one to combine many statements together and de
 Logicians draw a firm distinction between the \defn{logic}{conditional connective} and the \defn{logic}{implication relation}.
 They use the phrase ``if $P$ then $Q$'' for the conditional connective and the phrase ``$P$ implies $Q$'' for the implication relation.
 They explain the difference between these two forms by saying that the conditional is the contemplated relation, while the implication is the asserted relation.
-We will discuss this distinction in the Section~\ref{section:Relations}, where we formally study relations between statements.
+We will discuss this distinction in Section~\ref{section:Relations}, where we formally study relations between statements.
 The importance and soundness of the conditional form $P \rightarrow Q$ will become clearer then.
 
 The logical \defn{logic}{biconditional} is an operator connecting two logical propositions that is true if the statements are both true or both false, and it is false otherwise.
@@ -158,7 +158,8 @@ We wish to make a truth table for the following statement,
 \begin{equation} \label{equation:LogicStatement}
 (P \rightarrow R) \wedge (Q \vee \neg R) .
 \end{equation}
-Using simple steps, we can form the true table for this statement.
+Using simple steps, we can form the truth table for this statement.
+
 \begin{center}
 \begin{tabular}{|c|c|c|c:c:c:c:c:c:c|}
 \hline
@@ -404,9 +405,9 @@ More generally, we write
 \[ \exists x \in U, P(x) \Leftrightarrow \bigvee_{x\in U} P(x). \]
 If $U=\emptyset$ is the empty set, then $\exists x \in U, P(x)$ is false by convention because there are no elements in $U$.
 
-The term \defn{logic}{universal instantiation} identifies the inference from $\forall x\in U,\,P(x)$ to $P(x_0)$ for some specified $x_0\in U$. This rule does not assert that such an $x_0$ exists but rather the conditional that, if a statement $P(x)$ is true for all $x\in U$ and $U$ is not empty, then we can find $x_0 \in U$ such that $P(x_0)$ is true.
-A common mistake is to neglect the required condition $U$ is not empty, but universal instantiation does not imply anything when $U$ is empty.
-If $U$ is not empty though, then universal instantiation implies that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
+The term \defn{logic}{universal instantiation} identifies the inference from $\forall x\in U,\,P(x)$ and $x_0 \in U$ to the statement $P(x_0)$.
+If $U$ is not empty, then universal instantiation naturally implies the existential generalization that $\forall x\in U, P(x) \Rightarrow \exists x\in U, P(x)$.
+For this, a common mistake is to neglect the condition that $U$ is not empty, but this is required because universal instantiation requires an $x_0 \in U$.
 
 Based on the meaning of these quantifiers, one can infer the logical equivalences
 \begin{gather*}
@@ -478,7 +479,7 @@ A \defn{logic}{corollary} is a mathematical statement which follows easily from 
 The distinction between these names and their definitions is somewhat arbitrary.
 Ultimately, these are labels for mathematical claims distinguished mainly by their role and perceived importance.
 One may also separate conceptually the statement of a mathematical claim from its proof.
-Each statement must be proved before it is accepted as a true but the terms above are only used when the author believes a correct proof exists.
+Each statement must be proved before it is accepted as true but the terms above are only used when the author believes a correct proof exists.
 
 A proof should be written in grammatically correct English.
 Complete sentences should be used, with full punctuation.
@@ -509,7 +510,7 @@ It follows that $Q$ cannot be false when $P$ is true, so $P \rightarrow Q$.
 \begin{example} \label{example:even_square}
 ``If an integer $n$ has an even square, then $n$ is even.''
 
-Its contrapositive is: ``If $n$ is odd, then $n^2$ is odd.'' because ``$n$ is odd'' is the logical negation of ``$n$ is even''.
+Its contrapositive is ``if $n$ is odd, then $n^2$ is odd'' because ``$n$ is odd'' is the logical negation of ``$n$ is even''.
 Thus, our desired statement follows as the contrapositive of our direct proof example.
 \end{example}
 
@@ -563,7 +564,7 @@ Thus, we have $P(n+1)$ and the result follows from mathematical induction.
 \end{example}
 
 More general-looking forms of finite induction can often be reduced to the standard form.
-For example, let $S_1\subseteq S_2\subseteq\cdots$ be a sequence of nested finite subsets of $\mathbb N$ and define $S_\infty=\bigcup_{n\in\mathbb N}S_n$
+For example, let $S_1\subseteq S_2\subseteq\cdots$ be a sequence of nested finite subsets of $\mathbb N$ and define $S_\infty=\bigcup_{n\in\mathbb N}S_n$.
 Next, define $P(n)$ to be the statement $\forall m\in S_n,\,Q(m)$.
 If one proves $P(1)$ and $P(n)\to P(n+1)$ for every $n\in \mathbb{N}$, then induction gives $P(n)$ for all $n\in \mathbb{N}$.
 Since every $m\in S_\infty$ belongs to some $S_n$, it follows that $Q(m)$ holds for every $m\in S_\infty$.
@@ -573,9 +574,9 @@ Set theory is generally considered to be the foundation of all modern mathematic
 This means that most mathematical objects (numbers, relations, functions, etc.) are defined in terms of sets.
 
 Unfortunately for engineers, set theory is not quite as simple as it seems.
-It turns out that simple approaches to set theory with unrestricted set formation include paradoxes (e.g., statements which are both true and false).
-Axiomatic set theories avoid these contradictions by specifying which sets may be formed, but that exercise is rather unproductive for engineers.
-Instead, we will use the operations of \defn{set theory}{naive set theory} which rigorously defines the operations of set theory without worrying about possible contradictions.
+It turns out that simple approaches to set theory with unrestricted set formation include contradictions (e.g., statements which are both true and false).
+Axiomatic set theories avoid these contradictions by specifying which sets may be formed, but that exercise is beyond the scope of these notes.
+Instead, we will work informally with the familiar operations of \defn{set theory}{naive set theory} which defines the operations of set theory without worrying about possible contradictions.
 Of course, we will restrict ourselves to standard constructions known to be justified in ZFC.
 This approach is sufficient for most of mathematics and also acts as a stepping-stone to more formal treatments.
 
@@ -629,18 +630,18 @@ The set of rational numbers is countably infinite while the set of real numbers 
 \end{example}
 
 \begin{example}[\defn{set theory}{Russell's Paradox}]
-Under unrestricted comprehension, let $R$ be the set of all sets that do not contain themselves or $R = \{S|S\notin S\}$.
-Such a set is said to exist in naive set theory simply because the property $S \not in S$ can be evaluated for any set.
-The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \leftrightarrow R\notin R$.
+Under unrestricted comprehension, let $R$ be the set of all sets that do not contain themselves or $R = \{S|S \notin S\}$.
+Such a set is said to exist in naive set theory simply because the property $S \notin S$ can be evaluated for any set.
+The paradox arises from the fact that the definition leads to the logical contradiction $R\in R \leftrightarrow R \notin R$.
 \end{example}
 
 What this proves is that \emph{naive set theory is not consistent} because it allows constructions that lead to contradictions.
 Axiomatic set theory eliminates this paradox by not allowing unrestricted comprehension and other problematic constructions.
 Another reasonable conclusion is that Russell's paradox shows that the set $R$ cannot exist in any consistent theory of sets.
 
-Another common question is whether there are sets that contain themselves.
+Another common question is whether there are ``sets that contain themselves''.
 In naive set theory, the answer is yes and some examples are the ``set of all sets'' and the ``set of all abstract ideas''.
-On the other hand, in the ZF axiomatic formulation of set theory, these sets are not allowed and it can be shown that no set contains itself.
+This is a weakness of naive set theory and, in the ZF axiomatic formulation, such sets are not allowed and no set contains itself.
 
 There are a few standard relationships defined between any two sets $A,B$.
 \begin{definition}
@@ -656,9 +657,9 @@ This means that
 It is a \textbf{proper subset} (denoted $A\subset B$) if $A\subseteq B$ and $A\neq B$.
 \end{definition}
 
-There are also a number of operations between sets.
-
-\gpt{\textbf{Suggestion:} Before introducing the operations, consider defining the \textbf{power set}: ``For a set $A$, its power set is $\mathcal P(A)=\{B\mid B\subseteq A\}$, the set of all subsets of $A$.'' \textbf{Reason:} The power set is a basic set-theoretic construction and makes the later preimage-operator notation $f^{-1}:\mathcal P(Y)\to\mathcal P(X)$ self-contained.}
+\begin{definition}
+For a set $A$, its \defn{set theory}{power set} $\mathcal{P}(A)$ is the set of all subsets of $A$ so that $\mathcal P(A)=\{B\mid B\subseteq A\}$.
+\end{definition}
 
 Let $A,B$ be any two sets.
 \begin{definition}
@@ -678,7 +679,7 @@ Two sets are said to be \defn{set theory}{disjoint} if $A\cap B = \emptyset$.
 The \defn{set theory}{set difference} between $A$ and $B$ (denoted $A-B$ or $A \setminus \!B$) is the set of elements in $A$ but not in $B$.
 This means that
 \[ x\in A-B \Leftrightarrow (x\in A)\wedge (x\notin B). \]
-If there is some implied ambient set $U$ containing $A$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$
+If there is some implied ambient set $U$ containing $A$, then the \defn{set theory}{complement} (denoted $A^c$) is defined by $A^c = U-A$.
 
 \end{definition}
 
@@ -713,7 +714,7 @@ A^3 = \{ (a,a,a),(a,a,b),(a,b,a),(a,b,b),(b,a,a),(b,a,b),(b,b,a),(b,b,b) \}.
 \end{equation*}
 \end{example}
 The countably infinite product of $X$, denoted $X^\omega$, is the set of infinite sequences $(x_1,x_2,x_3,\ldots)$ where $x_n \in X$ is arbitrary for $n\in \mathbb{N}$.
-If $X$ has a distinguished zero element, then we denote the set of sequences in $X^\omega$ with finite support by $X^\infty$ though other choices are also common.
+If $X$ has a distinguished zero element, then we denote the set of sequences in $X^\omega$ with finitely many non-zero entries by $X^\infty$ though other choices are also common.
 
 One can also formalize relationships between elements of a set.
 A \textbf{relation} $\sim$ between elements of the set $A$ is defined by the pairs $(x,y)\in A\times A$ for which the relation holds.

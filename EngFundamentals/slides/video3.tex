@@ -116,14 +116,26 @@
 \newif\ifslow
 \slowtrue
 
+% GPT review comments are hidden in production builds. Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 \newcommand{\vecnot}[1]{#1}
+\input{institution}
 
 \begin{document}
 
 \ifslow
 
 \title{ECE 586: Vector Space Methods \\ Lecture 3 Flip Video: Set Theory}
-\author{Henry D. Pfister \\ Duke University}
+\author{Henry D. Pfister \\ \univ}
 \date{}
 %\date{August 20th, 2020}
 %\maketitle
@@ -167,8 +179,8 @@
   \item<6-> \textcolor{blue}{Set defined as ``any collection of objects, mathematical or otherwise''}
   \item<6-> Ex. Consider ``the set of all books published in 2007''
   \item<7-> Objects in a set are called \textcolor{blue}{elements} or \textcolor{blue}{members} of the set
-  \item<8-> Logical statement: ``$a$ is a member of the set $A$'' is written \textcolor{blue}{$a \in A$}
-  \item<9-> Its negation: ``$a$ is not a member of the set $A$'' is written \textcolor{blue}{$a \notin A$}
+  \item<8-> Logical statement: ``$a$ is a member of the set $A$'' is denoted \textcolor{blue}{$a \in A$}
+  \item<9-> Its negation: ``$a$ is not a member of the set $A$'' is denoted \textcolor{blue}{$a \notin A$}
 \end{itemize}
 \end{itemize}
 
@@ -179,6 +191,7 @@
 	\setlength\itemsep{2mm}
 	\item Read.
 	\end{enumerate}
+	\gpt{This nine-overlay frame has only one narration item, so ``Read'' does not identify which newly revealed line belongs to each beat.  For the production script, narrate each reveal separately: foundation; mathematical objects as sets; inconsistency of unrestricted definitions; axiomatic restriction; pragmatic use of naive set theory; definition and example of a set; elements; membership; and nonmembership.  This avoids synchronization drift when note extraction assumes one item per overlay.}
 }
 
 \end{frame}
@@ -201,11 +214,11 @@
 \begin{itemize} 
   \setlength\itemsep{1mm}
   \item \textcolor{blue}{Set-builder notation}: For logical predicate $P(x)$ defined on $x\in X$,\\  ``$A$ is the set of elements in $X$ such that $P(x)$ is true'' is denoted by
-\[ A = \{ x\in X | P(x) \} \]
+\[ A = \{ x\in X \mid  P(x) \} \]
   \item<6-> If no $x\in X$ satisfies $P(x)$, then result is the \textcolor{blue}{empty set $\emptyset$}
   \item<7-> Ex. natural numbers $\mathbb{N}$ and positive prime integers $P$:
 \begin{align*}
-  \mathbb{N} &= \{ x\in \mathbb{Z} | x\geq 1 \} = \{ 1,2,3,4,\ldots \} \\
+  \mathbb{N} &= \{ x\in \mathbb{Z} \mid  x\geq 1 \} = \{ 1,2,3,4,\ldots \} \\
   P &= \{ x\in \mathbb{Z} | x\geq 1 \textrm{ and ``}x\textrm{ is prime''} \} = \{ 2,3,5,7,11,\ldots \}
 \end{align*}
 \end{itemize}
@@ -218,6 +231,7 @@
 	\setlength\itemsep{2mm}
 	\item Read.
 	\end{enumerate}
+	\gpt{This seven-overlay frame has only one blanket ``Read'' cue.  The production script therefore applies that direction reveal by reveal, reading only the newly displayed material on each overlay.  For an unambiguous embedded script, add seven note items matched to overlays 1--7, as in the revised video 2 notes.}
 }
 
 \end{frame}
@@ -253,7 +267,7 @@
 \item<1-> Cardinality \vspace{1mm}
 \begin{itemize} 
   \setlength\itemsep{2mm}
-  \item<1-> For set $A$, the \textcolor{blue}{cardinality} $|A|$ is the number of elements in $A$
+  \item<1-> For a set $A$, its \textcolor{blue}{cardinality} $|A|$ is the number of elements in $A$
   \[ |\{ a,e,i,o,u \}| = 5 \]
   \item<2-> If there is a one-to-one correspondence between $A$ and the natural numbers $\mathbb{N}$, then $A$ is called \textcolor{blue}{countably infinite} and  $|A| = \infty$
   \item<3-> Ex. Set of \textcolor{blue}{rational numbers $\mathbb{Q} \triangleq \{ q \in \mathbb{R} \,|\, \exists n \in \mathbb{N}, nq \in \mathbb{Z} \}$} is countably infinite (e.g., list rationals $m/n$ with $|m|\leq n^2$)
@@ -270,6 +284,7 @@
 	\setlength\itemsep{2mm}
 	\item Read.
 	\end{enumerate}
+	\gpt{This five-overlay frame has only one blanket ``Read'' cue.  The production script therefore applies that direction reveal by reveal, reading only the newly displayed material on each overlay.  For an unambiguous embedded script, add five note items matched to overlays 1--5.}
 }
 
 \end{frame}
@@ -401,6 +416,7 @@
 	\item Read.
 	
 	\end{enumerate}
+	\gpt{Mathematical correction to the first note item: restricting the equality condition to ``for all $x\in A$'' changes it to $A\subseteq B$ and does not establish $B\subseteq A$.  Keep the quantifier over the implied universe, or state both inclusions.  The restriction to $x\in A$ is valid for the subset condition in the second item.  Also consider noting that some texts use $\subset$ for any subset and others for a proper subset.}
 }
 
 \end{frame}
@@ -442,6 +458,7 @@
 	\item Now, we can apply De Morgan's identity by translating to logic, negating, and mapping back to set theory.  First, we see that $x$ is in the infinite union iff $\exists \alpha \in I, x\in S_\alpha$.  Since the logical negation of this statement is $\forall \alpha \in I, x \notin S_\alpha$, it follows that $x$ is in the complement of the infinite union iff it is in the infinite intersection of the complements of the sets in the collection.
 	
 	\end{enumerate}
+	\gpt{On the slide, replace the equals sign in ``$\neg(P\vee Q)=\neg P\wedge\neg Q$'' by the logical-equivalence symbol $\Leftrightarrow$.  These are propositions with identical truth values, not numerical or set-valued expressions.}
 }
 
 \end{frame}
@@ -485,6 +502,7 @@ The paradox arises from the fact that this definition leads to the logical contr
 		\item Read.  
 		\item Read.  
 	\end{enumerate}
+	\gpt{Russell-paradox corrections: replace ``though it may empty'' by ``though it may be empty'' grammatically, but mathematically the parenthetical should be removed because if $R$ existed then $\emptyset\notin\emptyset$ would imply $\emptyset\in R$.  In the first note item, replace the final two sentences by: ``If $R\notin R$, its definition implies $R\in R$; if $R\in R$, its definition implies $R\notin R$.''  The current ``Alternatively, it must be in $R$'' repeats the same direction and does not exhibit the contradiction.}
 }
 
 \end{frame}

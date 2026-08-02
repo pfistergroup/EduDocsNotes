@@ -115,14 +115,24 @@
 \newif\ifslow
 \slowtrue
 
+% GPT review comments are hidden in production builds.  Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 \newcommand{\vecnot}[1]{#1}
+\input{institution}
 
 \begin{document}
 
-\ifslow
-
 \title{ECE 586: Vector Space Methods \\ Course Introduction Video}
-\author{Henry D. Pfister \\ Duke University}
+\author{Henry D. Pfister \\ \univ}
 \date{}
 %\date{August 18th, 2020}
 %\maketitle
@@ -138,10 +148,11 @@
 			\setlength\itemsep{3mm}
 			\color{red}
 			\item Hi, I'm Henry Pfister and this is the course introduction video for ECE 586, Vector Space Methods. \\[2mm]
-			For everyone who is new to Duke, let me start by saying welcome... It's nice to have you watching. \\[2mm]
-			To give you a little background on myself, I went to college in San Diego, CA  and then I taught at Texas A\&M University for 8 years before joining Duke in 2014. \\[2mm]
+			For everyone who is new to \univ, let me start by saying welcome... It's nice to have you watching. \\[2mm]
+			To give you a little background on myself, I went to college in San Diego, CA  and then I taught at Texas A\&M University for 8 years before joining \univ in 2014. \\[2mm]
 			Today, I will give you a brief introduction to the material covered in this course.
 		\end{enumerate}
+		\gpt{Consider making the opening more student-centered and less date-sensitive.  Suggested replacement for the final sentence: ``By the end of this short video, you should understand why the course is organized around distance, approximation, and optimization; what kinds of problems those ideas solve; and how to prepare for each class meeting.''  This previews concrete outcomes and will remain useful if biographical details or the course number change.}
 	}
 \end{frame}
 
@@ -154,11 +165,13 @@
   \setlength\itemsep{4mm}
   \item Engineering uses science and mathematics to \textcolor{blue}{invent, design, and build} things that solve problems and achieve practical goals
   
-  \item From a mathematical perspective, engineering models the world using \textcolor{blue}{vectors} and analyzes it using logic, linear algebra, and optimization
+  \item From a mathematical perspective, engineering represents the world using \textcolor{blue}{vectors} and analyzes it using logic, linear algebra, and optimization
+  %From a mathematical perspective, many engineering problems represent systems and data using \textcolor{blue}{vectors}, then analyze them using logic, linear algebra, and optimization.
   
   \item This class is essentially an applied math class designed for graduate engineers in \textcolor{blue}{data science, signal processing, and quantum computing}
   
   \item Its goal is to \textcolor{blue}{refresh and extend your undergraduate knowledge} of linear systems, vector spaces, matrices, and optimization
+%This is an applied mathematics course for graduate students in ECE and related fields.  Its goal is to deepen your understanding of linear systems, vector spaces, approximation, and optimization while developing the precision needed to read and write mathematical arguments.
 
 \end{itemize}
 
@@ -192,13 +205,13 @@
   \begin{itemize}
 	  \item Practical applications include function approximation and machine learning
   \end{itemize}     
-  \item The Four Fundamental Subspaces and Singular Value Decomposition
+  \item The Four Fundamental Subspaces via Singular Value Decomposition
   \begin{itemize}
 	  \item Practical applications include dimensionality reduction
   \end{itemize} 
   \item Optimization in Vector Spaces
   \begin{itemize}
-	  \item Practical applications include duality bounds in convex optimization
+	  \item Practical applications including duality bounds in convex optimization
   \end{itemize} 
 \end{itemize}
 
@@ -207,8 +220,10 @@
 		\begin{enumerate}
 			\setlength\itemsep{3mm}
 			\color{red}
-			\item Here we see the major topics that will be covered in this course. (read) \\ [2mm]  Don't worry if don't know some of the words here.  By the end of the course, they will all be familiar to you. \\ [2mm] Next, I'll present 3 example problems that this course will cover in detail.
+			\item Here we see the major topics that will be covered in this course. (read) \\ [2mm]  Don't worry if you don't know some of the words here.  By the end of the course, they will all be familiar to you. \\ [2mm] Next, I'll present three example problems that this course will cover in detail.
 		\end{enumerate}
+		\gpt{This slide is dense and its hierarchy is difficult to absorb while listening.  Consider splitting it into two reveals or replacing the six-item list with a four-stage progression: ``Language: logic and sets''; ``Closeness: metric and normed spaces''; ``Geometry: inner products, projection, and the SVD''; ``Decisions: optimization in vector spaces.''  Put one representative application after each stage.  The progression makes the course structure easier to remember.}
+
 	}
 	
 \end{frame}
@@ -234,13 +249,13 @@
 
 \end{itemize}
 
-\item <6-> The mathematical study of ``closeness'' is called \textcolor{blue}{Topology} \vspace{1mm}
+\item <6-> Metric spaces formalize distance and closeness in the field of \textcolor{blue}{Topology} \vspace{1mm}
 
 \begin{itemize}
   \setlength\itemsep{3mm}
   \item<6-> To answer the above question, one can define distances between objects
-  \item<7-> Using these distances, we can define a constant $c(\hat{A})$ such that
-  \[ \text{distance}(\vecnot{x},\hat{\vecnot{x}}) \leq c(\hat{A}) \; \text{distance}(A,\hat{A}) = c(\hat{A}) \; \text{length}(E)  \]
+  \item<7-> Using these distances, we can define a constant $c(\hat{A},\vecnot{b})$ such that
+  \[ \text{distance}(\vecnot{x},\hat{\vecnot{x}}) \leq c(\hat{A},\vecnot{b}) \; \text{distance}(A,\hat{A}) = c(\hat{A},\vecnot{b}) \; \text{length}(E)  \]
 \end{itemize}
   
 \end{itemize}
@@ -252,11 +267,11 @@
 	\setlength\itemsep{2mm}
 	\item Read.  To be concrete, try picturing 3 dimensional real vectors and a 3 by 3 matrix.
 	\item Read.  For this example, I'm assuming everyone is familiar with matrix inversion.  If that concept is rusty for you, don't worry.  It will be reviewed later and all concepts used in this class will be defined precisely.
-	\item Read.  This happen frequently in real-world practical problems and I want you think about that for a second. (wait)
+	\item Read.  This happens frequently in real-world practical problems and I want you to think about that for a second. (wait)
 	\item Read. The key question here is how should we define ``small''.  In this course, that question will be considered in some detail.
-	\item Read. Given $\hat{A}$, we can compute an estimate $\hat{x}$.  But, we really need to understand the difference between our estimate $\hat{x}$ and the true value $x$.
+	\item Read. Given $\hat{A}$, we can compute an estimate $\hat{\vecnot{x}}$.  But, we really need to understand the difference between our estimate $\hat{\vecnot{x}}$ and the true value $x$.
 	\item Read. In particular, the idea is to define distances between vectors and distances between matrices.  From that, we can also define lengths of these objects.
-	\item Read. We can think of the distance between $A$ and $\hat{A}$ as the length of the error matrix $E$.  Thus, the final expression shows the distance between $x$ and $\hat{x}$ will shrink to zero as the length of $E$ shrinks to zero.  Bounds like this allow system designers to understand how much error can be tolerated. 
+	\item Read. We can think of the distance between $A$ and $\hat{A}$ as the length of the error matrix $E$.  Thus, the final expression shows the distance between $x$ and $\hat{\vecnot{x}}$ will shrink to zero as the length of $E$ shrinks to zero.  Bounds like this allow system designers to understand how much error can be tolerated. 
  \end{enumerate}
 }
   
@@ -271,12 +286,12 @@
   \setlength\itemsep{3mm}
   \item<1-> Suppose you want to find a 3rd-order polynomial that gives a \\ \textcolor{blue}{``good'' approximation} of a function \textcolor{blue}{$f(x)$} on the interval $[0,1]$.
   
-  \item<2-> A key question is, ``What do we mean by good?'' max error? avg error?
+  \item<2-> A key question is, ``What do we mean by good?'' maximum error?
   
-  \item<3-> A standard approach is to minimize the \textcolor{blue}{mean squared error} and this gives
+  \item<3-> A standard approach is to minimize the \textcolor{blue}{mean-squared error} and this gives
   \[ \min_{a_0,a_1,a_2,a_3} \int_0^1 \left[ f(x) - (a_0+a_1 x+ a_2 x^2+a_3 x^3) \right]^2 dx \]
   
-  \item<4-> Given $f(x)$ and the ability to integrate, one \textcolor{blue}{can solve this via brute force}
+  \item<4-> Given $f(x)$, one \textcolor{blue}{can solve this via optimization}
   
   \item<5-> This course will show there is also an \textcolor{blue}{simple intuitive approach}
 
@@ -300,7 +315,7 @@
 	\footnotesize
 	\setlength\itemsep{2mm}
 	\item Read.
-	\item Read.  Like the last example, one has to decide how measure the error (or closeness).  For example, any function that lies inside the dashed red lines has a maximum error of less than 0.1.
+	\item Read.  Like the last example, one has to decide how to measure the error (or closeness).  For example, any function that lies inside the dashed red lines has a maximum error of less than 0.1.
 	\item Read.  This choice may be based on mathematical convenience because it has a simple solution.
 	\item Read.  If you do this, you'll see that things simplify nicely.  The resulting polynomial is plotted in green.
 	\item Read.  We'll also explore the geometric reason why this problem simplifies.
@@ -370,10 +385,10 @@
 	\setlength\itemsep{2mm}
 	\item Read.  We will use the displayed figure as a running example. 
 	\item Read.  The chord with $x=0$ and $y=1.5$ is shown in the figure.
-	\item Read.  From this definition, we see that the example function is indeed convex.  Mathematically, the left-hand side is the function value evaluated at a point between $x$ and $y$ determined by $\lambda$ and the right-hand side is height of the chord at the same point.
+	\item Read.  From this definition, we see that the example function is indeed convex.  Mathematically, the left-hand side is the function value evaluated at a point between $x$ and $y$ determined by $\lambda$ and the right-hand side is the height of the chord at the same point.
 	\item Read.  Try drawing on your paper a function with two distinct local minima and then checking if this function is convex. (wait)
 	\item Read.  Picture simple functions that can be used to lower bound $f(x)$.
-	\item Read.  Pictorially, we observe that $f(x)$ lies above all of its tangent lines.  Now, consider the function of any tangent line (e.g., defined by the function value and derivative at a single point).  One can minimize this new function to get a lower bound. \\ [2mm] Convexity is an important subject in advanced mathematics because these definitions and properties extend naturally to functions mapping multidimensional vectors to real numbers. 
+	\item Read.  Pictorially, we observe that $f(x)$ lies above all of its tangent lines.  Now, consider any tangent line (e.g., defined by the function value and derivative at a single point).  One can minimize this linear function to get a lower bound. \\ [2mm] Convexity is an important subject in advanced mathematics because these definitions and properties extend naturally to functions mapping multidimensional vectors to real numbers. 
 
  \end{enumerate}
 }
@@ -384,16 +399,16 @@
 \begin{frame}<1-3> \frametitle{Course Overview and Philosophy}
 
 \begin{itemize}
-\item<1-> First Theme: Standard definitions and vocabulary \vspace{1mm}
+\item<1-> First Theme: The language of mathematics \vspace{1mm}
 
 \begin{itemize}
   \setlength\itemsep{1.5mm}
-  \item Engineering has many subfields where new ideas are described using \textcolor{blue}{abstract mathematics}
+  \item Engineering has many subfields in which new ideas are described in the language of \textcolor{blue}{abstract mathematics}
   
-  \item A key goal of this course is to \textcolor{blue}{teach the vocabulary} necessary to read \\ and understand papers and textbooks in these subfields \vspace{2mm}
+  \item A key goal is to \textcolor{blue}{learn this language} and its vocabulary in order to read \\ and understand papers, textbooks, and AI responses in these subfields \vspace{2mm}
 \end{itemize}
 
-\item<2-> Second Theme: Standard theorems and their proof \vspace{1mm}
+\item<2-> Second Theme: Standard theorems and their proofs \vspace{1mm}
 
 \begin{itemize}
   \setlength\itemsep{1.5mm}
@@ -409,7 +424,7 @@
   \setlength\itemsep{2mm}
   \item Written homework \textcolor{blue}{builds knowledge} of definitions and techniques
   \item Computer assignments \textcolor{blue}{demonstrate practical applications}
-  \item These are like training for a sport; each workout provides a small gain but \textcolor{blue}{consistent effort leads to significant improvement} over time
+  \item These are like training for a sport: each workout provides a small gain but \textcolor{blue}{consistent effort leads to significant improvement} over time
 
 \end{itemize}
 \end{itemize}
@@ -420,8 +435,9 @@
 	\setlength\itemsep{3mm}
 	\item Read.
 	\item Read.
-	\item Read.  Although some material in this class is challenging, in the past, almost all of the students are able to become proficient in almost all of the topics.
+	\item Read.  Although some material is challenging, students who work consistently have historically become proficient in most of the course topics.
  \end{enumerate}
+	\gpt{Typo: replace ``Standard theorems and their proof'' with ``Standard theorems and their proofs.''  Consider making mathematical maturity explicit by replacing the second-theme sub-bullets with: ``State assumptions and conclusions precisely''; ``Read, critique, and construct proofs''; ``Recognize proof techniques that transfer to unfamiliar problems.''}
 }
 
 \end{frame}
@@ -436,11 +452,12 @@
   \setlength\itemsep{2mm}
   \item Syllabus: Lists lecture/video topics by date along with HW
   \item Course Notes: Detailed description of the course content
-  \item Flip Videos: Slide-based introduction to course notes \smash{\Smiley[1.4][yellow]}
-  \item Lectures: Q/A about videos/notes + group work on example problems \vspace{4mm}
+  \item Flipped Class Videos: Slide-based introduction to course notes \smash{\Smiley[1.4][yellow]}
+  \item Lectures: Q\&A about videos/notes + group work on example problems
+  \item Discussion: Live problem solving practice in groups without Google/AI \vspace{4mm}
 \end{itemize}
 
-\item<2-> My Recommendations \vspace{1mm}
+\item<2-> Recommendations \vspace{1mm}
 
 \begin{itemize}
   \setlength\itemsep{2mm}
@@ -460,6 +477,7 @@
 	\item Read.
 	\item Read.  Thanks for your attention.  I look forward to seeing everybody during the first class meeting.
  \end{enumerate}
+	\gpt{Consider ending with a concrete preparation loop that students can remember: ``Before class: watch, read, and write down one question.  During class: test your understanding on problems.  After class: complete the homework and ask for help early.''  This converts the list of resources into observable study behavior.}
 }  
 
 \end{frame}

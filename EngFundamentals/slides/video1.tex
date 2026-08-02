@@ -115,14 +115,26 @@
 \newif\ifslow
 \slowtrue
 
+% GPT review comments are hidden in production builds. Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 \newcommand{\vecnot}[1]{#1}
+\input{institution}
 
 \begin{document}
 
 \ifslow
 
 \title{ECE 586: Vector Space Methods \\ Lecture 1 Flip Video: Propositional Logic}
-\author{Henry D. Pfister \\ Duke University}
+\author{Henry D. Pfister \\ \univ}
 \date{}
 %\date{August 18th, 2020}
 %\maketitle
@@ -156,7 +168,7 @@
   \setlength\itemsep{1mm}
   \item \textcolor{blue}{A declarative sentence that is true or false, but not both}
   
-  \item<2-> Ex. ``This video was recorded for a course at Duke University'' \greencheck
+  \item<2-> Ex. ``This video was recorded for a course at \univ'' \greencheck
   
   \item<3-> Ex. ``The real number $\sqrt{2}$ is rational'' \redx
   
@@ -171,7 +183,7 @@
 \begin{itemize}
   \setlength\itemsep{1mm}
   \item One can also \textcolor{blue}{form new statements from old ones} using English expressions: and; or; not; if, then; if and only if
-  \item<6-> Ex. ``Duke is located in Durham, NC \textcolor{red}{or} all real numbers are rational''
+  \item<6-> Ex. ``\univ is located in \city \textcolor{red}{or} all real numbers are rational''
   
   \item<7-> Note: symbols \textcolor{blue}{$P,Q,R,\ldots$} used to denote abstract statements 
 
@@ -271,10 +283,10 @@
 	\begin{enumerate}[<alert@+>]
 	\footnotesize
 	\setlength\itemsep{2mm}
-	\item For logical propositions $P$ and $Q$, the logical AND is true if both statements are true and false otherwise.  In formal logic, this operation is called "the conjuction of $P$ and $Q$" and denoted by the upward pointing operator shown.
-	\item For logical propositions $P$ and $Q$, the logical OR is true if either statement is true and false otherwise.  In formal logic, this operation is called "the disjuction of $P$ and $Q$" and denoted by the downward pointing operator shown.
-	\item The negation of the logical proposition $P$ (i.e., NOT $P$) is true only if $P$ is false.  It is denoted by the denoted by the symbol shown.
-	\item All basic logical operations can be described by truth tables and these tables are shown for the above operations. (explain) \\ [2mm] For example, in the first table, we list all possible truth values for $P$ AND $Q$ along with the corresponding value for $P$ OR $Q$.  The second table starts the same way but lists the corresponding value for $P$ OR $Q$.
+	\item For logical propositions $P$ and $Q$, the logical AND is true if both statements are true and false otherwise.  In formal logic, this operation is called "the conjunction of $P$ and $Q$" and denoted by the upward pointing operator shown.
+	\item For logical propositions $P$ and $Q$, the logical OR is true if either statement is true and false otherwise.  In formal logic, this operation is called "the disjunction of $P$ and $Q$" and denoted by the downward pointing operator shown.
+	\item The negation of the logical proposition $P$ (i.e., NOT $P$) is true only if $P$ is false.  It is denoted by the symbol shown.
+	\item All basic logical operations can be described by truth tables and these tables are shown for the above operations. (explain) \\ [2mm] For example, in the first table, we list all possible truth values for $P$ and $Q$ along with the corresponding value for $P$ AND $Q$.  The second table starts the same way but lists the corresponding value for $P$ OR $Q$. The last table defines negation.
  \end{enumerate}
 }
 
@@ -335,6 +347,7 @@ So, if it rains and they don't ride their bike, then most people would agree the
 	\item Now, let's consider an intuitive description of the conditional connective. (read)
 	\item read.
  \end{enumerate}
+	\gpt{The phrase ``the promise is kept by default'' is intuitive but can hide the formal point.  Suggested addition after the truth table: ``When $P$ is false, there is no counterexample to the claim that whenever $P$ occurs, $Q$ occurs; this is called vacuous truth.''  This prepares students for vacuous implications in proofs.}
 }
 
 \end{frame}
@@ -436,7 +449,7 @@ F & F & F & F & T & F & T & F & T & T \\
 	\footnotesize
 	\setlength\itemsep{2mm}
 	\item Read. The logical AND of ``if $P$ then $R$'' with ``$Q$ OR not $R$''
-	\item For compound statements of this type, there is an straightforward (if tedious) method to compute the truth table. \\ [2mm] First, one lists all involved statements in the first columns and enumerates all possibilities.  Then, one writes the formula at the top and creates a column for each statement and operation. Finally, one works from left to right and fills any column whose values are determined by previously filled entries.  In this example, the order of filling is shown at the bottom of the table. \\ [2mm] For example, after the four fixed values have been copied, the result of the conditional connective can be written underneath its right-arrow notation.
+	\item For compound statements of this type, there is a straightforward (if tedious) method to compute the truth table. \\ [2mm] First, one lists all involved statements in the first columns and enumerates all possibilities.  Then, one writes the formula at the top and creates a column for each statement and operation. Finally, one continues by filling any column whose values are determined by previously filled entries.  In this example, the order of filling is shown at the bottom of the table. \\ [2mm] For example, after the four fixed values have been copied, the result of the conditional connective can be written underneath its right-arrow notation.
  \end{enumerate}
 }
 
@@ -492,8 +505,8 @@ F & F & F & F & T & F & T & F & T & T \\
 	\item Read.  In particular, it is typically a statement about a compound statement that depends on multiple statements (say $P$ and $Q$).
 	\item Read. Since either $P$ or $\neg P$ must be true, their logical OR must be true and this statement is always true.  It is also independent of $Q$.
 	\item Read. Similar to the previous example, either $P$ or $\neg P$ must be false and, thus, their logical AND must also be false.  So, this statement is always false.  It is also independent of $Q$.
-	\item Read. Logical implications provide logical arguments that are true for all statements.  Thus, they are important bulding block for logical proofs.
-	\item Read. Logical equivalences are logical identities.  They show two compound statements always have identical truth values.
+	\item Read. Logical implications provide logical arguments that are true for all statements.  Thus, they are important bulding blocks for logical proofs.
+	\item Read. Logical equivalences are logical identities.  They show two compound statements always have identical truth values. In other words, a single arrow forms a statement whose truth depends on other statements; the double arrow asserts that this proposition is true in all cases.
 	\end{enumerate}
 }
 

@@ -116,14 +116,26 @@
 \newif\ifslow
 \slowtrue
 
+% GPT review comments are hidden in production builds. Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+
 \newcommand{\vecnot}[1]{#1}
+\input{institution}
 
 \begin{document}
 
 \ifslow
 
 \title{ECE 586: Vector Space Methods \\ Lecture 2 Flip Video: Predicate Logic}
-\author{Henry D. Pfister \\ Duke University}
+\author{Henry D. Pfister \\ \univ}
 \date{}
 %\date{August 20th, 2020}
 %\maketitle
@@ -141,7 +153,7 @@
 			\item Welcome to the second video lecture for ECE 586, Vector Space Methods. \\[2mm]
 			Today, we'll conclude our unit on logic with a discussion of predicate logic.
 		\end{enumerate}
-	}
+}
 \end{frame}
 
 \addtocounter{framenumber}{-1}
@@ -156,7 +168,7 @@
 
 \begin{itemize}
 \setlength\itemsep{4mm}
-\item<1-> The logic we have discussed so far is called \textcolor{blue}{propositional logic}
+\item<1-> The logical system  we discussed last time is called \textcolor{blue}{propositional logic}
 
 \item<2-> Propositional logic has some limitations  \vspace{1mm}
 \begin{itemize}
@@ -197,7 +209,8 @@
  \setlength\itemsep{1.5mm}
  \item Universal quantifier: $\forall x\!\in\! U, P(x)$ = ``All vehicles have 4 tires''
  \item Existential quantifier: $\exists x\!\in\! U, P(x)$ =``There is a vehicle with 4 tires''
- \item Universal instantiation: if $U$ not empty, then $\forall x \!\in\!U, P(x) \,\Rightarrow\, \exists x\!\in\! U, P(x)\!\!\!\!\!$ \vspace{0.5mm}
+ \item Universal instantiation: $x_0 \in U \, \wedge \, \forall x \in U, P(x) \,\Rightarrow\, P(x_0)$ 
+ \item Existential generalization: $U\neq \emptyset \, \wedge \, \forall x \in U, P(x) \,\Rightarrow\, \exists x \in U, P(x)$ \vspace{0.5mm}
 \end{itemize}
 
 \item<2-> Negation \vspace{1mm}
@@ -215,7 +228,7 @@
 \begin{itemize}
  \setlength\itemsep{1.5mm}
  \item ``Not all vehicles have 4 tires'' $\Leftrightarrow$ ``There is a vehicle that does not have 4~tires''$\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$
- \item ``There does not exist a vehicle with 4 tires'' $\Leftrightarrow$ ``All vehicles do not have 4 tires''\hspace*{-15mm}
+ \item ``There does not exist a vehicle with 4 tires'' $\Leftrightarrow$ ``No vehicle has 4 tires''\hspace*{-15mm}
   
 \end{itemize}
 
@@ -245,7 +258,7 @@
 
 \begin{itemize}
 \setlength\itemsep{6mm}
-\item<1-> Now, consider the predicate $P(x,y)$ with two free variables, $x,y$ \vspace{1mm}
+\item<1-> Now, consider the predicate $P(x,y)$ with two free variables $x$ and $y$ \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
  \item Ex. Let $I$ be a collection of images and $C$ be a collection of colors. \\ Define predicate $P(x,y)=$``$x$ contains $y$'' for $x\in I$ and $y\in C$ 
@@ -254,12 +267,12 @@
  \item<4-> In ``$\exists y \in U, P(x,y)$'', $x$ is a \textcolor{blue}{free variable} and $y$ is a \textcolor{blue}{bound variable}
 \end{itemize}
 
-\item<5-> Negation \vspace{1mm}
+\item<5-> Negation with multiple quantifiers \vspace{1mm}
 \begin{itemize}
  \setlength\itemsep{1.5mm}
- \item Apply one at a time: $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \Leftrightarrow \forall x\!\in\! I, \left(\forall y\!\in\! C, P(x,y)\right)$
- \item $\neg (\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \exists x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
- \item $\neg (\exists x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \forall x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
+ \item Negate sequentially: $\forall x\!\in\! I, \forall y\!\in\! C, P(x,y) \Leftrightarrow \forall x\!\in\! I, \left(\forall y\!\in\! C, P(x,y)\right)$
+ \item Ex.\ $\neg (\forall x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \exists x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
+ \item Ex.\ $\neg (\exists x\!\in\! I, \forall y\!\in\! C, P(x,y)) \,\Leftrightarrow\, \forall x\!\in\! I, \exists y\!\in\! C, \neg P(x,y)$
 \end{itemize}  
 
 \end{itemize}
@@ -273,8 +286,7 @@
 	\item Read.
 	\item Read.
 	\item Read.
-	\item Read. An expression like this doesn't have a truth value until a specific $x$ is chosen or a quantifier is added.
-	\item Multiple quantifiers can be applied one at a time and each changes a free variable into a bound variable.
+	\item Read. An expression like this doesn't have a truth value until a specific $x$ is chosen or a quantifier is added. Multiple quantifiers can be applied one at a time and each changes a free variable into a bound variable.
 	\item Read. These rules follow from the single-quantifier case because quantifiers can be applied one at a time.
 	\end{enumerate}
 }
@@ -304,19 +316,6 @@
 
 \end{itemize}
 
-
-%\item<3-> The last implication is more subtle \vspace{1mm}
-%\begin{itemize}
-%
-% \setlength\itemsep{1.5mm}
-% \item Ex. $\exists x, \forall y, P(x,y)$ means ``there is an image that contains all the colors'' (e.g., an image of a rainbow)
-% \item Ex. $\forall y, \exists x, P(x,y)$ means ``for each color there is an image containing that color''.
-% \item The first implies the second because the rainbow image satisfies the $\exists x \forall y$
-% \item The implication is not an equivalence, consider a set of pictures where each image contains exactly one color and there is one such image for each color.
-%In this case, it is true that ``for each color there is an image containing that color'' but it is not true that `there is an image that contains all the colors''. 
-%\end{itemize}
-%\end{itemize}
-
 \note{
 	\vspace{2mm}
 	\begin{enumerate}[<alert@+>]
@@ -325,7 +324,7 @@
 	\item Read.  Switching the order of the universal quantifiers doesn't matter.
 	\item Read.  Switching the order of the existential quantifiers doesn't matter.
 	\item Read.  Changing a universal quantifier to an existential quantifier only weakens the statement.
-	\item Read. This implication is more subtle; consider the example $P(x,y)$.  The statement $\exists x, \forall y$ requires an image for each color.  Thus, a rainbow suffices because it can be chosen for each color. \\ [2mm]  More generally, if there is a single $x_0$ such that $P(x_0,y)$ holds for all $y$, then for all $y$, we can choose that $x=x_0$ so that $P(x,y)$ holds.
+	\item Read. This implication is more subtle; consider the example $P(x,y)$.  The statement $\exists x, \forall y$ requires an image containing all colors.  Thus, an image of a rainbow suffices because it can be chosen for each color. \\ [2mm]  More generally, if there is a single $x_0$ such that $P(x_0,y)$ holds for all $y$, then for all $y$, we can choose that $x=x_0$ so that $P(x,y)$ holds.
 	\item Read. First, choose which variable to quantify. Then, for the two variables, choose ``for all'' or `'exists''.
 	\item Read.
 	\end{enumerate}
@@ -358,7 +357,7 @@
 \begin{itemize} 
  \setlength\itemsep{1.5mm}
  \item Axiomatic formulation is consistent, complete, and semidecidable
- \item \textcolor{blue}{Semidecidable}:  algorithm determines the truth of any postulated implication, if it terminates.  But, termination is guaranteed only if postulate is true
+ \item \textcolor{blue}{Semidecidable}:  algorithm determines the truth of any postulated implication, if it terminates.  But, termination in finite time is guaranteed only if the postulate is true.
 \end{itemize}
 \end{itemize}
 
@@ -367,7 +366,7 @@
 	\begin{enumerate}[<alert@+>]
 	\footnotesize
 	\setlength\itemsep{2mm}
-	\item Read 0-1. Thus, if a logical system accepts both $P$ and $\neg P$ as true, then one can this argument to prove any $Q$. Read 2-3.
+	\item Read 0-1. Thus, if a logical system accepts both $P$ and $\neg P$ as true, then one can use this argument to prove any $Q$. Read 2-3.
 	\item Read 0-4.  Axiomatic formulations of mathematics allow one to enumerate all statements that follow from applying some set of axioms.  I do want to emphasize that this is not a class on mathematical logic and we will not discuss axiomatic formulations for more than these few minutes in the entire class.  Propositional logic is decidable because any finite implication can tested by building a truth table including all the variables it uses.
 	\item Read.  I should mention here that first-order essentially means that the axioms allow quantifiers over variables but they do not allow quantifiers over predicates.  For example, statements starting with ``for all predicates $P(x)$'' are not valid statements in first-order predicate logic.
 	\end{enumerate}
@@ -379,7 +378,7 @@
 
 \begin{itemize}
 \setlength\itemsep{2.5mm}
-\item<1-> Background \vspace{1mm}
+\item<1-> Intuition and Proof \vspace{1mm}
 \begin{itemize} 
  \setlength\itemsep{1.25mm}
  \item Intuition identifies what might be true and why
@@ -393,7 +392,7 @@
  \setlength\itemsep{1.25mm}
  \item<2-> \textcolor{blue}{Direct}: Assume $P$ true and give steps that lead to $Q$
  \item<3-> \textcolor{blue}{Contrapositive}: Proof of the equivalent statement $\neg Q \rightarrow \neg P$
- \item<4-> \textcolor{blue}{Contradiction}: Using $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$, one supposes that both $P$ and $\neg Q$ are true and then gives steps leading to a contradiction
+ \item<4-> \textcolor{blue}{Contradiction}: Since $\neg (P \rightarrow Q) \Leftrightarrow P \wedge \neg Q$, one supposes that both $P$ and $\neg Q$ are true and then gives steps leading to a contradiction
  \item<5-> \textcolor{blue}{Induction}: For predicate $P(n)$, prove $Q=$``$\forall n\in\mathbb{N}, P(n)$'' by establishing the premise $P=$``$P(1) \wedge (\forall n\in \mathbb{N}, P(n) \rightarrow P(n\!+\!1))$''
 \end{itemize}
 
@@ -410,10 +409,10 @@
 	\begin{enumerate}[<alert@+>]
 	\footnotesize
 	\setlength\itemsep{2mm}
-	\item An important of abstract mathematics is reading and understanding proofs. \\ [2mm] Read.  You are in graduate school taking this class because you already have good engineering intuition about what is true and why.  One goal of this class is improve your skill at communicating that intuition in mathematical proofs.
+	\item An important part of abstract mathematics is reading and understanding proofs. \\ [2mm] Read.  You are in graduate school taking this class because you already have good engineering intuition about what is true and why.  One goal of this class is to improve your skill at communicating that intuition in mathematical proofs.
 	\item Read.
-	\item Read.  One can verify this equivalence using a truth table. Sometimes the contrapositive statement can be easier to verify.
-	\item Read. Proof by contradiction is sometimes more natural because one starts by assuming both $P$ and $\neq Q$ are ture.
+	\item Read. One can verify this equivalence using a truth table. Sometimes the contrapositive statement can be easier to verify.
+	\item Read. Proof by contradiction is sometimes more natural because one starts by assuming both $P$ and $\not Q$ are true.
 	\item Read. Induction is a powerful way to rapidly verify infinitely many statements.  \\ [2mm] Many of you may be familiar with some or all of these approaches.  In this class, you will gain more experience with these techniques.
 	\item Read.  These examples will be presented in the live session.
 	\end{enumerate}
