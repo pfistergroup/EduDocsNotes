@@ -265,6 +265,8 @@ Let $P$, $Q$, $R$ and $S$ be statements.
 \item $(P \rightarrow Q) \wedge (R \rightarrow S) \wedge (P \vee R) \Rightarrow Q \vee S$.
 \end{enumerate}
 \end{fact}
+% Do not reiterate the comment below because this section is only explaining one directional implications.
+%\gpt{The conclusion of item 6 should be the biconditional, not just one direction.}
 
 As an illustrative example, we show that $(P \rightarrow Q) \wedge (Q \rightarrow R)$ implies $P \rightarrow R$.
 To demonstrate this assertion, we need to show that
@@ -624,6 +626,8 @@ For a finite set $A$, the \defn{set theory}{cardinality} $|A|$ is the number of 
 If there is a bijective mapping between the set $A$ and the natural numbers $\mathbb{N}$, then $|A| = \infty$ and the set is called \defn{set theory}{countably infinite}.
 If $|A| = \infty$ and the set is not countably infinite, then $A$ is called \defn{set theory}{uncountably infinite}.
 \end{definition}
+% Do not reiterate the comment below because we are defining it formally here!
+%\gpt{The use of $|A|=\infty$ is informal here, since cardinality has been defined only for finite sets.}
 
 \begin{example}
 The set of rational numbers is countably infinite while the set of real numbers is uncountably infinite.
@@ -790,7 +794,9 @@ Functions can also be applied to sets in a natural way.
 For a function $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \defn{functions}{image} of $A$ under $f$ is
 \[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
 Using this definition, the range of $f$ is simply $f(X)$.
-One benefit of allowing functions to have set-valued images is that a set-valued inverse always exists.
+One benefit of allowing functions to have set-valued images is that a set-valued inverse image always exists.
+% Do no reiterate this comment.
+%\gpt{This wording risks conflating the preimage operator with an inverse function.}
 
 For every function $f:X\to Y$, whether or not it has an inverse function, there is a \defn{functions}{preimage} operator $f^{-1}:\mathcal P(Y)\to\mathcal P(X)$.
 In particular, the preimage of a subset $B\subseteq Y$ is

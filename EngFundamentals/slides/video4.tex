@@ -126,6 +126,8 @@
 \fi
 \newcommand{\gpt}[1]{%
   \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+\newcommand{\claude}[1]{%
+  \ifgptcomments\par\medskip{\color{purple}\scriptsize\textbf{Claude comment. }#1}\fi}
 
 \newcommand{\vecnot}[1]{#1}
 \input{institution}
@@ -173,7 +175,7 @@
   %Build sets by grouping elements into vectors
   \item For sets $A,B$, the \textcolor{blue}{Cartesian product} $A\times B$ is the set of ordered pairs \[ A \times B \triangleq \{(a,b) \,|\, a\in A, b\in B\}\]
   \item For $n$-tuples from the same set, we write $A^n=A\times A \times \cdots \times A$
-  \item Ex. For $A  = \{ a,b \}$ and $B  = \{ c,d \}$, we have
+  \item Ex. For $A  = \{ a,b \}$ and $B  = \{ c,d \}$, then we have
 \begin{align*}
 A\times B &= \{(a,c),(a,d),(b,c),(b,d) \} \\
 A^2 = A \times A &= \{ (a,a),(a,b),(b,a),(b,b) \} \\
@@ -184,18 +186,19 @@ A^2 = A \times A &= \{ (a,a),(a,b),(b,a),(b,b) \} \\
 \vspace{-7mm}
 
 \begin{definition}<2->
-A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the subset $R \subseteq A\times A$.  Specifically, we say the relation $x \sim y$ holds if and only if $(x,y)\in R$.
+A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by a subset $R \subseteq A\times A$.  Specifically, we say the relation $x \sim y$ holds if and only if $(x,y)\in R$.
 \end{definition}
-\uncover<2->{Relations are the abstraction of operators like $\{\, = \, , \, \leq \, , \, \geq \, , \, < \, , \, > \, \}$}
+\uncover<2->{Relations are the abstraction of binary comparisons like $\{\, = \, , \, < , \, > ,\, \leq \, , \geq \}$}
 
 \note{
 	\vspace{8mm}
 	\begin{enumerate}
 		\setlength\itemsep{3mm}
 		\color{red}
-		\item Read.  
-		\item Read. 
+		\item Read.
+		\item Read.
 	\end{enumerate}
+	\claude{Throughout \texttt{scripts/video4.md} the relation symbol $\sim$ is spoken as ``tilde'' (``the relation tilde'', ``x tilde y'', ``A modulo tilde''), because the previous script's ``sim'' is not a word and Qwen reads it as one.  Change globally in the script if you say something else in lecture, such as ``x is related to y''.}
 }
 
 
@@ -220,12 +223,12 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 \begin{itemize}
   \setlength\itemsep{1.5mm}
   %\item Abstract generalization of equality
-  \item Ex. let $A$ be a set of people and $P(x,y)$ be the statement: \\ \textcolor{blue}{``$x$ has the same birthday (month and day) as $y$''}
+  \item Ex. let $A$ be a set of people and let $P(x,y)$ be the statement: \\ \textcolor{blue}{``$x$ has the same birthday (month and day) as $y$''}
   \item Define \textcolor{blue}{relation $\sim$} such that \textcolor{blue}{$x\sim y$} holds iff $P(x,y)$ is true.  Then, \vspace{-1mm}
   \[ R = \{ (x,y)\in A\times A \,|\, P(x,y) \} \vspace*{-1mm} \]
-  \item<3-> Partitions $A$ into disjoint \textcolor{blue}{equivalence classes}: $[a] \triangleq \left\{x\in A | x \sim a\right\}$
-  \item<4-> Ex. $\sim$ has an equivalence class for each possible day in a year
-  \item<5-> Set of equivalence classes called the \textcolor{blue}{quotient set}: $A / \!\sim \;\triangleq \{ \, [a] \, | \, a\in A \}\!\!\!\!\!$
+  \item<3-> This partitions $A$ into disjoint \textcolor{blue}{equivalence classes}: $[a] \triangleq \left\{x\in A | x \sim a\right\}$
+  \item<4-> Ex. $\sim$ has an equivalence class for each day of the year achieved by $A$.
+  \item<5-> Set of equivalence classes called its \textcolor{blue}{quotient set}: $A / \!\sim \;\triangleq \{ \, [a] \, | \, a\in A \}\!\!\!\!\!$
 
 \end{itemize}
 \end{itemize}
@@ -237,12 +240,9 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 		\setlength\itemsep{3mm}
 		\item Read.  
 		\item Read.  Check conditions.
-		\item Read.  Here, the brackets around $a$ (i.e., $[a]$) represents all elements that are equivalent to $a$.  Notice that every element must be in some equivalence class.  Also, no element can be in two different equivalence classes due to transitivity.
-		\item Read.
+		\item Read.  Here, the brackets around $a$ (i.e., $[a]$) represent all elements that are equivalent to $a$.  Notice that every element must be in some equivalence class.  These definitions imply that each element is in exactly one equivalence class.\item Read.
 		\item Read.  The quotient set can be seen as the collection of subsets that partition $A$.
 	\end{enumerate}
-	\gpt{The claim that no element can lie in two different equivalence classes is not due to transitivity alone; the standard proof uses reflexivity, symmetry, and transitivity.  Suggested replacement: ``If two equivalence classes overlap, symmetry and transitivity show that each is contained in the other, so the classes are equal.''}
-	\gpt{The birthday example has one equivalence class for each birthday represented among the people in $A$, not necessarily for every possible day of the year.  Suggested replacement: ``Ex. $\sim$ has an equivalence class for each birthday represented in $A$.''}
 }
 
 \end{frame}
@@ -253,7 +253,7 @@ A \textcolor{blue}{relation} $\sim$ between elements of $A$ is defined by the su
 
 \begin{definition}
 A \textcolor{blue}{function} $f \colon X \rightarrow Y$ from $X$ to $Y$ is defined by a subset $F \subset X \times Y$ such that $A_x = \{ y\in Y | (x,y)\in F \}$ has exactly one element for each $x\in X$.
-The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}, is unique element in $A_x$.
+The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}, is the unique element in $A_x$.
 \end{definition}
 
 \begin{itemize}
@@ -262,7 +262,7 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \begin{itemize} 
   \setlength\itemsep{1.5mm}
   \item<2-> Function $f \colon X\rightarrow Y$ assigns one value $f(x)\in Y$ to each $x\in X$
-  \item<3-> Notation \textcolor{blue}{$f \colon X \rightarrow Y$} emphasizes the \textcolor{blue}{domain} $X$ and the \textcolor{blue}{codomain} $Y$
+  \item<3-> Notation \textcolor{blue}{$f \colon X \rightarrow Y$} identifies the \textcolor{blue}{domain} $X$ and the \textcolor{blue}{codomain} $Y$
   \item<4-> \textcolor{blue}{Range} of $f$ is subset of $Y$ achieved by $f$, $\{y \in Y \,|\, \exists x\in X, y=f(x) \}$
   \item<5-> Since the term codomain is uncommon, people sometimes use the term range instead of codomain either intentionally or unintentionally
 \end{itemize}
@@ -276,7 +276,8 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \end{itemize}
 
 \end{itemize}
-\note{\gpt{In the formal definition, consider replacing $F\subset X\times Y$ by $F\subseteq X\times Y$ unless a proper subset is intended.  Also replace ``is unique element in $A_x$'' by ``is the unique element of $A_x$.''  A student-friendly equivalent definition could follow: ``For every $x\in X$, there exists exactly one $y\in Y$ such that $(x,y)\in F$.''}}
+\note{Hi
+}
 \end{frame}  
 
 \begin{frame}{1.5: Properties of Functions}
@@ -294,14 +295,15 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
   \setlength\itemsep{1.5mm}
   \item \textcolor{blue}{one-to-one} or \textcolor{blue}{injective} if, $\forall x,x'\in X$, if $f(x)=f(x')$ then $x=x'$
   \item \textcolor{blue}{onto} or \textcolor{blue}{surjective} if its range $\{ f(x) | x\in X\}$ equals $Y$
-  \item \textcolor{blue}{one-to-one correspondence} or \textcolor{blue}{bijective} if both one-to-one and onto
+  \item \textcolor{blue}{one-to-one correspondence} or \textcolor{blue}{bijective} if it is 
+  both one-to-one and onto
 \end{itemize}
 
 \item<3-> Inversion \vspace{1mm}
 \begin{itemize}
   \setlength\itemsep{1.5mm}
   \item A bijective function has a unique \textcolor{blue}{inverse function} $f^{-1} \colon Y\rightarrow X$ satisfying: $\forall x\in X, f^{-1}(f(x)) = x$ and $\forall y\in Y, f(f^{-1}(y)) = y$
-  \item Any one-to-one function $f \colon X\rightarrow Y$ defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
+  \item Any one-to-one function $f \colon X\rightarrow Y$ automatically defines a bijective function $g \colon X \rightarrow R$ where $R$ is the range of $f$ and $g(x)=f(x)$ for all $x\in X$
 
 \end{itemize}
 
@@ -315,7 +317,7 @@ The \textcolor{blue}{value} of $f$ at $x\in X$, \textcolor{blue}{denoted $f(x)$}
 \vspace{1mm}
 \begin{definition}<1->
 For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{image} of $A$ under $f$ is \vspace{-2mm}
-\[ f(A) \triangleq \{ y\in Y | \exists x\in A \textrm{ s.t. } f(x)=y\} = \{f(x) | x\in A\}. \]
+\[ f(A) \triangleq \{ y\in Y \mid \exists x\in A, \; f(x)=y\} = \{f(x) \mid x\in A\}. \]
 \end{definition}
 
 \begin{center}
@@ -324,7 +326,7 @@ For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{im
 
 \begin{itemize}
   \setlength\itemsep{2mm}
-  \item<3-> This implies that the range of $f$ is simply $f(X)$
+  \item<3-> This implies that the range of $f$ can be written simply as $f(X)$.
 \end{itemize}
 
 \note{
@@ -336,7 +338,6 @@ For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{im
 		\item Read.  Here ...
 		\item Read.
 	\end{enumerate}
-	\gpt{The second cue ends with the unfinished phrase ``Here ...''.  The production script preserves that phrase rather than inventing a description of the diagram.  Replace it with the exact explanation you want spoken after the image appears.}
 }
 
 \end{frame}  
@@ -345,8 +346,8 @@ For $f \colon X\rightarrow Y$ and subset $A\subseteq X$, the \textcolor{blue}{im
 \begin{frame}<1-4> \frametitle{1.5: Applying Functions to Sets (2)}
 
 \begin{definition}<1->
-The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C\subseteq Y$ is \vspace{-2mm}
-\[ f^{-1}(C) \triangleq \{ x\in X | f(x)\in C\}. \]
+The \textcolor{blue}{preimage} or \textcolor{blue}{inverse image} of a subset $C\subseteq Y$ is \vspace{-2mm}
+\[ f^{-1}(C) \triangleq \{ x\in X \mid f(x)\in C\}. \]
 \end{definition}
 
 \begin{center}
@@ -373,8 +374,6 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
 		\item Read.  Here ...
 		\item Read.
 	\end{enumerate}
-	\gpt{This frame has four rendered overlays but only three note cues, and the second cue ends with the unfinished phrase ``Here ...''.  The production script preserves that phrase and reads only the fourth reveal on the final beat.  Add the intended diagram explanation and a fourth note item to make the embedded script explicit.}
-	\gpt{The notation $f^{-1}(C)$ here denotes a preimage and does not require an inverse function.  Suggested replacement for ``the set-valued inverse always exists'': ``The preimage operator is defined for every function, even when the function is not invertible.''  This prevents students from conflating a preimage with the inverse function introduced earlier.}
 }
 
 \end{frame}  
@@ -400,7 +399,7 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
  	\begin{enumerate}[<alert@+>]
  		\footnotesize
  		\setlength\itemsep{3mm}
- 		\item Read. These expressions hold because $f$ compresses sets (i.e.,can map different inputs to the same value) while $f^{-1}$ expands sets (i.e., can map singleton to multiple values) 
+ 		\item Read. These expressions hold because $f$ compresses sets (i.e., can map different inputs to the same value) while $f^{-1}$ expands sets (i.e., can map a singleton to multiple values)
  		\item Read.
  		\item Read.
  	\end{enumerate}
@@ -419,7 +418,7 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
  \setlength\itemsep{3mm}
  \item Try the suggested reading: Course Notes EF 1.5
  \item Or the optional reading: PAF 4.1-5.3
- \item And also looking at problems in Assignment 2
+ \item Also, look at the problems in Assignment 2
 \end{itemize}
 \end{itemize}
 
@@ -428,9 +427,10 @@ The \textcolor{blue}{inverse image} or \textcolor{blue}{preimage} of a subset $C
 	\begin{enumerate}
 		\setlength\itemsep{3mm}
 		\color{red}
-		\item Here are some options to continue learning this material.
+		\item Here are some options to continue learning this material. (read) \\ [2mm]  That's it for today.  So, I'll see you next time.
 	\end{enumerate}
 	\gpt{Grammar: replace ``And also looking at problems in Assignment 2'' by ``Also, look at the problems in Assignment 2.''  Consider adding a one-sentence synthesis before the reading list: ``Relations group elements by shared properties, while functions assign outputs and carry sets forward or backward through images and preimages.''}
+	\claude{The slide grammar flagged above is fixed.  This closing note was also the only one in videos 1--5 with no ``(read)'' and no sign-off, so the reading list was never spoken and the video ended abruptly; both are now restored to match videos 1, 2, 3, and 5.  Revert if the omission was deliberate.}
 }
 
 \end{frame}

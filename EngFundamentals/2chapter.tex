@@ -9,14 +9,15 @@ For every pair of elements $s, t \in F$ then their sum $(s + t) \in F$.
 For every pair of elements $s, t \in F$ then their product $st \in F$.
 Suppose that these two operations satisfy
 \begin{enumerate}
-\item addition is commutative: $s + t = t + s \; \forall s, t \in F$
-\item addition is associative: $r + (s + t) = (r + s) + t \; \forall r, s, t \in F$
+\item addition is commutative: $s + t = t + s, \; \forall s, t \in F$
+\item addition is associative: $r + (s + t) = (r + s) + t, \; \forall r, s, t \in F$
+\item there is a unique element $0 \in F$ such that $s + 0 = s, \; \forall s \in F$
 \item to each $s \in F$ there exists a unique element $(-s) \in F$ such that $s + (-s) = 0$
-\item multiplication is commutative: $st = ts \; \forall s,t \in F$
-\item multiplication is associative: $r(st) = (rs)t \; \forall r, s, t \in F$
-\item there is a unique non-zero element $1 \in F$ such that $s1 = s \; \forall s \in F$
-\item to each $s \in F - 0$ there exists a unique element $s^{-1} \in F$ such that $s s^{-1} = 1$
-\item multiplication distributes over addition: $r (s + t) = rs + rt \; \forall r, s, t \in F$.
+\item multiplication is commutative: $st = ts, \; \forall s,t \in F$
+\item multiplication is associative: $r(st) = (rs)t, \; \forall r, s, t \in F$
+\item there is a unique element $1 \in F - \{0\}$ such that $s1 = s, \; \forall s \in F$
+\item to each $s \in F - \{0\}$ there exists a unique element $s^{-1} \in F$ such that $s s^{-1} = 1$
+\item multiplication distributes over addition: $r (s + t) = rs + rt, \; \forall r, s, t \in F$.
 \end{enumerate}
 Then, the set $F$ together with these two operations is a \textbf{field}.
 \index{field}
@@ -35,18 +36,19 @@ Is the set of rational numbers a subfield of the real numbers?
 \end{problem}
 
 \begin{example}
-Is the set of all real numbers of the form $s + t \sqrt{2}$, where $s$ and $t$ are rational, a subfield of the complex numbers?
+Is the set of all real numbers of the form $s + t \sqrt{2}$, where $s$ and $t$ are rational, a subfield of the real numbers?
 
 The set $F = \left\{ s + t \sqrt{2} : s, t \in \RationalNumbers \right\}$ together with the standard addition and multiplication is a field.
-Let $s, t, u, v \in \RationalNumbers$,
+Consider $s, t, u, v \in \RationalNumbers$ and observe
 \begin{gather*}
 s + t \sqrt{2} + u + v \sqrt{2} = (s+u) + (t+v) \sqrt{2} \in F \\
 \left( s + t \sqrt{2} \right) \left( u + v \sqrt{2} \right) = (su + 2 tv) + (sv + tu) \sqrt{2} \in F \\
-\left( s + t \sqrt{2} \right)^{-1} = \frac{ s - t \sqrt{2} }{ s^2 + 2 t^2 }
-= \frac{ s }{ s^2 + 2 t^2 } - \frac{ t }{ s^2 + 2 t^2 } \sqrt{2} \in F
+\left( s + t \sqrt{2} \right)^{-1} = \frac{ s - t \sqrt{2} }{ s^2 - 2 t^2 }
+= \frac{ s }{ s^2 - 2 t^2 } - \frac{ t }{ s^2 - 2 t^2 } \sqrt{2} \in F,
 \end{gather*}
-Again, the remaining properties are straightforward to prove.
-The field $s + t \sqrt{2}$, where $s$ and $t$ are rational, is a subfield of the complex numbers.
+where we assume $(s,t)\neq(0,0)$ in the last equation and $s^2-2t^2\ne0$ because $(s/t)^2=2$ is impossible for rational $s$ and $t$.
+The remaining properties are straightforward to prove.
+Also, the field $s + t \sqrt{2}$, where $s$ and $t$ are rational, is a subfield of the real numbers.
 \end{example}
 
 
@@ -61,7 +63,7 @@ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & y_2 \\
 a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & y_m
 \end{array}
 \end{equation}
-where $y_1,\ldots,y_n \in F$ and $a_{ij} \in F$ for $1 \leq i \leq m$ and $1 \leq j \leq n$.
+where $y_1,\ldots,y_m \in F$ and $a_{ij} \in F$ for $1 \leq i \leq m$ and $1 \leq j \leq n$.
 These conditions form a \emph{system of $m$ linear equations in $n$ unknowns}.
 A shorthand notation for~\eqref{equation:SystemOfEquations} is the matrix equation
 \begin{equation*}
@@ -79,7 +81,7 @@ a_{21} & a_{22} & \cdots & a_{2n} \\
 a_{m1} & a_{m2} & \cdots & a_{mn}
 \end{bmatrix}.
 \end{equation*}
-We also use $[A]_{i,j}$ to denote the entry of $A$ in the $i$-th row and $j$-th column (i.e., $a_{ij}$) and $[\vecnot{x}_i ]$ to denote the $i$-th entry in $\vecnot{x}$ (i.e., $x_i$).
+We also use $[A]_{i,j}$ to denote the entry of $A$ in the $i$-th row and $j$-th column (i.e., $a_{ij}$) and $[\vecnot{x}]_i$ to denote the $i$-th entry in $\vecnot{x}$ (i.e., $x_i$).
 %The vectors $\vecnot{x}$ and %$\vecnot{y}$ denoted by
 %\begin{align*}
 %\vecnot{x} &= (x_1, \ldots, x_n)^T \\
@@ -122,7 +124,7 @@ For matrices $A \in \mathbb{C}^{m\times p}$ and $B \in \mathbb{C}^{p \times n}$,
 An $m\times n$ matrix $A$ over $F$ is in \defn{matrix}{row echelon form} if
 \begin{enumerate}
 \item all rows containing only zeros, if they exist, are the bottom of the matrix, and
-\item For rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
+\item For rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it. Note that a leading coefficient is also called a pivot.
 \end{enumerate}
 These two conditions imply that entries below the leading coefficient in a column are zero.
 A matrix is \textbf{column echelon form} if its transpose is in row echelon form.
@@ -177,9 +179,12 @@ Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over
 \end{lemma}
 \begin{proof}
 First, we use row reduction to compute the reduced row echelon form $R=PA$ of $A$, where $P$ is invertible.
-Then, we observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$.
+Since $R$ has at most $m<n$ pivot columns with leading coefficients, it must have a column without a leading coefficient (i.e., a free variable).
+Set any free variable to $1$ and the remaining free variables to $0$.
+Solving for the pivot variables, we observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any free column of $R$.
 This allows us to construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and thus $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$.
 \end{proof}
+
 
 \section{Vector Spaces}
 
@@ -247,11 +252,11 @@ A vector $\vecnot{w} \in V$ is said to be a \defn{vector space}{linear combinati
 
 \begin{definition}
 Let $V$ be a vector space over $F$.
-A \defn{vector space}{subspace} of $V$ is a subset $W \subset V$ which is itself a vector space over $F$.
+A \defn{vector space}{subspace} of $V$ is a subset $W \subseteq V$ which is itself a vector space over $F$.
 \end{definition}
 
 \begin{fact}
-A non-empty subset $W \subset V$ is a subspace of $V$ if and only if for every pair $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
+A non-empty subset $W \subseteq V$ is a subspace of $V$ if and only if for every pair $\vecnot{w}_1, \vecnot{w}_2 \in W$ and every scalar $s \in F$ the vector $s \vecnot{w}_1 + \vecnot{w}_2$ is again in $W$.
 \end{fact}
 If $V$ is a vector space then the intersection of any collection of subspaces of $V$ is a subspace of $V$.
 
@@ -273,10 +278,13 @@ The \defn{vector space}{span} of $U$, denoted $\Span(U)$, is defined to be the s
 The subspace spanned by $U$ can be defined equivalently as the intersection of all subspaces of $V$ that contain $U$.
 To see this, we note that the intersection of all subspaces containing $U$ is a subspace containing $U$ because the intersection of subspaces is also a subspace.
 The intersection cannot be larger than $\Span(U)$, however, because $\Span(U)$ is a subspace containing $U$.
+We say two subspaces $U,W$ have trivial intersection (or are disjoint) if $U\cap W=\{\vecnot{0}\}$.
+% Do not reiterate this comment because disjoint is used informally for subspaces in this way
+%\gpt{Remove ``or are disjoint'' from the final sentence: subspaces with trivial intersection still share $\vecnot0$, so they are not disjoint in the set-theoretic sense.}
 
 \begin{definition}
 Let $V$ be a vector space and $U,W$ be subspaces.
-If $U,W$ are disjoint (i.e., $U\cap W = \{ \vecnot{0} \}$), their \defn{vector space}{direct sum} $U \oplus W$ is defined by
+If $U,W$ have trivial intersection (i.e., $U\cap W = \{ \vecnot{0} \}$), then their \defn{vector space}{direct sum} $U \oplus W$ is defined by
 \[ U \oplus W \triangleq \{\vecnot{u}+\vecnot{w} | \vecnot{u} \in U, \vecnot{w} \in W \}. \]
 \end{definition}
 
@@ -343,9 +351,11 @@ Every vector space has a Hamel basis.
 \end{theorem}
 \begin{proof}
 Let $X$ be the set of linearly independent subsets of $V$.
-Furthermore, for $x, y \in X$ consider the strict partial order defined by proper inclusion.
-By the maximum principle, if $x$ is an element of $X$, then there exists a maximal simply ordered subset $Z$ of $X$ containing $x$.
-This element is a Hamel basis for $V$.
+For $x, y \in X$ consider the strict partial order defined by proper inclusion.
+By the maximum principle (see Appendix~\ref{app:maximum-principle}), for each $x \in X$, there exists a maximal chain (i.e., simply ordered subset $Z$ of $X$ containing $x$).
+%If $\operatorname{span}(Z)\ne V$, then adjoining a vector outside the span preserves linear independence, which gives a contradiction.
+%Thus, the maximal element $Z$ forms a Hamel basis for $V$.
+Let $\mathcal B=\bigcup_{S\in Z}S$.  Then $\mathcal B$ is linearly independent.  If $\operatorname{span}(\mathcal B)\ne V$, adjoining a vector outside this span produces a larger linearly independent set, and hence a larger chain, a contradiction.  Thus $\mathcal B$ is a Hamel basis for $V$.
 \end{proof}
 
 \begin{example}
@@ -411,10 +421,9 @@ Collecting the $a_{ij}$ coefficients into an $n$ by $m$ matrix $A$ shows that
 \begin{equation*}
 \begin{bmatrix} t_1 \\ \vdots \\ t_n \end{bmatrix} = A \begin{bmatrix} s_1 \\ \vdots \\ s_m \end{bmatrix} .
 \end{equation*}
-Since $A\in F^{n\times m}$ with $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies there are scalars $s_1, \ldots, s_n$, not all $0$, such that $t_1 = t_2 = \cdots = t_m = 0$.
+Since $A\in F^{n\times m}$ with $n<m$, Lemma~\ref{lemma:widematrix_has_nullvector} implies there are scalars $s_1, \ldots, s_m$, not all $0$, such that $t_1 = t_2 = \cdots = t_n = 0$.
 For these scalars, $\sum_{j=1}^m s_j \vecnot{u}_j = \vecnot{0}$.
-Thus, the set $U$ is linearly dependent.
-and the contradiction implies $m \leq n$.
+Thus, the set $U$ is linearly dependent and the contradiction implies $m \leq n$.
 \end{proof}
 
 Now, suppose that $V$ is a finite-dimensional vector space with bases $U=\{\vecnot{u}_1, \ldots, \vecnot{u}_n\}$ and $W =\{\vecnot{w}_1, \ldots, \vecnot{w}_m\}$ where $m \neq n$.
@@ -429,10 +438,8 @@ The \defn{vector space}{dimension} of a finite-dimensional vector space is the n
 We denote the dimension of a finite-dimensional vector space $V$ by $\dim(V)$.
 \end{definition}
 
-The zero subspace of a vector space $V$ is the subspace spanned by the vector $\vecnot{0}$.
-Since the set $\left\{ \vecnot{0} \right\}$ is linearly dependent and not a basis, we assign a dimension $0$ to the zero subspace.
-Alternatively, it can be argue that the empty set $\emptyset$ spans $\left\{ \vecnot{0} \right\}$ because the intersection of all the subspaces containing the empty set is $\left\{ 0 \right\}$.
-Though this is only a minor point.
+The zero subspace is $\{\vecnot{0}\}$ and has the empty set as a basis, so its dimension is $0$.
+This subspace is also spanned by the set $\left\{ \vecnot{0} \right\}$, which is linearly dependent, and thus not a basis.
 
 \begin{theorem}
 Let $A$ be an $n \times n$ matrix over $F$ whose columns, denoted by $\vecnot{a}_1, \ldots, \vecnot{a}_n$, form a linearly independent set of vectors in $F^{n}$.
@@ -490,7 +497,7 @@ Based on this ordered basis, a vector $\vecnot{v} \in V$ can be unambiguously re
 \end{equation*}
 
 \begin{definition}
-For a finite-dimensional vector space $V$ with ordered basis $\mathcal{B}=(\vecnot{v}_1, \ldots, \vecnot{v}_n )$, the \defn{vector space}{coordinate vector} of $\vecnot{v} \in V$ is denoted by $\left[ \vecnot{v} \right]_{\mathcal{B}}$ and equals the unique vector $\vecnot{s} = F^n$ such that
+For a finite-dimensional vector space $V$ with ordered basis $\mathcal{B}=(\vecnot{v}_1, \ldots, \vecnot{v}_n )$, the \defn{vector space}{coordinate vector} of $\vecnot{v} \in V$ is denoted by $\left[ \vecnot{v} \right]_{\mathcal{B}}$ and equals the unique vector $\vecnot{s} \in F^n$ such that
 \[ \vecnot{v} = \sum_{i=1}^n s_i \vecnot{v}_i. \]  
 \end{definition}
 
@@ -772,7 +779,7 @@ T \left( \vecnot{0} \right) = \vecnot{0} \implies \vecnot{0} \in \mathcal{N}(T).
 \end{equation*}
 Furthermore, if $T \vecnot{v}_1 = T \vecnot{v}_2 = 0$ then
 \begin{equation*}
-T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T \left( \vecnot{v}_1 \right) + \left( \vecnot{v}_2 \right) = s \vecnot{0} + \vecnot{0} = \vecnot{0} ,
+T \left( s \vecnot{v}_1 + \vecnot{v}_2 \right) = s T \left( \vecnot{v}_1 \right) + T \left( \vecnot{v}_2 \right) = s \vecnot{0} + \vecnot{0} = \vecnot{0} ,
 \end{equation*}
 so that $s \vecnot{v}_1 + \vecnot{v}_2 \in \mathcal{N}(T)$.
 
@@ -827,7 +834,9 @@ If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \begin{proof}
 %It is easy to verify that elementary row operations preserve the row space of $A$.
 Let $R=PA$ be the reduced row echelon form of $A$, where $P$ is invertible.
-Let $r$ be the number of non-zero rows in $R$ and observe that $\mathrm{row~rank} (A) = r$ because the rows of $R$ form a basis for the row space of $A$.
+Since elementary row operations preserve the row space, $R=PA$ implies the row space of $R$ is a subset of the row space of $A$.
+Likewise, $A=P^{-1}R$ gives the reverse inclusion. 
+Thus, the rows of $R$ form a basis for the row space of $A$ and $\mathrm{row~rank} (A) = r$, where $r$ is the number of non-zero rows in $R$.
 Next, we write $A=P^{-1}R$ and observe that each column of $R$ has non-zero entries only in the first $r$ rows.
 Thus, each column of $A$ is a linear combination of the first $r$ columns in $P^{-1}$.
 Thus, the column space of $A$ is spanned by $r$ vectors and $\Rank (A) \leq \mathrm{row~rank} (A)$.
@@ -842,7 +851,7 @@ Regardless, it holds that $\Rank(A) = \Rank(A^T) = \Rank(A^H)$.
 
 \section{Norms}
 
-Let $V$ be a vector space over the real numbers or the complex numbers.
+Let $V$ be a vector space over the field $F$ of real numbers or complex numbers.
 
 \begin{definition}
 A \defn{vector space}{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \RealNumbers$ that satisfies the following properties.
@@ -866,7 +875,7 @@ is the metric induced by the norm.
 
 \begin{definition}
 A vector $\vecnot{v} \in V$ is said to be \defn{vector space}{normalized} if $\left\| \vecnot{v} \right\| = 1$.
-Any vector can be normalized, except the zero vector:
+Every nonzero vector can be normalized:
 \begin{equation}
 \vecnot{u} = \frac{\vecnot{v}}{\left\| \vecnot{v} \right\|}
 \end{equation}
@@ -905,11 +914,12 @@ The Lebesgue integral of a non-negative function is zero if and only if the func
 Therefore, two functions are \emph{equal almost everywhere} if the norm of their difference is zero. 
 Strictly speaking, a vector space of ``functions" with the $L^p$ norm actually has elements that are equivalence classes of functions defined by \emph{equality almost everywhere}.
 
-The normed vector space $L^{p}(X)$ (with $1\leq p<\infty)$ is the subset of all functions mapping $X$ to the real numbers (i.e., $f\colon X\rightarrow\mathbb{R}$) where the Lebesgue integral
+For $1\le p<\infty$, $L^p(X)$ is the normed vector space of equivalence classes (modulo equality a.e.) of measurable functions $f\colon X\to\mathbb R$ such that the Lebesgue integral
 \[
 \left\Vert f\right\Vert _{L^{p}}\triangleq\left(\int_{X}\left|f(x)\right|^{p}dx\right)^{1/p}
 \]
-exists and is finite. Of course, this definition begs the question, ``What is the Lebesgue integral?''. The following definition is sufficient for these notes:
+is finite (since measurable implies existence).
+Of course, this definition begs the question, ``What is the Lebesgue integral?''. For these notes, we use the following.
 \begin{definition}
 The \defn{integral}{Lebesgue integral} is a generalization of the Riemann integral that applies to wider class of functions. The values of these two integrals coincide on the set of Riemann integrable functions.
 Loosely speaking, one can construct any non-negative function $f\in L^{p}(X)$ by considering sequences $f_{1},f_{2},\ldots$ of ``simple'' functions formed by rounding values of $f$ down to values in a finite set $S_i \subset [0,\infty)$ where $\{0\} \subset S_1 \subset S_2 \subset \cdots \subset [0,\infty)$.
@@ -921,9 +931,9 @@ In fact, the non-negative functions in $L^{p}(X)$ are in one-to-one corresponden
 \end{definition}
 
 \begin{definition}
-The \defn{integral}{Lebesgue measure} of a set $A \subseteq X$ is equal to the Lebesgue integral of its indicator function when both quantities exist. In particular, the set is measurable if and only if the Lebesgue integral of its indicator function exists.
+A set $A\subseteq X$ is called \defn{integral}{Lebesgue measurable} when its indicator $\mathbf 1_A$ is measurable.
+In this case, its \defn{integral}{Lebesgue measure} is equal to the Lebesgue integral $\mu(A)=\int_X\mathbf 1_A\,dx$ of its indicator function.
 \end{definition}
-
 \end{minipage}}
 
 \end{table}
@@ -933,7 +943,7 @@ By the properties of a metric, we have
 \item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) \geq 0 \quad \forall \vecnot{v} \in V$; equality holds if and only if $\vecnot{v} = \vecnot{0}$
 \item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{w}, \vecnot{0} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{0}, \vecnot{w} \right) \geq \bar{d} \left( \vecnot{v}, \vecnot{w} \right) \quad \forall \vecnot{v}, \vecnot{w} \in V$.
 \end{enumerate}
-However, $\bar{d} \left( s \vecnot{v}, \vecnot{0} \right)$ is not necessarily equal to $s \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
+However, $\bar{d} \left( s \vecnot{v}, \vecnot{0} \right)$ is not necessarily equal to $|s| \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
 For instance,
 $\bar{d} \left( 2 \vecnot{e}_1, \vecnot{0} \right) = 1 < 2 \bar{d} \left( \vecnot{e}_1, \vecnot{0} \right)$.
 Thus, the function $f \colon \RealNumbers^n \rightarrow \RealNumbers$ defined by
@@ -946,9 +956,9 @@ is not a norm.
 \begin{example}
 The following functions are examples of norms for $\mathbb{R}^n$ and $\mathbb{C}^n$:
 \begin{enumerate}
-\item the $l^1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
-\item the $l^p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
-\item the $l^{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |v_i| \}$.
+\item the $\ell^1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
+\item the $\ell^p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
+\item the $\ell^{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |v_i| \}$.
 \end{enumerate}
 \end{example}
 
@@ -967,8 +977,8 @@ In this example, the integral notation refers to the \defn{integral}{Lebesgue in
 
 \begin{example}
 Consider any set $W$ of real-valued random variables, defined on a common probability space, such that $\| X \|_p \triangleq \Expect [|X|^p]^{1/p} < \infty$ for all $X\in W$ and some fixed $p\in [1,\infty)$.
-Then, $V = \Span (W)$ is a normed vector space over $\RealNumbers$ and $X,Y\in V$ are considered to be equal if $\| X-Y \|^p = E \left[ |X-Y|^p \right] = 0$ (or equivalently $\Pr (X \neq Y ) = 0$).
-In addition, the closure of $V$ is a Banach space.
+We say $X,Y\in W$ are almost-surely equal if $\| X-Y \|_p^p = E \left[ |X-Y|^p \right] = 0$ because this is equivalent to $\Pr (X \neq Y ) = 0$.
+Then, $V = \Span (W)$ (modulo almost-sure equality) is a normed vector space over $\RealNumbers$ and the closure of $V$ is a Banach space.
 \end{example}
 
 \begin{remark}
@@ -992,11 +1002,11 @@ The vector spaces $\mathbb{R}^n$ (or $\mathbb{C}^n$) with any well-defined norm 
 
 \begin{example}
 The vector space of all continuous functions from $[a,b]$ to $\mathbb{R}$ is a Banach space under the supremum norm
-\[ \left\| f(t) \right\| = \sup_{t\in [a,b]} f(t). \]
+\[ \left\| f(t) \right\| = \sup_{t\in [a,b]} |f(t)|. \]
 \end{example}
 
 \begin{definition}
-A Banach space $V$ has a \defn{vector space}{Schauder basis}, $\vecnot{v}_1, \vecnot{v}_2, \ldots$, if every $\vecnot{v} \in V$ can be written uniquely as
+A Banach space $V$ has a \defn{vector space}{Schauder basis}, $\vecnot{v}_1, \vecnot{v}_2, \ldots$, if every $\vecnot{v} \in V$ can be written uniquely as a convergent series of the form
 \[ \vecnot{v} = \sum_{i=1}^\infty s_i \vecnot{v}_i. \]
 \end{definition}
 
@@ -1007,20 +1017,20 @@ Fortunately, these atypical spaces are essentially never encountered in practice
 \end{remark}
 
 \begin{lemma} \label{lem:banach_sum_convergence}
-If $\sum_{i=1}^\infty \| \vecnot{v}_i \| = a < \infty$, then $\vecnot{u}_n = \sum_{i=1}^n \vecnot{v}_i$ satisfies $\vecnot{u}_n \to \vecnot{u}$.
+In a Banach space $V$, if $\sum_{i=1}^\infty \| \vecnot{v}_i \| = a < \infty$, then $\vecnot{u}_n = \sum_{i=1}^n \vecnot{v}_i$ converges and there exists $\vecnot{u} \in V$ such that $\vecnot{u}_n \to \vecnot{u}$.
 \end{lemma}
 \begin{proof}
 This is left as an exercise for the reader because it is a straightforward generalization of the proof of Lemma~\ref{lem:abs_sum_convergence}.
 \end{proof}
 
 \begin{example}
-Let $V = \mathbb{R}^\omega$ be the vector space of semi-infinite real sequences.
-The \defn{vector space}{standard Schauder basis} is the countably infinite extension $\{\vecnot{e}_1 ,\vecnot{e}_2, \ldots \}$ of the standard basis.
+For $1\le p<\infty$, let $V=\ell^p$ be the space of real sequences with finite $\ell^p$ norm.
+Its standard Schauder basis is the sequence $\vecnot e_1,\vecnot e_2,\ldots$, which is the countably infinite extension of the finite-dimensional standard basis.
 \end{example}
 
 \begin{definition}
 Let $V$ be a vector space over $\mathbb{R}$ or $\mathbb{C}$.
-Two norms on $V$, denoted $\|\cdot\|_{V}$ and $\|\cdot\|_{V'}$, are called \defn{vector space}{equivalent norms} if, for all $\vecnot{v} \in V$, there are positive real numbers $m,M$ such that
+Two norms on $V$, denoted $\|\cdot\|_{V}$ and $\|\cdot\|_{V'}$, are called \defn{vector space}{equivalent norms} if there are positive real numbers $m,M$ such that, for all $\vecnot{v} \in V$, we have
 \begin{align} \label{equation:EquivNorm}
 m \| \vecnot{v} \|_{V'} & \leq \| \vecnot{v} \|_V \leq M \| \vecnot{v} \|_{V'}.
 \end{align}
@@ -1035,7 +1045,7 @@ Let $V$ be a finite-dimensional normed space over $F$ with norm $\| \cdot \|_V$.
 Then, $V$ has an ordered basis $\mathcal{B} = \vecnot{v}_1, \ldots, \vecnot{v}_n$.
 We can also define a new norm
 \[ \| \vecnot{v} \|_{V'} = \| [\vecnot{v}]_\mathcal{B} \|_1 = \sum_{i=1}^n |s_i|, \]
-where $[\vecnot{v}]_\mathcal{B} = (s_1,\ldots,s_n)$ is the unique coordinate vector such that  $\vecnot{v} = s_1 \vecnot{v} + \cdots + s_n \vecnot{v}_n$ and $\| \vecnot{s} \|_1$ is the 1-norm of $\vecnot{s}\in F^n$.
+where $[\vecnot{v}]_\mathcal{B} = (s_1,\ldots,s_n)$ is the unique coordinate vector such that  $\vecnot{v} = s_1 \vecnot{v}_1 + \cdots + s_n \vecnot{v}_n$ and $\| \vecnot{s} \|_1$ is the 1-norm of $\vecnot{s}\in F^n$.
 It is easy to verify that this is a valid norm.
 
 Since equivalence is a transitive property of norms and $\|\cdot \|_V$ is arbitrary, it is sufficient to show that $\| \cdot \|_{V}$ is equivalent to $\| \cdot \|_{V'}$.
@@ -1072,7 +1082,7 @@ Now, let the minimum of $f$ over $S$ be the non-negative real number
 m = \min_{(s_1, \ldots, s_n) \in S} f(s_1, \ldots, s_n).
 \end{equation*}
 Since $f$ is continuous and $S$ is compact, this minimum exists and is attained by some point $(s_1', \ldots, s_n') \in S$.
-Moreover, $\| \vecnot{v} \|_V \geq m$ for all $\vecnot{v} \in f(S)$.
+Moreover, $f(s_1,\ldots,s_n)\ge m$ for every $(s_1,\ldots,s_n)\in S$.
 Note that we must have $m > 0$ because otherwise $\vecnot{v}_1, \ldots, \vecnot{v}_n$ are linearly dependent, contradicting the fact that $\mathcal{B}$ is a basis.
 Since $|s_1|+\cdots+|s_n|=1$, this value of $m$ satisfies $\| \vecnot{v} \|_{V} \geq m \|\vecnot{v}\|_{V'} $ for all $(s_1,\ldots,s_n) \in S$.
 
@@ -1201,12 +1211,14 @@ It is not closed, however, because sequences in $W$ may converge to discontinuou
 In fact,  the set of continuous functions is dense in $L^p ([a,b])$ for $p\in[1,\infty)$. % and $\Closure{W} = V$.
 \end{example}
 \begin{example}
-Let $W = \{\vecnot{w}_1 ,\vecnot{w}_2 , \ldots \}$ be a linearly independent sequence of normalized vectors in a Banach space.
-The span of $W$ only includes finite linear combinations.
+Let $W = \{\vecnot{w}_1 ,\vecnot{w}_2 , \ldots \}$ be a normalized Schauder basis for some infinite-dimensional subspace of a Banach space.
+By definition, the span of $W$ only includes finite linear combinations.
 However, a sequence of finite linear combinations, like 
-\[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{w}_i , \]  converges to the infinite linear combination $\vecnot{u} = \lim_{n\to \infty} \vecnot{u}_n$ if the limit exists.
+\[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{w}_i , \]
+converges to the infinite linear combination $\vecnot{u} = \lim_{n\to \infty} \vecnot{u}_n$ if the limit exists.
 Applying Lemma~\ref{lem:banach_sum_convergence} to $\vecnot{v}_i = \frac{1}{i^2} \vecnot{w}_i$ shows that the limit exists if $\sum_{i=1}^\infty i^{-2} < \infty$ and this can be shown using the integral test.
-Thus, the span of any infinite set of linearly independent vectors is not closed.
+Since $\vecnot{u}$ is an infinite sum of elements in the Schauder basis $W$, uniqueness implies that it cannot be expressed as a finite linear combination of elements in $W$.
+Thus, $\vecnot{u}$ is not in the span of $W$ and the span is not closed.
 \end{example}
 
 \begin{theorem}[H\"{o}lder and Minkowski Inequalities] \label{thm:HolderMinkowski}
@@ -1216,7 +1228,7 @@ Consider the following weighted versions of the $\ell^p$ and $L^p$ norms defined
 \left\| \vecnot{v} \right\|_{\ell^p (\vecnot{w})} &= \left( \sum_{i=1}^n w_i |v_i|^p \right)^{\frac{1}{p}} \\
 \left\| f \right\|_{L^p (X,w)} &= \left( \int_X w(x) |f(x)|^p \, dx \right)^{\frac{1}{p}},
 \end{align*}
-where the vector $\vecnot{w}$ and function $w(x)$ define real positive weights and $X$ is chosen so that the Lebesgue integral is well-defined.
+where the vector $\vecnot{w}$ and the function $w(x)$ define real positive weights and $X$ is chosen so that the Lebesgue integral is well-defined.
 For $p\in [1,\infty)$, the Minkowski inequality states that
 \begin{align*}
 \| \vecnot{u} + \vecnot{v} \|_{\ell^p (\vecnot{w})} &\leq \| \vecnot{u} \|_{\ell^p (\vecnot{w})} + \| \vecnot{v} \|_{\ell^p (\vecnot{w})} \\
@@ -1246,12 +1258,13 @@ In some sense, inner product spaces generalize Euclidean spaces with their dot p
 Importantly, an inner product naturally induces a norm and, hence, a metric.
 Consequently, they are necessarily equipped with a metric topology, open sets, and a definition of convergence.
 
-In practice, one often encounters inner product space that are finite dimensional.
+In practice, one often encounters inner product spaces that are finite dimensional.
 Therein, vectors can be expressed as linear combinations of elements within a Hamel basis. 
 Yet, an inner product space can also be of infinite dimension.
 \indxdef{vector space}{Hilbert spaces} are complete inner product spaces, which makes them suitable to discuss Cauchy sequences of vectors and their limits.
-Furthermore, when an inner product space is \indxdef{topology}{separable} (in the induced metric topology), then it will have a countable \index{vector space}{Schauder} basis.
-Intuitively, a separable Hilbert space with its Schauder basis can be handled mathematically in a way similar to a finite-dimensional inner product space.
+Furthermore, when an inner product space is \indxdef{topology}{separable} (in the induced metric topology), then it has a countable orthonormal basis.
+Adding completeness gives a \emph{separable Hilbert space} where the orthonormal basis is automatically a Schauder basis.
+Intuitively, a separable Hilbert space with its orthonormal basis can be handled mathematically in a way similar to a finite-dimensional inner product space.
 For this reason, our treatment of infinite-dimensional inner product spaces is largely restricted to \emph{separable Hilbert spaces}.
 More general spaces require a higher level of mathematical sophistication, beyond this treatment.
 
@@ -1327,7 +1340,7 @@ Also, we have
 = s v_1 w_1 - s v_2 w_1 - s v_1 w_2 + 4 s v_2 w_2
 = s \inner{ \vecnot{v} }{ \vecnot{w} }.
 \end{equation*}
-Since $V = \RealNumbers^2$, we have $\inner{ \vecnot{v} }{ \vecnot{w} } = \overline{ \inner{ \vecnot{w} }{ \vecnot{v} } }$.
+Using this expression, one can verify that $\inner{ \vecnot{v} }{ \vecnot{w} } = \overline{ \inner{ \vecnot{w} }{ \vecnot{v} } }$.
 Furthermore,
 \begin{equation*}
 \inner{ \vecnot{v} }{ \vecnot{v} }
@@ -1336,7 +1349,7 @@ Furthermore,
 \geq 0
 \quad \text{with equality iff } \vecnot{v} = \vecnot{0}.
 \end{equation*}
-That is, $\inner{ \vecnot{v} }{ \vecnot{v} }$ is an inner product.
+That is, the given bilinear form is an inner product.
 
 
 \begin{example}
@@ -1427,7 +1440,8 @@ In fact, one can define the inner product
 \inner{ X }{ Y } = \Expect \left[ XY \right] ,
 \end{equation*}
 for any $X,Y \in V$.
-Using the induced norm, this inner product provides the topology of mean-square convergence and two random variables $X,Y\in V$ are considered equal if $\| X-Y \|^2 = E \left[ |X-Y|^2 \right] = 0$ (or equivalently $\Pr (X \neq Y ) = 0$).
+After modding out the equivalence defined by almost-sure equality, the induced norm becomes positive definite.
+In addition, the stated inner product provides the topology of mean-square convergence and two random variables $X,Y\in V$ are considered equivalent if $\| X-Y \|^2 = E \left[ |X-Y|^2 \right] = 0$ (or equivalently $\Pr (X \neq Y ) = 0$).
 \end{example}
 
 In terms of abstract mathematics, the introduction of an inner product allows one to introduce the key concept of orthogonality.
@@ -1435,7 +1449,7 @@ In terms of abstract mathematics, the introduction of an inner product allows on
 \begin{definition}
 Let $\vecnot{v}$ and $\vecnot{w}$ be vectors in an inner-product space $V$.
 Then $\vecnot{v}$ is \defn{inner-product space}{orthogonal} to $\vecnot{w}$ (denoted $\vecnot{v} \bot \vecnot{w}$) if $\inner{ \vecnot{v} }{ \vecnot{w} } = 0$.
-Since this relation is reflexive and $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
+Since this relation is symmetric and $\vecnot{w}$ is also orthogonal to $\vecnot{v}$, we simply say that $\vecnot{v}$ and $\vecnot{w}$ are orthogonal.
 \end{definition}
 
 
@@ -1474,8 +1488,8 @@ for every $\vecnot{v} \in V$.
 \end{figure}
 
 \begin{definition}
-Let $\vecnot{w},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
-As shown in Figure~\ref{fig:vector_projection}, the \defn{inner-product space}{projection} of $\vecnot{w}$ onto $\vecnot{v}$ is defined to be
+Let $\vecnot{v} \neq \vecnot{0}$ be a vector in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
+As shown in Figure~\ref{fig:vector_projection}, the \defn{inner-product space}{projection} of $\vecnot{w}\in V$ onto $\vecnot{v}$ is given by
 \begin{equation*}
 \vecnot{u} = \frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v}
 \end{equation*}
@@ -1505,14 +1519,15 @@ $\|\vecnot{u}\|^2
 \end{proof}
 
 \begin{theorem}
-If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced norm, then for any $\vecnot{v}, \vecnot{w} \in V$ and any scalar $s$
+If $V$ is an inner-product space and $\| \cdot \|$ is its associated induced norm, then for any $\vecnot{v}, \vecnot{w} \in V$ and any scalar $s$, we have the properties:
 \begin{enumerate}
 \item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
 \item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
-\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$
-\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some real $s\geq 0$.
+\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some real $s\geq 0$.
 \end{enumerate}
 \end{theorem}
+
 \begin{proof}
 The first two properties follow immediately from the definitions involved.
 The third property, $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$, is called the \defn{inner-product space}{Cauchy-Schwarz inequality}.
@@ -1567,19 +1582,19 @@ Thus, $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\|
 
 \begin{theorem}
 \label{theorem:InnerProductContinuous}
-Consider the vector space $\RealNumbers^n$ with the standard inner product. % of Example~\ref{example:StandardInnerProduct}.
+Let $V$ be an inner-product space over $F$ and fix $\vecnot v\in V$.
 Then, the function $f \colon V \rightarrow F$ defined by $f \left( \vecnot{w} \right) = \inner{ \vecnot{w} }{ \vecnot{v} }$ is continuous.
 \end{theorem}
 \begin{proof}
-Let $\vecnot{w}_1, \vecnot{w}_2, \ldots$ be a sequence in $V$ converging to $\vecnot{w}$.
-Then,
+Let $\vecnot{w}_1, \vecnot{w}_2, \ldots$ be any sequence in $V$ converging to $\vecnot{w}$.
+Then, for the induced norm $\| \cdot \|$, we have
 \begin{equation*}
 \left| \inner{ \vecnot{w}_n }{ \vecnot{v} }
 - \inner{ \vecnot{w} }{ \vecnot{v} } \right|
 = \left| \inner{ \vecnot{w}_n - \vecnot{w} }{ \vecnot{v} } \right|
 \leq \left\| \vecnot{w}_n - \vecnot{w} \right\| \left\| \vecnot{v} \right\|.
 \end{equation*}
-Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergence of $\inner{ \vecnot{w}_n }{ \vecnot{v} }$ is established.
+Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, we see that $\inner{ \vecnot{w}_n }{ \vecnot{v} }$ converges and thus $f$ is continuous.
 \end{proof}
 
 
@@ -1587,7 +1602,7 @@ Since $\left\| \vecnot{w}_n - \vecnot{w} \right\| \rightarrow 0$, the convergenc
 
 \begin{definition}
 Let $V$ be an inner-product space and $U,W$ be subspaces.
-Then, the subspace $U$ is an \defn{inner-product space}{orthogonal} to the subspace $W$ (denoted $U \bot W$) if $\vecnot{u} \bot \vecnot{w}$ for all $\vecnot{u}\in U$ and $\vecnot{w}\in W$.
+Then, the subspace $U$ is \defn{inner-product space}{orthogonal} to the subspace $W$ (denoted $U \bot W$) if $\vecnot{u} \bot \vecnot{w}$ for all $\vecnot{u}\in U$ and $\vecnot{w}\in W$.
 \end{definition}
 
 \begin{definition}
@@ -1782,14 +1797,14 @@ Then, the following conditions are equivalent:
 \begin{enumerate}
 \item[(i)] The columns of $U$ form an orthonormal basis (i.e.,  $U^H U = I$),
 \item[(ii)] the rows of $U$ form an orthonormal basis (i.e.,  $U U^H = I$),
-\item[(iii)] $U$ preserves inner products (i.e., $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{u},\vecnot{v}\in V$), and
+\item[(iii)] $U$ preserves inner products (i.e., $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{v},\vecnot{w}\in V$), and
 \item[(iv)] $U$ is an isometry (i.e., $\| U \vecnot{v} \| = \| \vecnot{v}\|$ for all $\vecnot{v} \in V$).
 \end{enumerate}
 \end{theorem}
 \begin{proof}
 If {\it(i)} holds, then $U$ is invertible because its columns are linearly independent.
 Thus, $U^H U = I$ implies $U^H = U^{-1}$ and {\it(ii)} follows.
-Likewise, {\it(iii)} holds because $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^H U^H U \vecnot{v} = \vecnot{w}^H \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{u},\vecnot{v}\in V$.
+Likewise, {\it(iii)} holds because $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^H U^H U \vecnot{v} = \vecnot{w}^H \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{v},\vecnot{w}\in V$.
 Choosing $\vecnot{w}=\vecnot{v}$ gives {\it(iv)}.
 Lastly, if $\| U \vecnot{v} \| = \| \vecnot{v}\|$ for all $\vecnot{v} \in V$, then
 $\vecnot{v}^H (U^H U - I) \vecnot{v} = \| U \vecnot{v} \|^2 - \| \vecnot{v} \|^2 = 0$ for all $\vecnot{v} \in V$.
@@ -1815,8 +1830,10 @@ None of these issues arise in finite-dimensional spaces, where an orthogonal bas
 Let $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$ be an orthonormal basis for Hilbert space $V$.
 Then, each element $\vecnot{v} \in V$ has a unique representation as
 \begin{equation*}
-\vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha}.
+\vecnot{v} = \sum_{\alpha \in A} s_{\alpha} \vecnot{v}_{\alpha},
 \end{equation*}
+where this infinite sum is defined as the limit of finite partial sums.
+The following identity implies that, for each fixed $\vecnot v$, only countably many coefficients $s_\alpha$ can be nonzero.
 Using orthogonality to compute $\inner{ \vecnot{v} }{ \vecnot{v} }$, one gets the \defn{inner-product space}{Parseval identity}
 \begin{equation*}
 \left\| \vecnot{v} \right\|^2 = \sum_{\alpha \in A} | s_{\alpha} |^2.
@@ -1830,11 +1847,14 @@ Every orthonormal set in a Hilbert space $V$ can be enlarged to an orthonormal b
 Let $x = \left\{ \vecnot{v}_{\alpha} | \alpha \in A_0 \right\}$ be the initial orthonormal set.
 Let $X$ be the set of orthonormal subsets of $V$ and, for $x, y \in X$, consider the strict partial order defined by proper inclusion.
 Since $x$ is an element of $X$, the Hausdorff maximal principle implies that there exists a maximal simply ordered subset $Z$ of $X$ containing $x$.
+The union of the sets in this chain is orthonormal and maximal because otherwise a larger orthonormal set would extend the chain.
 This shows the existence of a maximal orthonormal set $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$, where $A_0 \subset A$.
 
 Let $W$ be the closed subspace of $V$ generated by $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
-If $W \neq V$, there is a unit vector $\vecnot{u} \in W^{\bot}$, contradicting the maximality of the system $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
-Thus, $W = V$ and we have enlarged the orthonormal set $x$ to a basis.
+If $W \neq V$, then we can use Theorem~\ref{theorem:OrthogonalProjection} to project some vector in $V \setminus W$ onto $W$.
+The normalized error vector is a unit vector $\vecnot{u} \in W^{\bot}$.
+This contradicts the maximality of the system $\left\{ \vecnot{v}_{\alpha} | \alpha \in A \right\}$.
+Hence, $W = V$ and we have enlarged the orthonormal set $x$ to a basis.
 \end{proof}
 
 \begin{theorem} \label{theorem:SeparableHilbertSpace}
@@ -1843,13 +1863,13 @@ A Hilbert space $V$ has a countable orthonormal basis if and only if $V$ is sepa
 \begin{proof}[Sketch of proof]
 If $V$ is separable, then it contains a countable dense subset.
 Since this set is countable, it can be ordered into a sequence $\vecnot{v}_1 , \vecnot{v}_2 , \ldots$ such that, for every vector $\vecnot{v}\in V$ and any $\epsilon>0$, there exists an $n$ such that $\left\| \vecnot{v} - \vecnot{v}_n \right\| < \epsilon$.
-By removing all vectors that are linear combinations of previous vectors, this sequence can be pruned into a countable linearly independent set.
+After removing all vectors which are linear combinations of previous vectors, one is left with a pruned sequence that is a countable linearly independent set.
 Then, a countable orthonormal basis is generated by applying Gram-Schmidt orthogonalization to the pruned sequence of vectors.
 Conversely, if $V$ has a countable orthonormal basis, then linear combinations with rational coefficients can be used to construct a countable dense subset.
 \end{proof}
 
 \begin{lemma} \label{lem:hilbert_sum_convergence}
-Let $V$ be a Hilbert space and $\vecnot{v_1},\vecnot{v}_2,\ldots$ be a countable orthogonal set.
+Let $V$ be a Hilbert space and $\vecnot{v}_1,\vecnot{v}_2,\ldots$ be a countable orthogonal set.
 Then, $\vecnot{v} = \sum_{i=1}^\infty \vecnot{v}_i$ exists if and only $\sum_{i=1}^\infty \|\vecnot{v}_i\|^2 = M < \infty$.
 \end{lemma}
 \begin{proof}

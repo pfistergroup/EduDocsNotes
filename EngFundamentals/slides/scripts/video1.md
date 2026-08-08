@@ -8,7 +8,7 @@ after `Narration:` when a page needs an alternate Qwen take.
 ## Page 001: Title
 
 Narration:
-Welcome to the first flipped class video for ECE 586, Vector Space Methods. Today, we will discuss the first course topic: propositional logic. We will define the basic logical operations and then use them to build conditional, compound, and meta-level statements.
+Welcome to the first flipped class video for ECE 586, Vector-Space Methods. Today, we will discuss the first course topic: propositional logic. We will define the basic logical operations and then use them to build conditional, compound, and meta-level statements.
 
 ## Page 002: 1: Logic (overlay 1 of 7)
 

@@ -12,8 +12,9 @@
 \fill[blue] (2, 3, 0) circle (2pt) node[right] {$\hat{\vecnot{v}}$};
 \draw[->, blue] (0, 0, 0) -- (2, 3, 0);
 
-\draw[dotted] (2, 3, 2) -- (2, 3, 0);
-\draw[fill=black] (2, 3, 0.36) -- (1.8, 2.7, 0.36) -- (1.8, 2.7, 0) -- (2, 3, 0) -- cycle;
+\draw[dotted,->]  (2, 3, 0) -- (2, 3, 2);
+%\draw[fill=black] (2, 3, 0.36) -- (1.8, 2.7, 0.36) -- (1.8, 2.7, 0) -- (2, 3, 0) -- cycle;
 
 \fill[fill=blue, opacity = 0.2] (-2, -2, 0) -- (-2, 4, 0) -- (4, 4, 0) -- (4, -2, 0) -- cycle;
+\node[draw=none,blue] at (3.25,-1.25,0) {$W$};
 \end{tikzpicture}

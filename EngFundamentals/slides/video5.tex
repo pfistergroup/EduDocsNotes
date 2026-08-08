@@ -106,6 +106,19 @@
 %\newcommand{\dd}{\mathrm{d}}
 \input{macros}
 
+% Review comments are hidden in production builds.  Define
+% \enablegptcomments before inputting this file to show them in speaker notes.
+\newif\ifgptcomments
+\ifdefined\enablegptcomments
+  \gptcommentstrue
+\else
+  \gptcommentsfalse
+\fi
+\newcommand{\gpt}[1]{%
+  \ifgptcomments\par\medskip{\color{blue}\scriptsize\textbf{GPT comment. }#1}\fi}
+\newcommand{\claude}[1]{%
+  \ifgptcomments\par\medskip{\color{purple}\scriptsize\textbf{Claude comment. }#1}\fi}
+
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 \def\greencheck{{\color{green}\checkmark}}
 \def\scalecheck{\resizebox{\widthof{\checkmark}*\ratio{\widthof{x}}{\widthof{\normalsize x}}}{!}{\checkmark}}
@@ -195,10 +208,10 @@
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\item Read.  It allow one to define abstract notions of proximity and distance.
-		\item Why do we study it? Read. Here are two questions that it can help answer. 
+		\item Read.  It allows one to define abstract notions of proximity and distance.
+		\item Why do we study it? Read. Here are two questions that it can help answer.
 		\item Read.  Thus, this course will focus on metric spaces.
-		\item Read.  This definition provides is a useful abstraction of spaces with some notion of distance between any two points.
+		\item Read.  This definition is a useful abstraction of spaces with some notion of distance between any two points.
 		\item Read.  These rules can be seen as an abstraction of Euclidean space whose notion of distance retains some key properties of Euclidean distance.
 		\item Read. For example, suppose $x$ is where you work, $z$ is where you live, and $y$ is where you buy groceries.  Then, the triangle inequality abstracts the idea that stopping by the store on your way home cannot make your trip home shorter.
 	\end{enumerate}
@@ -256,7 +269,7 @@
 		\setlength\itemsep{3mm}
 		\item First, consider the (read).  This example is the standard (read). 1 holds because the absolute value of a number is non-negative and equals zero iff that number is zero.  2 holds because swapping $x,y$ doesn't change the absolute value. Read.
 		\item Next, consider the example of real $n$-dimensional vectors (read).
-		\item Finally, consider the set of (read).  For this metric, many of the properties are inherited from the absolute distance inside the maximum.  In particular, properties 1 and 2 follow naturally.  For the triangle inequality, we observe that: \\ [2mm] (a) the absolute difference between $f(x)$ and $h(x)$ is unchanged by adding and subtracting $g(x)$ inside the absolute value, \\ [2mm] (b) the absolute value of the sum of two numbers is upper bounded the sum of their absolute values, \\ [2mm] (c) the maximum of the sum of two functions is only increased by maximizing them separately.
+		\item Finally, consider the set of (read).  For this metric, many of the properties are inherited from the absolute distance inside the maximum.  In particular, properties 1 and 2 follow naturally.  For the triangle inequality, we observe that: \\ [2mm] (a) the absolute difference between $f(x)$ and $h(x)$ is unchanged by adding and subtracting $g(x)$ inside the absolute value, \\ [2mm] (b) the absolute value of the sum of two numbers is upper bounded by the sum of their absolute values, \\ [2mm] (c) the maximum of the sum of two functions is only increased by maximizing them separately.
 	\end{enumerate}
 }
 
@@ -299,7 +312,7 @@
 \draw[very thick] (0,0) rectangle (3,2.75) node[below left=0.2cm and 0.2cm] {$X$};
 \foreach \i/\x/\y in {1/27/6,2/22/11,3/18.5/13.5,4/15/15} {%
 \node [label=below:{$x_\i$},draw,fill=black,circle,inner sep=0pt,minimum size=3pt] (x\i) at (\x/10,\y/10) {};
-1.25,1.25) {}; }
+}
 \node at (1.1,1.56) {\ldots};
 }
 \uncover<3->{%
@@ -313,9 +326,10 @@
 		\footnotesize
 		\setlength\itemsep{3mm}
 		\item First, let us consider the (read).  This is illustrated in the figure.  Also, the statement denoted $P$ (read) says that all points in the open ball of radius $\epsilon$ also have an open ball around them of radius $\delta < \epsilon$ that lies entirely inside the original ball.  You will be asked to prove this in the homework.
-		\item Next, consider an (read).  Formally, we say that (read). It is well-known that this sequence converges to the constant $e$. A sequence is also illustrated in figure.
+		\item Next, consider an (read).  Formally, we say that (read). It is well-known that this sequence converges to the constant $e$. A sequence is also illustrated in the figure.
 		\item Finally, consider (read).  Formally, we say that (read). In the figure, one can imagine the example sequence converging to the point $x$.
 	\end{enumerate}
+	\claude{The \texttt{\textbackslash foreach} body in the sequence figure above contained a leftover fragment, ``\texttt{1.25,1.25) \{\};}'', between the \texttt{\textbackslash node} and the closing brace.  It was stray text inside a \texttt{tikzpicture} and would fail to compile, so it was removed.  Please confirm no node was meant to sit at $(1.25,1.25)$.}
 }
 
 \end{frame}
@@ -358,11 +372,11 @@ d \left( x_m, x_n \right) < \epsilon
 		\setlength\itemsep{3mm}
 		\item Read.  For the real numbers, you've probably seen this definition before in a calculus class.
 		\item Read.  This means that the tail of a convergent sequence must only contain points that are close to each other.
-		\item What about the converse? In calculus and real analysis, it is also common to prove convergence by showing a sequence in Cauchy.
+		\item What about the converse? In calculus and real analysis, it is also common to prove convergence by showing a sequence is Cauchy.
 		\item But this doesn't work in all metric spaces! Read.
 		\item Read.  Thus, this counterexample follows from the irrationality of $\sqrt{2}$.  Later, we will see that the converse is true for complete metric spaces.
 	\end{enumerate}
-}
+	\claude{The sub-item ``Proof will be given in the lecture'' ends with a stray \texttt{\textbackslash pause}.  The frame specification \texttt{<1-5>} pins this frame to five overlays and every later item carries an explicit \texttt{<3->}, \texttt{<4->}, or \texttt{<5->}, so the \texttt{\textbackslash pause} should have no visible effect and \texttt{scripts/video5.md} assumes five pages here.  Deleting it would remove the ambiguity.}
 
 \end{frame}
 
@@ -452,14 +466,14 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{2mm}
-		\item Sometimes it is useful to consider only the points in a set that are not part of a boundary.  This is called the interior of the set and for a... Read.  This implies that $w_0$ surrounded by an open ball in $W$.
-		\item It is also useful to consider points that can approached by non-trivial sequences from a set. These points are called limit points.  Formally, ... Read.  
+		\item Sometimes it is useful to consider only the points in a set that are not part of a boundary.  This is called the interior of the set and, formally, ... Read.  This implies that $w_0$ is surrounded by an open ball in $W$.
+		\item It is also useful to consider points that can be approached by non-trivial sequences from a set. These points are called limit points.  Formally, ... Read.
 		\item It can also be useful to consider a set along with all additional points lying on its boundary.  The resulting set is called the closure and, formally, ... Read.  This implies that $x_0$ is arbitrarily close to points in $W$.
 		\item These sets have a few nice properties.  First, one can show that the interior is open.
 		\item One can also show that (read).
 		\item Lastly, one can show that the (read).
 	\end{enumerate}
-}
+	\claude{Item 1 previously read ``This is called the interior of the set and for a... Read.'', which left a dangling ``for a'' immediately before the definition.  It is now ``and, formally, ...'', matching the parallel lead-ins you wrote for items 2 and 3.  Two missing words were also restored: ``can be approached'' in item 2 and ``$w_0$ is surrounded'' in item 1.}
 
 
 \end{frame}
@@ -511,7 +525,7 @@ A point $x_0\in X$ is in the \textcolor{blue}{closure} of $W$ (denoted $\Closure
 		\item Read to 2nd bullet. For closed sets, De Morgan's law implies that any closed set can be written as the countable disjoint intersection of closed intervals. But, exotic sets like the Cantor set show that they cannot be written as the countable union of closed sets. Read. This is because the disjoint union of multiple open balls cannot be connected.
 		\item Read. Thus, boundary points are either in the set and arbitrarily close to points outside the set or outside the set and arbitrarily close to points inside the set.
 	\end{enumerate}
-}
+	\claude{Page 028 speaks the two Cantor-set sentences in item 1 verbatim, but they look garbled rather than merely terse, so please check them before synthesis.  Complementing a countable disjoint \emph{union} of open intervals gives a countable \emph{intersection} of complements of open intervals, which is not a ``countable disjoint intersection of closed intervals'', and the Cantor set is a counterexample to writing every closed set as a countable union of closed \emph{intervals}, not of closed sets (every closed set is trivially a union of closed sets).  I did not guess at the intended claim.}
 
 \end{frame}
 

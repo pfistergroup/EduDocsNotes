@@ -19,7 +19,7 @@ debug-only and must be requested explicitly with `make video-qwen-local VIDEO=0`
 
 Narration:
 [[seed 43]]
- Hello! I'm Henry Pfister. And this is the course introduction video for ECE 586, Vector Space Methods. For everyone who is new to {{univ}}, let me start by saying welcome. It's nice to have you watching. [[pause 0.5]] By the end of this short video, you should have a reasonable understanding of the purpose and organization of this course and how to prepare for each class meeting.
+ Hello! I'm Henry Pfister. And this is the course introduction video for ECE 586, Vector-Space Methods. For everyone who is new to {{univ}}, let me start by saying welcome. It's nice to have you watching. [[pause 0.5]] By the end of this short video, you should have a reasonable understanding of the purpose and organization of this course and how to prepare for each class meeting.
 
 ## Page 002: Overview
 

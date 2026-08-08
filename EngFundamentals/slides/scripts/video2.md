@@ -8,7 +8,7 @@ immediately after `Narration:` to request an alternate remote-Qwen take.
 ## Page 001: Title
 
 Narration:
-Welcome to the second video lecture for ECE 586, Vector Space Methods. Today, we’ll conclude our unit on logic with a discussion of predicate logic.
+Welcome to the second video lecture for ECE 586, Vector-Space Methods. Today, we’ll conclude our unit on logic with a discussion of predicate logic.
 
 ## Page 002: 1.2.2: Propositions and Predicates (overlay 1 of 3)
 

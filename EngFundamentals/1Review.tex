@@ -613,7 +613,7 @@ For example, they can be used to construct the real numbers from the rational nu
 In fact, the same approach is used to construct the completion of any metric space.
 
 \begin{definition}
-Two Cauchy sequences $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$ in the same metric space are equivalent if $d(x_k,y_k)\to0$ (i.e., for every $\epsilon >0$, there exists an natural number $N$ such that $d (x_k, y_k) \leq \epsilon$ for all $k \geq N$).
+Two Cauchy sequences $x_1, x_2, \ldots$ and $y_1, y_2, \ldots$ in the same metric space are equivalent if $d(x_k,y_k)\to0$ (i.e., for every $\epsilon >0$, there exists a natural number $N$ such that $d (x_k, y_k) < \epsilon$ for all $k \geq N$).
 \end{definition}
 
 \begin{example}
@@ -656,7 +656,7 @@ The sequence $x_n$ is Cauchy because $d(x_m,x_n)$ can be made arbitrarily small 
 
 Since $x_1\in A$ and $f(A)\subseteq A$, every $x_n$ lies in $A$.
 Completeness of $X$ gives $x_n\to x^*$ for some $x^*\in X$ and, as $A$ is closed, this implies $x^*\in A$.
-From the continuity of $f$, we find that $x^* = \lim_n x_n = \lim_n f(x_n) = f(x^*)$ is the unique fixed point of $f$ in $A$.
+Since $f$ is Lipschitz continuous on $A$, we find that $x^* = \lim_n x_n = \lim_n f(x_n) = f(x^*)$ is the unique fixed point of $f$ in $A$.
 Since $x_n \to x^*$, we can use essentially the same argument to get the second error bound
 \[  d(x_{n+1},x^*) \leq \sum_{i=n+1}^{\infty} d(x_i,x_{i+1}) 
  \leq \sum_{i=n+1}^{\infty} \gamma^{i-n} d(x_n,x_{n+1}) = \frac{\gamma}{1-\gamma} d(x_n,x_{n+1}).\!  \qedhere \]
@@ -676,7 +676,7 @@ The mean value theorem also gives $\cos(y)-\cos(x)=\cos'(t)(y-x)$ for some $t$ b
 Since $\cos '(t) = -\sin(t)$ and $\sin(t)$ is increasing on $[0,1]$, we find that $\sin([0,1]) = [0,\sin(1)]$ with $\sin(1) \approx 0.84$.
 
 Taking the absolute value shows that $| \cos(y) - \cos(x) | \leq 0.85 |y-x|$.
-Therefore, $\cos(t)$ is a contraction on $[0,1]$ and the sequence $x_{n+1} = \cos(x_n)$ (e.g., see Figure~\ref{fig:cos_contract}) converges to the unique fixed point $x^* = \cos(x^*)$ for all $x_1 \in [0,1]$.
+Therefore, $\cos(x)$ is a contraction on $[0,1]$ and the sequence $x_{n+1} = \cos(x_n)$ (e.g., see Figure~\ref{fig:cos_contract}) converges to the unique fixed point $x^* = \cos(x^*)$ for all $x_1 \in [0,1]$.
 \end{example}
 
 %\begin{example}
