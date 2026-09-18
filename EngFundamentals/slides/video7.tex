@@ -178,7 +178,7 @@ For this sequence, one can show that $|x_n - \sqrt{2}|\to 0$. Since $\sqrt{2}$ i
 
 \begin{alertblock}{Key Point}<3->
 The standard metric space of real numbers is a complete metric space.
-This can be proven by starting with Zermelo-Fraenkel (ZF) set theory and associating the real numbers with Cauchy sequences of rational numbers.  The proof of this is not covered in this class but is available on the website.
+This can be shown by constructing the rational numbers using the ZFC axioms for set theory and associating the real numbers with Cauchy sequences of rational numbers. The proof of this is not covered here but available on the website.
 \end{alertblock}
 
 \note{
@@ -213,7 +213,10 @@ Moreover, the completion is unique up to isometry.
 \end{definition}
 
 \begin{alertblock}{Remark}<4->
-One can always complete a metric space $(X,d)$ by considering Cauchy sequences of elements in $X$.
+If a metric space is not complete, then some natural limit points are missing and there is a canonical way to use Cauchy sequences to include these points.
+%One can always complete a metric space $(X,d)$ by considering Cauchy sequences of elements in $X$.
+%uses Cauchy sequences to identifes these points with Cauchy sequences that don't converge.
+%One can always complete a metric space $(X,d)$ by considering Cauchy sequences of elements in $X$.
 \end{alertblock}
 
 \note{
@@ -226,7 +229,7 @@ One can always complete a metric space $(X,d)$ by considering Cauchy sequences o
 		\item Read.  For example, think of $X$ as the rational numbers, $Y$ as the real numbers, and $\phi$ as the mapping that embeds the rational numbers in the real numbers.  I should also note that an isometry is a function between metric spaces that preserves pairwise distances.
 		\item For example, if a metric space is not complete, then some of its natural limit points have been left out.  This can be repaired by creating new points associated with Cauchy sequences that don't converge.
 	\end{enumerate}
-	\gpt{The first definition conflicts with the earlier course definition of a limit point using a sequence of distinct points: under that definition, a dense set need not make every point a limit point (for example, an isolated point of $X$).  The always-correct definition is $\overline{A}=X$, equivalently every nonempty open ball in $X$ intersects $A$, or every $x\in X$ is the limit of a sequence in $A$ that need not have distinct terms.}
+	\gpt{The first definition conflicts with the earlier course definition of a limit point using a sequence of distinct points: under that definition, a dense set need not make every point a limit point (for example, an isolated point of $X$).  The always-correct definition is $\overline{A}=X$, equivalently every non-empty open ball in $X$ intersects $A$, or every $x\in X$ is the limit of a sequence in $A$ that need not have distinct terms.}
 }
 
 \end{frame}
@@ -235,7 +238,7 @@ One can always complete a metric space $(X,d)$ by considering Cauchy sequences o
 \begin{frame}<1-3> \frametitle{2.1.3: A Space of Continuous Functions}
 
 \begin{example}
-Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ and satisfy $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm \vspace{-3mm}
+Let $X=C[-1,1]$ be the space of continuous functions that map $[-1,1]$ to $\mathbb{R}$ with $\left\| f \right\|_2 < \infty$, where $\left\| f \right\|_2$ denotes the $L^2$ norm \vspace{-3mm}
 \begin{equation*}
 \left\| f \right\|_2 \triangleq \left( \int_{-1}^1 |f(t)|^2 dt \right)^{1/2} \vspace{-2mm}
 \end{equation*}
@@ -309,7 +312,7 @@ But, \textcolor{red}{it does not converge} to a continuous function in $C[-1,1]$
 \begin{frame}<1-2> \frametitle{2.1.3: Contractions on Metric Spaces}
 
 \begin{definition}<1->
-Let $A$ be a subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
+Let $A$ be a non-empty subset of a metric space $(X,d)$ and $f \colon X \rightarrow X$ be a function.
 Then, $f$ is a \textcolor{blue}{contraction} on $A$ if $f(A) \subseteq A$ and there exists a constant $\gamma < 1$ such that $d \left( f(x),f(y) \right) \leq \gamma  d(x,y)$ for all $x,y\in A$.
 \end{definition}
 
@@ -360,7 +363,7 @@ Define $f\colon X \to X$ with $f(x) = 1-\frac{1}{2}x$ and observe that \vspace{-
 \begin{frame}{2.1.3: Contraction Mapping Theorem}
 
 \begin{theorem}[Contraction Mapping Theorem]<1->
-Let $(X,d)$ be a complete metric space and $f$ be a contraction on a closed subset $A \subseteq X$.
+Let $(X,d)$ be a complete metric space, $A\subseteq X$ be a non-empty closed subset, and $f$ be a contraction on $A$.
 Then, 
 \begin{itemize}
 \setlength\itemsep{3mm}
@@ -369,7 +372,7 @@ Then,
 \end{itemize}
 \end{theorem}
 
-\gpt{Suggested theorem hypothesis from the revised book: replace the opening sentence by ``Let $(X,d)$ be complete, let $A\subseteq X$ be nonempty and closed, and let $f\colon X\to X$ satisfy $f(A)\subseteq A$ and $d(f(x),f(y))\leq\gamma d(x,y)$ for all $x,y\in A$, with $0\leq\gamma<1$.''  These hypotheses keep every iterate in $A$ and put the limiting fixed point in $A$.}
+\gpt{Suggested theorem hypothesis from the revised book: replace the opening sentence by ``Let $(X,d)$ be complete, let $A\subseteq X$ be non-empty and closed, and let $f\colon X\to X$ satisfy $f(A)\subseteq A$ and $d(f(x),f(y))\leq\gamma d(x,y)$ for all $x,y\in A$, with $0\leq\gamma<1$.''  These hypotheses keep every iterate in $A$ and put the limiting fixed point in $A$.}
 
 \note{
 	\vspace{2mm}

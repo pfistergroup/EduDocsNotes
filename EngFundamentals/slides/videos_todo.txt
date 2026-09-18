@@ -1,3 +1,26 @@
+Video 5:
+- Define metric space and convergenece
+- Add examples?
+- Define Cauchy and mention completeness
+- Define extended reals and properties of real numbers
+- Add examples?
+
+Video 6:
+- Continue reals, MCT, supremum sequence lemma for reals and funs, sums
+- Define function spaces and sequences of functions
+- Do continuity
+
+Video 7:
+- Finish completeness
+- Contraction
+
+
+
+
+
+
+
+
 0. Introduction
 
 1. Propositional Logic
