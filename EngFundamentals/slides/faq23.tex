@@ -1,0 +1,104 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 23: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{October 18, 2026}
+
+\maketitle
+
+\section{Linear and Constrained Optimization}
+
+\paragraph{Why is an unconstrained nonconstant linear objective unbounded below?}
+For $c\neq0$, choosing $x=-tc$ gives $c^T x=-t\|c\|^2\to-\infty$.
+Thus the infimum is $-\infty$; there is no finite minimizing point.
+If $c=0$, every point is a minimizer with value zero (slide 1).
+
+\paragraph{Does ordinary gradient descent preserve feasibility?}
+No. Subtracting the gradient can leave the feasible set.
+On a nonempty closed convex feasible set, a projected step $x_{k+1}=P_{\mathcal F}(x_k-\delta_k\nabla f_0(x_k))$ preserves feasibility.
+Its convergence still requires appropriate hypotheses and step sizes.
+The constrained-descent picture on slide 2 should be understood as using a feasible direction or projection.
+
+\paragraph{What does the vector inequality in a linear program mean?}
+The symbol $Ax\succeq b$ means a separate scalar inequality for each row: $(Ax)_i\geq b_i$.
+It does not compare vector lengths.
+An LP has a linear objective and affine equality or inequality constraints, such as the forms on slide 3, ``Linear Programs.''
+
+\paragraph{Why do positive combinations of LP constraints give lower bounds?}
+For constraints $Ax\geq b$, any $\lambda\geq0$ gives $\lambda^T Ax\geq\lambda^T b$.
+If $A^T\lambda=c$, this yields $c^T x\geq b^T\lambda$ for every feasible $x$.
+Nonnegative coefficients preserve the inequality directions.
+Slides 4--5 illustrate such certificates; any claimed coefficient combination should satisfy $A^T\lambda=c$ exactly.
+
+\paragraph{What is the difference between feasible, optimal, and an optimal value?}
+A feasible point satisfies every constraint.
+An optimal point achieves the smallest objective value among feasible points.
+The optimal value is the infimum over feasible points, which may fail to be achieved or may be infinite.
+The notation $p^*$ on slide 6 describes a value and does not itself assert existence of an optimizer.
+
+\section{Lagrangians and Duality}
+
+\paragraph{Why are inequality multipliers nonnegative and equality multipliers unrestricted?}
+The slides use inequalities $f_i(x)\leq0$ and equalities $h_j(x)=0$.
+For feasible $x$, nonnegative $\lambda_i$ ensure $\lambda_i f_i(x)\leq0$, while $\nu_jh_j(x)=0$ for any real $\nu_j$.
+Consequently, $L(x,\lambda,\nu)\leq f_0(x)$, which is the basis for weak duality.
+
+\paragraph{Is the dual function minimized only over feasible points?}
+No. It is $g(\lambda,\nu)=\inf_{x\in\mathcal D}L(x,\lambda,\nu)$, using the original domain $\mathcal D$ and putting the constraints into the Lagrangian.
+For each fixed multiplier pair this gives a lower bound on every feasible objective value.
+Restricting the infimum to the feasible set would change the definition (slide 10, ``Lagrangian Duality'').
+
+\paragraph{Why does weak duality hold?}
+For any feasible $x$ and any $\lambda\geq0$,
+\[
+g(\lambda,\nu)\leq L(x,\lambda,\nu)\leq f_0(x).
+\]
+Taking the primal infimum and dual supremum gives $d^*\leq p^*$.
+This proof does not require the primal objective or constraints to be convex; it also does not require attainment of either optimal value.
+
+\paragraph{Why is the dual function concave even when the original problem is not convex?}
+For each fixed $x$, the Lagrangian is affine in $(\lambda,\nu)$.
+The pointwise infimum of these affine functions is concave.
+Concavity does not imply a unique maximizing multiplier, or even that the supremum is attained.
+These distinctions qualify the wording about a ``unique max value'' on slides 10--11.
+
+\paragraph{What is strong duality, and does it always hold?}
+Strong duality means $d^*=p^*$, so the best dual lower bound equals the primal optimal value.
+It is not automatic for general nonlinear problems.
+For a convex problem, conditions such as Slater's condition provide standard sufficient hypotheses.
+A feasible primal point and feasible dual multipliers with equal values certify optimality of both.
+
+\paragraph{What conditions belong to the KKT system?}
+For differentiable objectives and constraints, the system includes primal feasibility, $\lambda_i\geq0$, stationarity $\nabla_xL(x,\lambda,\nu)=0$, and complementary slackness $\lambda_i f_i(x)=0$.
+At a local optimum, necessity requires a suitable constraint qualification, as noted on slide 8.
+For a convex problem with affine equalities, satisfying the full KKT system is sufficient for global optimality.
+
+\paragraph{Why do only active inequality constraints appear in stationarity at a KKT point?}
+Complementary slackness gives $\lambda_i=0$ whenever $f_i(x)<0$.
+Only active constraints with $f_i(x)=0$ can have nonzero multipliers.
+Their gradients combine with the equality-constraint gradients to balance the objective gradient.
+An active constraint can still have multiplier zero.
+
+\paragraph{How does the final slide obtain the dual of $\min c^Tx$ subject to $Ax=b$, $x\geq0$?}
+Using the slide's equality sign convention, write $L=c^Tx+\nu^T(b-Ax)-\lambda^Tx$ with $\lambda\geq0$.
+The infimum over all $x\in\mathbb{R}^n$ is finite only if $c-A^T\nu-\lambda=0$, in which case it equals $b^T\nu$.
+Eliminating $\lambda$ gives the dual $\max b^T\nu$ subject to $A^T\nu\leq c$.
+When the primal LP has a finite optimal solution, the dual also has an optimal solution with the same value.
+
+\end{document}

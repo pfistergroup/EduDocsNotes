@@ -1,0 +1,88 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 22: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{October 18, 2026}
+
+\maketitle
+
+\section{Alternating Projection}
+
+\paragraph{What does alternating projection do for two closed subspaces?}
+It projects onto each subspace in turn.
+For closed subspaces $U,W$ of a Hilbert space, the sequence converges in norm to $P_{U\cap W}v_0$ (slide 1).
+The intersection always contains zero, and each point in the intersection is fixed by both projections.
+
+\paragraph{Why is a hyperplane usually not a subspace?}
+For nonzero $w$, the set $\{v:\inner{v}{w}=0\}$ is a subspace.
+Replacing zero by a nonzero constant $c$ shifts it away from the origin, producing an affine hyperplane.
+Slides 2--3 derive its projection by shifting to a subspace, projecting, and shifting back.
+
+\paragraph{How does the hyperplane projection formula work?}
+For $H=\{u:\inner{u}{w}=c\}$ with $w\neq0$, it is
+\[
+P_H(v)=v-\frac{\inner{v}{w}-c}{\|w\|^2}w.
+\]
+The correction is parallel to the normal vector $w$, and substitution verifies that the new point satisfies the equality.
+For example, projecting $(2,0)$ onto $x_1+x_2=1$ gives $(3/2,-1/2)$.
+The course convention makes the inner product linear in its first argument.
+
+\paragraph{Why can we solve a linear system by projecting onto individual equations?}
+Each nonzero row of $Ax=b$ defines an affine hyperplane.
+Their intersection is precisely the solution set.
+Projecting cyclically onto these hyperplanes gives Kaczmarz's algorithm (slides 4--5).
+The consistency assumption matters: an inconsistent system has no common point to which this feasibility argument can apply.
+
+\paragraph{What is the Kaczmarz update, and what happens with a zero row?}
+For a real row vector $a_i^T$, the relaxed update is
+\[
+v_{k+1}=v_k-s\frac{a_i^T v_k-b_i}{\|a_i\|_2^2}a_i,
+\qquad i=(k\bmod m)+1.
+\]
+Here $s=1$ gives an exact projection and $0<s<1$ takes part of the correction.
+Skip a zero row with $b_i=0$; a zero row with $b_i\neq0$ proves inconsistency.
+The denominator requires a nonzero row.
+
+\paragraph{Does a smaller relaxation parameter solve an inconsistent system in the least-squares sense?}
+Not automatically. It can reduce oscillation, but a fixed relaxed cyclic projection scheme is not in general a least-squares solver.
+For a least-squares or minimum-norm guarantee, use an algorithm designed for that objective, as discussed in Videos 18--20.
+The suggestion on slide 5 that relaxation may help should not be read as such a guarantee.
+
+\section{Convex Feasibility}
+
+\paragraph{Do cyclic projections onto convex sets find the nearest point in their intersection?}
+Generally no. For finitely many nonempty closed convex sets in a finite-dimensional space with nonempty common intersection, cyclic projections converge to a feasible point.
+That point need not equal $P_{\cap_i C_i}v_0$.
+This is the distinction emphasized on slide 6, ``Alternating Projection onto Convex Sets.''
+
+\paragraph{What if the convex sets do not intersect, or the space is infinite dimensional?}
+The finite-dimensional convergence statement on slide 6 assumes a nonempty intersection.
+With an empty intersection, iterates can cycle or fail to converge to a feasible point.
+In infinite-dimensional Hilbert spaces, the analogous convex-set results generally give weak convergence under the usual hypotheses, rather than the norm convergence guaranteed for two closed subspaces.
+
+\paragraph{How do we project onto a half space?}
+In a real Hilbert space, let $H=\{u:\inner{u}{w}\geq c\}$ with $w\neq0$.
+If $v$ is feasible, leave it unchanged; otherwise project onto the boundary hyperplane:
+\[
+P_H(v)=v+\frac{\max\{0,c-\inner{v}{w}\}}{\|w\|^2}w.
+\]
+Slide 7 applies this idea to systems of linear inequalities.
+For complex vectors an inequality must instead be specified using a real-valued expression, such as the real part of an inner product.
+
+\end{document}

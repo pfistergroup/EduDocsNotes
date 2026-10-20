@@ -1,0 +1,86 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 13: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{Revised October 19, 2026}
+
+\maketitle
+
+\section{Norms and Metrics}
+
+\paragraph{What extra structure does a norm add to a vector space?}
+A norm assigns a nonnegative length to each vector, is zero only at zero, scales by $|s|$, and satisfies the triangle inequality.
+It induces the metric $d(v,w)=\|v-w\|$, so vector-space questions can also involve convergence and continuity.
+These are the definitions on slide 1, ``Normed Vector Spaces.''
+
+\paragraph{Why is $\min\{\|v\|_2,1\}$ not a norm even though the corresponding bounded distance is a metric?}
+It fails absolute homogeneity.
+For example, for a standard unit vector $e_1$, the proposed length of $2e_1$ is one, whereas twice the proposed length of $e_1$ is two.
+A metric does not require compatibility with scalar multiplication; a norm does.
+This is the counterexample on slide 4, ``Norms Versus Metrics.''
+
+\paragraph{Can the exponent $p$ be less than one in a $p$-norm?}
+For $p\geq1$, the usual $p$-norm satisfies the triangle inequality.
+For $0<p<1$, it generally fails: in $\mathbb{R}^2$, $\|e_1+e_2\|_p=2^{1/p}>2=\|e_1\|_p+\|e_2\|_p$.
+For $p=\infty$, use the largest absolute coordinate instead of a sum.
+
+\paragraph{Why must we restrict function and sequence spaces to elements of finite norm?}
+A norm must have a finite real value at every vector.
+For example, $(1,1,\ldots)$ does not belong to $\ell^p$ for finite $p$, but does belong to $\ell^\infty$.
+For the integral norms on slide 3, $L^p$ spaces use measurable functions with finite norm, identifying functions equal almost everywhere.
+This identification is needed because an integral can ignore differences on a set of measure zero.
+
+\paragraph{What is the difference between a supremum and an essential supremum?}
+A supremum considers all point values, whereas an essential supremum ignores changes on sets of measure zero.
+For continuous functions on a compact interval the two coincide with the maximum absolute value.
+For general measurable functions, the essential supremum is the appropriate $L^\infty$ norm on equivalence classes.
+
+\paragraph{Do equivalent norms assign the same length?}
+No. They satisfy $m\|v\|_a\leq\|v\|_b\leq M\|v\|_a$ for fixed positive constants $m,M$.
+Consequently, they have the same convergent sequences, Cauchy sequences, and topology.
+All norms on a fixed finite-dimensional real or complex vector space are equivalent, as on slide 5; this need not hold in infinite dimensions.
+
+\section{Completeness and Infinite Sums}
+
+\paragraph{What makes a normed space a Banach space?}
+Completeness in its induced metric: every Cauchy sequence must converge to a vector in the space.
+For example, $C[a,b]$ with the supremum norm is Banach, because a uniform limit of continuous functions is continuous.
+The same set with the $L^2$ norm need not be complete, as the example in Video 7 shows.
+
+\paragraph{How is a Schauder basis different from a Hamel basis?}
+A Hamel basis expresses every vector uniquely as a finite linear combination.
+A Schauder basis allows a series whose partial sums converge in norm, with unique coefficients in the given order.
+The standard unit vectors form a Schauder basis of $\ell^p$ for $1\leq p<\infty$ (slide 7), but their finite span contains only finitely supported sequences.
+Not every Banach space has a Schauder basis.
+
+\paragraph{Why does absolute convergence imply convergence in a Banach space?}
+If $\sum_i\|v_i\|<\infty$, the triangle inequality gives
+\[
+\left\|\sum_{i=m+1}^n v_i\right\|\leq\sum_{i=m+1}^n\|v_i\|\longrightarrow0.
+\]
+Thus the partial sums are Cauchy, and completeness supplies their limit in the space.
+This is the proof on slide 8, ``Convergence of Sums.''
+
+\paragraph{Does being closed under linear combinations make a subspace a closed set?}
+No. Algebraic closure uses finite sums, whereas topological closure also includes limits.
+In $\ell^p$, the finite sums $u_n=\sum_{i=1}^n i^{-2}e_i$ converge in norm to an infinite-support sequence.
+The subspace of finitely supported sequences does not contain that limit and is therefore not closed (slide 9).
+Every finite-dimensional subspace of a normed space is closed.
+
+\end{document}

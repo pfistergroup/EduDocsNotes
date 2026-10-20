@@ -1,0 +1,80 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 9: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{October 18, 2026}
+
+\maketitle
+
+\section{Fields and Matrices}
+
+\paragraph{Why do we introduce fields when most engineering problems use real or complex numbers?}
+A field records the arithmetic rules needed for scalar calculations, so the same argument can work over $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$, or a finite field.
+Slides 1--3 separate these rules from any particular interpretation of the scalars.
+For example, Gaussian elimination uses field arithmetic and therefore applies to linear systems over finite fields as well.
+
+\paragraph{Why are the integers not a field? Why does arithmetic modulo a prime work?}
+A field requires every nonzero element to have a multiplicative inverse.
+The integer $2$ has no integer inverse, so $\mathbb{Z}$ is not a field.
+Modulo a prime $p$, each nonzero residue has an inverse.
+For a composite modulus this fails: modulo $6$, $2\cdot3=0$, although both factors are nonzero.
+
+\paragraph{Does multiplication by zero have an inverse?}
+No. The inverse axiom on slide 2, ``Fields,'' excludes zero.
+Distributivity implies $0s=0$ for every scalar $s$, so $0s$ cannot equal the field identity $1\neq0$.
+Division by zero is therefore undefined.
+
+\paragraph{Why is the matrix for $m$ equations in $n$ unknowns an $m\times n$ array?}
+Each row contains the coefficients of one equation, and each column corresponds to one unknown.
+Thus $A\in F^{m\times n}$ multiplies a column vector $x\in F^n$ to produce $Ax\in F^m$, as on slide 4, ``Matrices.''
+
+\paragraph{How should I interpret matrix multiplication beyond the entry formula?}
+On slide 5, ``Matrix Multiplication,'' each column of $AB$ is a linear combination of columns of $A$, with coefficients from the corresponding column of $B$.
+Equivalently, $AB$ represents first applying $B$ and then $A$.
+The shared inner dimension is required for these combinations to be defined; multiplication need not commute.
+
+\section{Row Reduction}
+
+\paragraph{What is the difference between row echelon form and reduced row echelon form?}
+In row echelon form, zero rows are last and each successive nonzero row starts strictly farther to the right.
+Reduced row echelon form also requires each leading entry to be one and every other entry in its column to be zero.
+Slide 6 illustrates both. The RREF of a given matrix is unique, although elimination can take different sequences of steps.
+
+\paragraph{Why must a row be multiplied by a nonzero scalar?}
+Elementary row operations must be reversible to preserve an equivalent linear system.
+Multiplication by a nonzero scalar can be undone by its inverse, but multiplication by zero destroys an equation.
+For $Ax=b$, apply every row operation to the entire augmented matrix $[A\;b]$, not only to $A$.
+
+\paragraph{How does the augmented matrix $[A\;I]$ keep track of elimination?}
+The same row operations that turn $A$ into $R$ turn $I$ into an invertible matrix $P$, giving $[R\;P]$ with $R=PA$.
+On slide 8, only the left block must reach RREF; continue no farther once it has done so.
+Row reduction preserves the null space because $PAx=0$ if and only if $Ax=0$.
+
+\paragraph{Why does $m<n$ guarantee a nonzero solution of $Ax=0$?}
+There can be at most $m$ pivot columns, so with $n>m$ at least one variable is free.
+Choose a free variable to be nonzero and solve backward for the pivot variables.
+For example, $[1\;2]x=0$ has the nonzero solution $x=(-2,1)^T$.
+This is the ``Foundation of Dimension'' lemma on slide 9.
+
+\paragraph{Does having more unknowns than equations guarantee a solution of $Ax=b$?}
+No. It guarantees a nonzero homogeneous solution, not consistency for an arbitrary right-hand side.
+For example, two identical coefficient rows with different right-hand sides are inconsistent.
+If a solution $x_0$ does exist, all solutions are $x_0+z$ with $z\in\mathcal{N}(A)$.
+
+\end{document}

@@ -1,0 +1,80 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 21: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{October 18, 2026}
+
+\maketitle
+
+\section{Convex Sets and Convex Functions}
+
+\paragraph{How is a convex set different from a subspace?}
+A convex set contains every line segment joining two of its points.
+A subspace is closed under all linear combinations, so it is convex and contains zero.
+A ball or a shifted half space can be convex without being a subspace (slide 1, ``Convexity'').
+
+\paragraph{Can a convex function have several minimizers?}
+Yes. A constant function has every feasible point as a minimizer.
+Convexity guarantees that every local minimum on a convex feasible set is global, not that its location is unique.
+Strict convexity gives at most one minimizer, if a minimizer exists (slide 2, ``Convex Optimization'').
+
+\paragraph{Does strict convexity guarantee that a minimum is achieved?}
+No. For example, $f(x)=e^x$ is strictly convex on $\mathbb{R}$ but has infimum zero and no minimizer.
+Existence requires an additional argument, such as continuity on a nonempty compact feasible set.
+For the squared distance to a nonempty closed convex set in a Hilbert space, the projection theorem supplies existence without requiring compactness.
+
+\paragraph{Why does a tangent plane give a global lower bound for a convex function?}
+For a differentiable convex function, slide 3, ``Convex Optimization and Derivatives,'' gives
+\[
+f(x)\geq f(x_0)+\inner{x-x_0}{\nabla f(x_0)}.
+\]
+Convexity controls the function along the segment from $x_0$ to $x$; taking the initial slope gives this bound.
+A zero gradient therefore proves global optimality for an unconstrained problem.
+
+\paragraph{At a constrained minimum, must the gradient be zero?}
+No. At a boundary point, the negative gradient may point outside the feasible set.
+For example, minimizing $f(x)=x$ over $[0,\infty)$ gives $x^*=0$ even though $f'(0)=1$.
+For a differentiable convex function on a convex set $A$, the appropriate condition is $\inner{x-x^*}{\nabla f(x^*)}\geq0$ for every $x\in A$.
+
+\section{Projection onto Convex Sets}
+
+\paragraph{Why do we require the set to be nonempty, closed, and convex?}
+Nonemptiness provides feasible candidates, closedness prevents the nearest point from being excluded, and convexity gives uniqueness in a Hilbert space.
+For example, projecting $0$ onto $(0,1)$ has no solution, while projecting $0$ onto $\{-1,1\}$ has two nearest points.
+Slide 4, ``Projection onto Convex Sets,'' should be read with the nonempty-set assumption.
+
+\paragraph{What does the projection inequality mean geometrically?}
+For a real Hilbert space, $p=P_A(v)$ is characterized by
+\[
+\inner{v-p}{u-p}\leq0\quad\text{for every }u\in A.
+\]
+Thus the residual from $p$ toward $v$ makes a nonacute angle with every feasible direction from $p$ into the set.
+In a complex Hilbert space, use the real part of the inner product in this inequality.
+
+\paragraph{How does projection onto a subspace fit this inequality?}
+For a subspace, both $p+tw$ and $p-tw$ are feasible whenever $w$ is in the subspace.
+Applying the inequality with both signs forces the residual to be orthogonal to every $w$.
+This recovers the orthogonality condition used in Videos 17 and 18.
+
+\paragraph{Is projection onto a convex set a linear map?}
+Generally no. Projection onto $[0,\infty)$ in $\mathbb{R}$ is $P_A(x)=\max\{x,0\}$, which is nonlinear.
+It still fixes points already in the set and is nonexpansive: $\|P_A(v)-P_A(w)\|\leq\|v-w\|$.
+For a closed subspace, the orthogonal projection is linear.
+
+\end{document}

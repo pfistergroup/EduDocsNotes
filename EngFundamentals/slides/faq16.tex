@@ -1,0 +1,86 @@
+\documentclass[10pt,english]{article}
+
+\usepackage{amsfonts,url,tikz,amsmath}
+
+% Paper setup
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\topmargin=-0.5in
+\headheight=0.0in
+\headsep=0.5in
+\textheight=9.0in
+\footskip=0.5in
+
+\input{macros}
+
+\begin{document}
+
+\title{ECE 586: Vector Space Methods \\ Lecture 16: Frequently Asked Questions}
+\author{Henry D. Pfister \\ \univ}
+\date{October 18, 2026}
+
+\maketitle
+
+\section{Derivatives as Linear Maps}
+
+\paragraph{Why is a derivative a linear transformation rather than just a number?}
+For $f\colon\mathbb{R}^n\to\mathbb{R}^m$, the derivative at $x$ maps a perturbation $h$ to the first-order output change $J(x)h$.
+The Jacobian is an $m\times n$ matrix representation of that linear map.
+For $n=m=1$, a linear map is multiplication by a scalar, which recovers the familiar derivative (slide 2, ``Derivatives'').
+
+\paragraph{What does the Fr\'echet derivative definition require?}
+It requires a bounded linear map $T$ for which
+\[
+f(x+h)=f(x)+Th+r(h),\qquad \frac{\|r(h)\|}{\|h\|}\longrightarrow0.
+\]
+The same $T$ must work as $h$ tends to zero in every direction, not just along a fixed line.
+This is the definition on slide 5, ``What is Meant by Differentiable?''
+
+\paragraph{What does a bound on the derivative tell us about the function?}
+If $f$ is differentiable on a neighborhood of a convex set $A$ and $\|f'(x)\|_{\mathrm{op}}\leq L$ throughout $A$, then $\|f(y)-f(x)\|\leq L\|y-x\|$ for $x,y\in A$.
+Convexity lets us follow the entire line segment between the points while using the derivative bound.
+The chain rule on slide 6 composes derivative maps in the same order as the corresponding functions.
+
+\paragraph{How do we compute a directional derivative in the slide example?}
+Substitute $x+th$ into the function and differentiate with respect to the scalar $t$ at zero.
+For $f(x_1,x_2)=(x_1x_2,x_1+x_2^2)$, $x=(1,1)$, and $h=(1,2)$, this gives $(3,5)$, as on slide 7.
+When $f$ is Fr\'echet differentiable, the answer equals $f'(x)h$.
+
+\paragraph{Does existence of every directional derivative imply Fr\'echet differentiability?}
+No. Directional derivatives test one direction at a time, and can fail even to depend linearly on the direction.
+The slides call the function G\^ateaux differentiable when these derivatives define a continuous linear function of the direction.
+Even that condition is weaker than the uniform first-order remainder required for Fr\'echet differentiability.
+
+\section{Gradients and Descent}
+
+\paragraph{Why does a negative directional derivative give a descent direction?}
+If $\delta f(x;h)=a<0$, then $[f(x+th)-f(x)]/t$ is negative for all sufficiently small positive $t$.
+Multiplying by $t>0$ gives $f(x+th)<f(x)$.
+This is a local statement; it does not say that every positive step size will decrease the function (slide 8).
+
+\paragraph{What is the distinction between the derivative and the gradient?}
+For a real-valued function on a real Hilbert space, $f'(x)$ is a bounded linear functional, whereas $\nabla f(x)$ is a vector in the space.
+The Riesz theorem identifies them through $f'(x)h=\inner{h}{\nabla f(x)}$.
+In Euclidean coordinates, the derivative is a row matrix and the gradient is its transpose (slide 9).
+A general Banach space has no canonical inner-product identification of its dual with itself.
+
+\paragraph{Why does gradient descent use the negative gradient?}
+Among unit directions in a Hilbert space, $-\nabla f(x)/\|\nabla f(x)\|$ gives the most negative directional derivative when the gradient is nonzero.
+This follows from Cauchy--Schwarz.
+The iteration on slide 10 is $x_{n+1}=x_n-\delta_n\nabla f(x_n)$; the step size still needs to be chosen appropriately.
+
+\paragraph{How does a Lipschitz gradient give a useful step-size bound?}
+Slide 11 bounds the first-order approximation error by $L\|y-x\|^2/2$.
+Substituting $y=x-\delta\nabla f(x)$ yields
+\[
+f(y)\leq f(x)-\delta\left(1-\frac{L\delta}{2}\right)\|\nabla f(x)\|^2.
+\]
+For $L>0$, a step $0<\delta<2/L$ therefore decreases $f$ when the gradient is nonzero, provided the bound applies along that step.
+
+\paragraph{Does a zero gradient guarantee a global minimum?}
+No. For a general differentiable function, it may indicate a local maximum or saddle point.
+For a differentiable convex function on the whole space, a zero gradient is sufficient for a global minimum.
+Convexity and constrained optimality are developed in Videos 21 and 23.
+
+\end{document}
