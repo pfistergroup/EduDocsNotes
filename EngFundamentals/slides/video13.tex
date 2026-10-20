@@ -125,6 +125,7 @@
 
 \begin{document}
 
+
 \title{ECE 586: Vector Space Methods \\ Lecture 13 Flip Video: Normed Vector Spaces}
 \author{Henry D. Pfister \\ \univ}
 \date{}
@@ -135,14 +136,14 @@
 
 \begin{frame}[plain]
 	\titlepage
-	
+
 	\note{
 		\vspace{8mm}
 		\begin{enumerate}
 			\setlength\itemsep{3mm}
 			\color{red}
-			\item Welcome to the 11th video lecture for ECE 586, Vector Space Methods. \\[2mm]
-			Today, we'll finish our discussion of subspaces and bases and then move on to linear transforms.
+			\item Welcome to the 13th video lecture for ECE 586, Vector Space Methods. \\[2mm]
+			Today, we'll combine vector spaces with metric spaces by discussing normed vector spaces and Banach spaces.
 		\end{enumerate}
 	}
 \end{frame}
@@ -153,12 +154,12 @@
 
 
 
-\begin{frame}{3.5: Normed Vector Spaces}
+\begin{frame}<1-2>{3.5: Normed Vector Spaces}
 
-Let $V$ be a vector space over the real numbers or the complex numbers.
+Let $V$ be a vector space over a field $F$, where $F = \mathbb{R}$ or $\mathbb{C}$.
 
-\begin{definition}
-A \textcolor{blue}{norm} on vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \RealNumbers$ that satisfies the following properties.
+\begin{definition}<1->
+A \textcolor{blue}{norm} on the vector space $V$ is a real-valued function $\left\| \cdot \right\| \colon V \rightarrow \RealNumbers$ that satisfies the following properties.
 \begin{enumerate}
 \item $\left\| \vecnot{v} \right\| \geq 0 \quad \forall \vecnot{v} \in V$;
 equality holds if and only if $\vecnot{v} = \vecnot{0}$
@@ -170,41 +171,70 @@ equality holds if and only if $\vecnot{v} = \vecnot{0}$
 
 \vspace{3mm}
 
+\begin{uncoverenv}<2->
 The concept of a norm is closely related to that of a metric.
 For instance, a metric can be defined from any norm.\\[2mm]
-Let $\left\| \vecnot{v} \right\|$ be a norm on vector space $V$, then the \textcolor{blue}{induced metric} is
+For a norm $\left\| \cdot \right\|$ on the vector space $V$, the \textcolor{blue}{induced metric} is
 \begin{equation*}
 d \left( \vecnot{v}, \vecnot{w} \right)
 = \left\| \vecnot{v} - \vecnot{w} \right\|.
 \end{equation*}
+\end{uncoverenv}
 
 \note{
 	\vspace{2mm}
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
-		\item Sums and Direct Sums allow one to combine subspaces.  Read.
-		\item Read.  This is the smallest intersection possible because all subspaces contain the zero vector.
-		\item Read.
-		\item Read.
+		\item A norm generalizes the idea of the length of a vector.  Read.  The third property is called the triangle inequality.
+		\item Read.  Thus, every normed vector space is also a metric space and all of our results for metric spaces can be applied.
 	\end{enumerate}
 }
 
 \end{frame}
 
-\begin{frame}{3.5: Examples of Normed Vector Spaces}
+\begin{frame}<1-2>{3.5: Examples of Normed Vector Spaces}
 
-\begin{example}[Standard Norms for Real/Complex Vector Spaces]
+\begin{example}<1->[Standard Norms for Real/Complex Vector Spaces]
 The following functions are examples of norms for $\mathbb{R}^n$ and $\mathbb{C}^n$:
 \begin{enumerate}
 \item the $l^1$ norm: $\left\| \vecnot{v} \right\|_1 = \sum_{i=1}^n |v_i|$
 \item the $l^p$ norm: $\left\| \vecnot{v} \right\|_p = \left( \sum_{i=1}^n |v_i|^p \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
-\item the $l^{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{1,\ldots, n} \{ |v_i| \}$
+\item the $l^{\infty}$ norm: $\left\| \vecnot{v} \right\|_{\infty} = \max_{i\in \{1,\ldots, n\}} \{ |v_i| \}$
 \end{enumerate}
 \end{example}
 
-\begin{example}[Standard Norms for Real/Complex Function Spaces]
-Similarly, for the vector space of functions from $[a, b]$ to $\RealNumbers$ (or $\ComplexNumbers$):
+\vspace{2mm}
+
+\begin{example}<2->[Comparing Norms]
+The same vector may have different lengths under different norms:
+\[
+\renewcommand{\arraystretch}{1.15}
+\begin{array}{c|ccc}
+\vecnot{v} & \|\vecnot{v}\|_1 & \|\vecnot{v}\|_2 & \|\vecnot{v}\|_\infty \\ \hline
+(3,-4,12) & 19 & 13 & 12 \\
+(1,\mathrm{i},1) & 3 & \sqrt{3} & 1 \\
+(0,0,2) & 2 & 2 & 2
+\end{array}
+\]
+\end{example}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read. The $l^2$ norm is the standard Euclidean length of a vector.
+		\item Read. In the second row, $\mathrm{i}$ is the imaginary unit and its absolute value is one. The third row shows that these norms may also give the same length.
+	\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}<1-3>{3.5: Norms for Function Spaces}
+
+\begin{example}<1->[Standard Norms for Real/Complex Function Spaces]
+For real or complex functions on $[a,b]$, replace sums by integrals:
 \begin{enumerate}
 \item the $L^1$ norm: $\left\| f(t) \right\|_1 = \int_a^b |f(t)| dt$
 \item the $L^p$ norm: $\left\| f(t) \right\|_p = \left( \int_a^b |f(t)|^p dt \right)^{\frac{1}{p}}, \quad p \in (1,\infty)$
@@ -212,16 +242,35 @@ Similarly, for the vector space of functions from $[a, b]$ to $\RealNumbers$ (or
 \end{enumerate}
 \end{example}
 
-For infinite dimensional spaces, \textcolor{red}{only vectors with finite norm} are included.
-% \gpt{Suggested cut/paste qualification: define $L^p([a,b])$ using measurable functions modulo equality almost everywhere; otherwise the displayed integral can vanish for a nonzero pointwise function and is only a seminorm.}
-% \gpt{Suggested expanded definition adapted from the August 23 book, with its notation repaired: ``A real function $f$ is measurable if $f^{-1}((t,\infty))$ is measurable for every $t\in\mathbb R$.  It is zero almost everywhere if $\mu(\{x:f(x)\neq0\})=0$.  For $1\leq p<\infty$, $L^p([a,b])$ consists of measurable functions with finite $\|f\|_p=(\int_a^b|f|^p)^{1/p}$, modulo equality almost everywhere.''}
+\begin{block}{Equality Almost Everywhere}<2->
+\small
+\begin{itemize}
+\setlength\itemsep{0.5mm}
+\item Integrals define \textcolor{blue}{seminorms} where $\|f\|_p=0$ iff $f=0$ \textcolor{blue}{almost everywhere (a.e.)}
+\item Set of functions $=0$ a.e. form a \textcolor{blue}{closed subspace} in the seminorm topology
+\item Equivalence relation $f\sim g$ when $\|f-g\|_p=0$ allows us to formally define $L^p$ as \textcolor{blue}{normed space of equivalence classes}.
+\end{itemize}
+\end{block}
+
+\uncover<3->{In infinite dimensional spaces, some vectors/functions with finite values may have \textcolor{red}{infinite norm} and are \textcolor{blue}{excluded from the normed space} by convention.}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read. The essential supremum ignores changes on sets of zero length. For continuous functions on this interval, it equals the ordinary supremum.
+		\item Read. For each $p$, we start with measurable functions for which the displayed expression is finite. A seminorm satisfies the norm axioms except that a nonzero function may have seminorm zero. Almost everywhere means except on a set of zero length. For example, changing a function at a single point does not change its equivalence class. The entire closed subspace of zero-a.e. functions becomes the zero vector, and the induced norm is well-defined on the equivalence classes. The standard construction uses the Lebesgue integral, but we will keep the usual function notation.
+		\item Read. Otherwise, the norm would not be a real-valued function. An infinite-dimensional space does not mean that every vector has infinite norm; it means that no finite list spans the whole space.
+	\end{enumerate}
+}
 
 \end{frame}
 
-\begin{frame}{3.5: Norms Versus Metrics}
+\begin{frame}<1-3>{3.5: Norms Versus Metrics}
 
 \begin{example}
-Consider vectors in $\RealNumbers^n$ with the euclidean metric
+Consider vectors in $\RealNumbers^n$ with the Euclidean metric
 \begin{equation*}
 d \left( \vecnot{v}, \vecnot{w} \right)
 = \sqrt{ (v_1 - w_1)^2 + \cdots + (v_n - w_n)^2 }.
@@ -236,25 +285,40 @@ Define $f \colon \RealNumbers^n \rightarrow \RealNumbers$ by
 $f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
 Is the function $f$ a norm?
 
+\begin{uncoverenv}<2->
 By the properties of $\overline{d}$, we have
 \begin{enumerate}
-\item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) \geq 0 \quad \forall \vecnot{v} \in V$; equality holds if and only if $\vecnot{v} = \vecnot{0}$
-\item $\bar{d} \left( \vecnot{v} + \vecnot{w}, \vecnot{0}\right) = \bar{d} \left( \vecnot{v}, -\vecnot{w} \right) \leq \bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{w}, \vecnot{0} \right) \quad \forall \vecnot{v}, \vecnot{w} \in V$.
+\item $\bar{d} \left( \vecnot{v}, \vecnot{0} \right) \geq 0 \quad \forall \vecnot{v} \in \mathbb{R}^n$; equality holds if and only if $\vecnot{v} = \vecnot{0}$ \addtocounter{enumi}{1}
+\item $\bar{d} \left( \vecnot{v} + \vecnot{w}, \vecnot{0}\right) = \bar{d} \left( \vecnot{v}, -\vecnot{w} \right) \leq \bar{d} \left( \vecnot{v}, \vecnot{0} \right) + \bar{d} \left( \vecnot{w}, \vecnot{0} \right) \quad \forall \vecnot{v}, \vecnot{w} \in \mathbb{R}^n$.
 \end{enumerate}
+\end{uncoverenv}
 
 \vspace{2mm}
 
-However, $\bar{d} \left( s \vecnot{v}, \vecnot{0} \right)$ is not always equal to $s \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
+\begin{uncoverenv}<3->
+However, $\bar{d} \left( s \vecnot{v}, \vecnot{0} \right)$ is not always equal to $|s| \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$.
 For instance,
 $\bar{d} \left( 2 \vecnot{e}_1, \vecnot{0} \right) = 1 < 2 \bar{d} \left( \vecnot{e}_1, \vecnot{0} \right)$.
-Thus, the $f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$
+Thus, the function $f \left( \vecnot{v} \right) = \bar{d} \left( \vecnot{v}, \vecnot{0} \right)$
 is not a norm.
+\end{uncoverenv}
 \end{example}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item We have seen that every norm induces a metric.  But, does every metric define a norm?  Read.
+		\item Read.  So, the function $f$ satisfies the first and third properties of a norm.
+		\item Read.  In other words, not every metric is induced by a norm.
+	\end{enumerate}
+}
 
 \end{frame}
 
 
-\begin{frame}{3.5: Properies of Normed Vector Spaces}
+\begin{frame}<1-3>{3.5: Properties of Normed Vector Spaces}
 
 \begin{definition}<1->
 A vector $\vecnot{v} \in V$ is called \textcolor{blue}{normalized} if $\left\| \vecnot{v} \right\| = 1$.
@@ -271,22 +335,32 @@ A normalized vector is called a \textcolor{blue}{unit vector}.
 %To prove the triangle inequality, one requires the Minkowski inequality which is stated in the notes.
 %\end{block}
 
-\begin{definition}
-For a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$, two norms (denoted $\|\cdot\|_{V}$ and $\|\cdot\|_{V'}$) are called \textcolor{blue}{equivalent} if, for all $\vecnot{v} \in V$, there are positive reals $m,M$ such that
-\begin{align*} 
+\begin{definition}<2->
+For a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$, two norms (denoted $\|\cdot\|_{V}$ and $\|\cdot\|_{V'}$) are called \textcolor{blue}{equivalent} if there are positive reals $m,M$ such that, for all $\vecnot{v} \in V$,
+\begin{align*}
 m \| \vecnot{v} \|_{V'} & \leq \| \vecnot{v} \|_V \leq M \| \vecnot{v} \|_{V'}.
 \end{align*}
 \end{definition}
 
-\begin{lemma} 
+\begin{lemma}<3->
 For finite-dimensional normed spaces, all norms are equivalent.
 \end{lemma}
-% \gpt{Suggested cut/paste quantifier repair: ``Two norms are equivalent if there exist constants $m,M>0$ such that $m\|v\|_{V'}\leq\|v\|_V\leq M\|v\|_{V'}$ for every $v\in V$.''  The constants must be uniform in $v$.}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  The second property of a norm shows that dividing by the norm gives a vector whose norm equals one.
+		\item Read.  Equivalent norms define the same open sets and hence the same notion of convergence.
+		\item Read.  Thus, in finite dimensions, the choice of norm does not affect whether a sequence converges.  This is not true in infinite dimensions.
+	\end{enumerate}
+}
 
 \end{frame}
 
 
-\begin{frame}{3.5: Complete Normed Spaces}
+\begin{frame}<1-4>[shrink=5]{3.5: Complete Normed Spaces}
 
 %\begin{definition}<1->
 %A vector $\vecnot{v} \in V$ is called \textcolor{blue}{normalized} if $\left\| \vecnot{v} \right\| = 1$.
@@ -303,46 +377,65 @@ A complete normed vector space is called a \textcolor{blue}{Banach space}.
 \end{definition}
 
 \begin{example}<2->
-Vector spaces $\mathbb{R}^n$ (or $\mathbb{C}^n$) with any well-defined norm are Banach spaces.
+Vector space $\mathbb{R}^n$ (or $\mathbb{C}^n$) with any well-defined norm is a Banach space.
 \end{example}
 
 \begin{example}<3->
-Let $V = \mathbb{R}^\infty$ be the Banach space of real sequences $(v_1,v_2,v_3,\ldots)$ with norm \vspace{-3mm}
+For $1 \leq p < \infty$, let $V = \ell^p$ be the Banach space of real sequences $(v_1,v_2,v_3,\ldots)$ with finite norm \vspace{-3mm}
 \[ \|\vecnot{v} \|_p = \left(\sum_{i=1}^\infty |v_i |^p \right)^{1/p}. \]
 \end{example}
-% \gpt{Suggested cut/paste correction: replace $\mathbb{R}^{\infty}$ by $\ell^p=\{v:\sum_i|v_i|^p<\infty\}$ (for $1\leq p<\infty$).  The space of all real sequences is not normed by this formula.}
 
 
 \begin{example}<4->
-The vector space of continuous functions $f \colon [a,b] \to \mathbb{R}$ is a Banach space under the norm \vspace{-2.5mm}
-\[ \left\| f(t) \right\| = \sup_{t\in [a,b]} f(t). \vspace*{-0.5mm}\]
+The vector space of continuous functions $f \colon [a,b] \to \mathbb{R}$ is a Banach space under the supremum norm \vspace{-2.5mm}
+\[ \left\| f(t) \right\| = \sup_{t\in [a,b]} |f(t)|. \vspace*{-0.5mm}\]
 \end{example}
-% \gpt{Suggested cut/paste correction: $\|f\|_{\infty}=\sup_{t\in[a,b]}|f(t)|$.}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Recall that a metric space is complete if every Cauchy sequence converges to a point in the space.  Read.  Completeness is defined using the induced metric.
+		\item Read.  This follows from the completeness of the real numbers and the equivalence of all norms in finite dimensions.
+		\item Read.  As we discussed, only sequences with finite norm are included.
+		\item Read.  This works because the uniform limit of continuous functions is continuous.
+	\end{enumerate}
+}
 
 \end{frame}
 
-\begin{frame}{3.5: Schauder Basis}
+\begin{frame}<1-2>{3.5: Schauder Basis}
 
-\begin{definition}
+\begin{definition}<1->
 A Banach space $V$ has a \textcolor{blue}{Schauder basis}, $\vecnot{v}_1, \vecnot{v}_2, \ldots$, if every $\vecnot{v} \in V$ can be written uniquely as
 \[ \vecnot{v} = \sum_{i=1}^\infty s_i \vecnot{v}_i, \]
 where convergence is determined by the norm topology.
 \end{definition}
 
-\begin{example}
-Let $V = \mathbb{R}^\infty$ be the vector space of real sequences.
+\begin{example}<1->
+Let $V = \ell^p$, for $1 \leq p < \infty$, be the vector space of real sequences with finite $p$-norm.
 The \textcolor{blue}{standard Schauder basis} is the countably infinite extension $\{\vecnot{e}_1 ,\vecnot{e}_2, \ldots \}$ of the standard basis.
 \end{example}
-% \gpt{Suggested cut/paste correction: use $V=\ell^p$ (for $1\leq p<\infty$); the standard unit vectors form a Schauder basis there, not on the unrestricted sequence space $\mathbb{R}^{\infty}$.}
 
 \begin{block}{Caveat}<2->
-Although all commonly used Banach spaces have a Schauder basis, some do not.
+A Banach space need not have a Schauder basis.
 Thus, this cannot be assumed in general proofs for Banach spaces.
 \end{block}
 
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Recall that a Hamel basis only allows finite linear combinations.  Now that we have a topology, we can also consider infinite linear combinations.  Read.
+		\item Read.
+	\end{enumerate}
+}
+
 \end{frame}
 
-\begin{frame}{3.5: Convergence of Sums}
+\begin{frame}<1-5>[shrink=5]{3.5: Convergence of Sums}
 
 
 Banach space convergence via the induced metric $d(\vecnot{v}, \vecnot{w}) = \| \vecnot{v}-\vecnot{w} \|$.
@@ -353,26 +446,39 @@ If $\,\sum_{i=1}^\infty \| \vecnot{v}_i \| \vtp = \vtp a \vtp <\vtp \infty$, the
 \end{lemma}
 \vspace{-0.5mm}
 
-\begin{proof}
+\begin{proof}<2->
 \begin{itemize}
-\item Let $a_n = \sum_{i=1}^n \| \vecnot{v}_i \|$ and observe that, for $n\!>\!m$, \vspace{-2mm}
-\[ |a_n - a_m| = \left| \sum_{i=1}^n \| \vecnot{v}_i \| - \sum_{i=1}^m \| \vecnot{v}_i \|  \right| = \sum_{i=m+1}^n \| \vecnot{v}_i \| \] 
+\item<2-> Let $a_n = \sum_{i=1}^n \| \vecnot{v}_i \|$ and observe that, for $n\!>\!m$, \vspace{-2mm}
+\[ |a_n - a_m| = \left| \sum_{i=1}^n \| \vecnot{v}_i \| - \sum_{i=1}^m \| \vecnot{v}_i \|  \right| = \sum_{i=m+1}^n \| \vecnot{v}_i \| \]
 \vspace{-2mm}
-\[ \|\vecnot{u}_n - \vecnot{u}_m \| = \left\| \sum_{i=1}^n \vecnot{v}_i - \sum_{i=1}^m \vecnot{v}_i  \right\| = \left\| \sum_{i=m+1}^n \vecnot{v}_i \right\| \leq \sum_{i=m+1}^n \| \vecnot{v}_i \| \] 
+\[ \|\vecnot{u}_n - \vecnot{u}_m \| = \left\| \sum_{i=1}^n \vecnot{v}_i - \sum_{i=1}^m \vecnot{v}_i  \right\| = \left\| \sum_{i=m+1}^n \vecnot{v}_i \right\| \leq \sum_{i=m+1}^n \| \vecnot{v}_i \| \]
 
-\item Since $\sum_{i=1}^\infty \| \vecnot{v}_i \|$ converges in $\RealNumbers$, $a_n$ must be a Cauchy sequence \vspace{1mm}
+\item<3-> Since $\sum_{i=1}^\infty \| \vecnot{v}_i \|$ converges in $\RealNumbers$, $a_n$ must be a Cauchy sequence \vspace{1mm}
 
-\item Since $\|\vecnot{u}_n - \vecnot{u}_m\| \leq |a_n - a_m|$, $\vecnot{u}_n$ is also a Cauchy sequence \vspace{1mm}
+\item<4-> Since $\|\vecnot{u}_n - \vecnot{u}_m\| \leq |a_n - a_m|$, $\vecnot{u}_n$ is also a Cauchy sequence \vspace{1mm}
 
-\item Once $\vecnot{u}_n$ converges, the norm bound given by the triangle inequality \hfill \qedhere
+\item<5-> Once $\vecnot{u}_n$ converges, the norm bound is given by the triangle inequality. \hfill \qedhere
 
 \end{itemize}
 
 \end{proof}
 
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  This is the Banach space analog of the fact that absolutely convergent series of real numbers converge.
+		\item Let $a_n$ equal the sum, from $i=1$ to $n$, of the norm of $\vecnot{v}_i$.  For $n>m$, the first equation shows that the absolute difference of the partial sums of the norms equals the sum of the intermediate terms.  The second equation shows that the norm of the difference of the vector partial sums is upper bounded by the sum of the norms of the intermediate terms.  The inequality follows from the triangle inequality.
+		\item Read.
+		\item Read.  Since a Banach space is complete, this Cauchy sequence converges to some vector $\vecnot{u}$.
+		\item Read.  That is, the norm of $\vecnot{u}_n$ is at most $a$ for all $n$ and this bound also holds in the limit.
+	\end{enumerate}
+}
+
 \end{frame}
 
-\begin{frame}{3.5: Open and Closed Subspaces}
+\begin{frame}<1-3>[shrink=5]{3.5: Open and Closed Subspaces}
 
 \begin{definition}<1->
 A \textcolor{blue}{closed subspace} of a Banach space is a subspace that is a closed set in the topology generated by the norm.
@@ -384,17 +490,27 @@ All finite dimensional subspaces of a Banach space are closed.
 \end{theorem}
 \vspace{-0.5mm}
 
-\begin{example}[Span of infinite linearly independent set not closed]<3->
-Let $W = \{\vecnot{w}_1 ,\vecnot{w}_2 , \ldots \}$ be a linearly independent sequence of normalized vectors in a Banach space.
+\begin{example}<3->[A span that is not closed]
+Let $W = \{\vecnot{e}_1 ,\vecnot{e}_2 , \ldots \}$ be the standard Schauder basis of $\ell^p$, for $1 \leq p < \infty$.
 The span of $W$ only includes finite linear combinations.
 However, a sequence of finite linear combinations, like \vspace{-2mm}
-\[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{w}_i , \vspace{-1.5mm} \]  converges to $\lim_{n\to \infty} \vecnot{u}_n$ if it exists.
-Thus, the span of $W$ is not closed.
+\[ \vecnot{u}_n = \sum_{i=1}^n \frac{1}{i^2} \vecnot{e}_i , \vspace{-1.5mm} \]  converges to $\lim_{n\to \infty} \vecnot{u}_n$ with infinite support.
+This limit is not a finite linear combination of the basis vectors. Thus, the span of $W$ is not closed.
 \end{example}
-% \gpt{Suggested replacement from the revised book: assume $(w_i)$ is a normalized Schauder basis and use $u=\sum_{i=1}^{\infty}i^{-2}w_i$.  Then the partial sums lie in $\operatorname{span}\{w_i\}$, converge to $u$, and uniqueness of the Schauder expansion shows $u$ is not a finite linear combination.  Linear independence alone does not guarantee the displayed series converges.}
 \vspace{-0.5mm}
 
 \visible<3->{Show convergence in live session.}
+
+\note{
+	\vspace{2mm}
+	\begin{enumerate}[<alert@+>]
+		\footnotesize
+		\setlength\itemsep{3mm}
+		\item Read.  Recall that a closed set contains all of its limit points.
+		\item Read.  This is because every finite-dimensional normed space is complete.
+		\item (read example, but not the final line)  Convergence will be shown in the live session.
+	\end{enumerate}
+}
 
 \end{frame}
 

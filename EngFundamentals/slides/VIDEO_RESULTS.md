@@ -626,3 +626,346 @@ The canonical H.264/AAC MP4 is 733.4000 seconds, 12,894,254 bytes, at 908 by
 510 and 30 fps. Its SHA-256 is
 `61eae84b33d25a9dc7641c96675203b90ce5d771b8e1075de023744f5c6df551`.
 Automatic cleanup stopped the DCC service after synthesis.
+
+## Video 10 first production cut
+
+Video 10 was built on 2026-09-27 from the reviewed script with the Coben hp3
+x-vector reference and service identity
+`qwen3-tts-1.7b-base-coben-hp3-xvector-v1`. Because the queued DCC allocation
+did not start in time, the 23 speech chunks were synthesized on a temporary
+Vast.ai A10 instance using BF16 and SDPA. All synthesis requests succeeded,
+and a final cache-only run reused all 23 speech chunks and all 23 timed pages
+without requesting a DCC service.
+
+The result contains 573.92 seconds of speech and 604.87 seconds of timed PCM
+narration. The 23 timed page WAV payloads concatenate byte-for-byte into the
+continuous narration WAV; both have PCM SHA-256
+`a26febfac6d1444c503a3b6f68101af281c00763c3dba4b5e98d1e2786e18ded`.
+The canonical H.264/AAC MP4 is 604.9000 seconds, 10,556,763 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`9db3a735e72a6e5538396dfa45737d783b248c835e5fb0f35cf32880e4191b48`.
+Full FFmpeg decoding completed without error; the video and audio streams
+differ by 15 ms, within one 30-fps frame. The final AAC level is -29.1 dBFS
+mean and -5.8 dBFS peak. Representative start, middle, and end frames were
+visually inspected.
+
+## Video 10 script and slide refresh
+
+Video 10 was rebuilt on 2026-09-27 after edits to the reviewed script and
+slide source. The incremental Vast.ai A10 run synthesized 25 changed speech
+chunks and reused 10, rebuilt 13 timed page WAVs and reused 10, and completed
+the audio phase in 598.28 seconds without request errors or retries. A final
+cache-only pass found all 35 speech chunks present and did not request a DCC
+allocation. The renderer rebuilt 16 video segments and reused seven.
+
+The refreshed result contains 578.56 seconds of speech and 613.11 seconds of
+timed PCM narration. The 23 timed page WAV payloads concatenate byte-for-byte
+into the continuous narration WAV; both have PCM SHA-256
+`3426271cd5676c4845fa9445cceb0fb59a449b8182e79c4a2105d3055bd00893`.
+The canonical H.264/AAC MP4 is 613.1333 seconds, 10,735,781 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`6f78d59ef9ab3c32c7119a1d444e20a1b4d837be4b74b79c200607bd52cdd3a7`.
+Full FFmpeg decoding completed without error; video and audio stream durations
+differ by 13 ms, within one 30-fps frame. The final AAC level is -29.0 dBFS
+mean and -5.8 dBFS peak. Representative frames, including the edited vector
+space, standard-basis, and invertibility slides, were visually inspected.
+
+## Video 10 second script and slide refresh
+
+Video 10 was rebuilt again on 2026-09-27 after the next script and slide
+revision. The incremental Vast.ai A10 run synthesized 14 changed speech chunks
+and reused 22, rebuilt 11 timed page WAVs and reused 12, and completed the
+audio phase in 454.43 seconds without request errors or retries. A final
+cache-only pass found all 36 speech chunks present and did not request a DCC
+allocation. The renderer rebuilt 15 video segments and reused eight.
+
+The refreshed result contains 584.72 seconds of speech and 620.17 seconds of
+timed PCM narration. The 23 timed page WAV payloads concatenate byte-for-byte
+into the continuous narration WAV; both have PCM SHA-256
+`c8a7a8a6ae3c834674c5080ceac06d9f7fcdd27923a5e82efc4cc849ed068bfc`.
+The canonical H.264/AAC MP4 is 620.2000 seconds, 10,862,945 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`a2a6dd206a6a029790f219f1f8ceface514cc264b689cad2d8ff94368d7b6b7e`.
+Full FFmpeg decoding completed without error; the MP4 differs from the PCM
+narration by 30 ms, within one 30-fps frame. The final AAC level is -28.6 dBFS
+mean and -5.8 dBFS peak. Representative frames, including the edited vector
+space, function-space, and standard-basis slides, were visually inspected.
+
+## Video 10 third script refresh
+
+Video 10 was rebuilt again on 2026-09-27 after the next narration revision.
+A malformed `[[pause 0.3]` marker on page 11 was corrected to
+`[[pause 0.3]]` before synthesis. The incremental Vast.ai A10 run synthesized
+seven changed speech chunks and reused 30, rebuilt six timed page WAVs and
+reused 17, and completed the audio phase in 232.74 seconds without request
+errors or retries. A final cache-only pass found all 37 speech chunks present
+and did not request a DCC allocation. The renderer rebuilt 10 video segments
+and reused 13.
+
+The refreshed result contains 579.52 seconds of speech and 615.27 seconds of
+timed PCM narration. The 23 timed page WAV payloads concatenate byte-for-byte
+into the continuous narration WAV; both have PCM SHA-256
+`a0b73f89c415e4329ea4a9ccfd26a67b1ab78b4fad3e985f1f98558c71b770df`.
+The canonical H.264/AAC MP4 is 615.3000 seconds, 10,829,640 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`7f1d4c7230801374ba20e21f35dd86e6a1572945d391bf61708eeff6616aeaa6`.
+Full FFmpeg decoding completed without error; video and audio stream durations
+differ by 4 ms. The final AAC level is -28.7 dBFS mean and -5.8 dBFS peak.
+Representative start, end, and changed-page frames were visually inspected.
+
+## Video 10 fourth script refresh
+
+Video 10 was rebuilt again on 2026-09-27 after two further narration edits.
+The incremental Vast.ai A10 run synthesized two changed speech chunks and
+reused 35, rebuilt two timed page WAVs and reused 21, and completed the audio
+phase in 83.55 seconds without request errors or retries. A final cache-only
+pass found all 37 speech chunks present and did not request a DCC allocation.
+The renderer rebuilt four video segments and reused 19.
+
+The refreshed result contains 580.80 seconds of speech and 616.55 seconds of
+timed PCM narration. The 23 timed page WAV payloads concatenate byte-for-byte
+into the continuous narration WAV; both have PCM SHA-256
+`b2254f01748d718562816a4b5c5f83243f7ce81cf469605ce71b14fc347d76eb`.
+The canonical H.264/AAC MP4 is 616.5667 seconds, 10,830,136 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`5b5c1299b24949de9164d89a5e2ff18e601fdf2b531d09102b42f0a8422a923f`.
+Full FFmpeg decoding completed without error; the MP4 differs from the PCM
+narration by 17 ms, within one 30-fps frame. The final AAC level is -28.8 dBFS
+mean and -5.8 dBFS peak. Representative start, end, and changed-page frames
+were visually inspected.
+
+## Video 12 first production cut
+
+Video 12 was built on 2026-10-13 after the current script, slide, and
+pronunciation edits. The pending DCC allocation had an estimated wait of about
+three days, so the 14 missing speech chunks were synthesized on a temporary
+Vast.ai RTX 5090 instance using BF16 and SDPA. Before private input was
+uploaded, the host passed a CUDA smoke test with NVIDIA driver 595.71.05,
+PyTorch 2.9.1+cu128, and CUDA 12.8. A real authenticated synthesis request also
+passed before the queued DCC fallback was cancelled.
+
+The incremental run synthesized 14 speech chunks, reused 14, rebuilt 11 timed
+page WAVs, reused 13, and completed the audio phase in 200.20 seconds without
+request errors or retries. The renderer rebuilt 13 video segments and reused
+11. A final cache-only pass found all 28 speech chunks present and reused all
+24 timed pages without requesting a DCC service.
+
+The result contains 460.4 seconds of speech and 490.1 seconds of timed mono,
+16-bit, 24-kHz PCM narration. The 24 timed page WAV payloads concatenate
+byte-for-byte into the continuous narration WAV; both have PCM SHA-256
+`db29a24e3bf89fd2820fbe3459291b21865603ced5badcb4e3297208bb7616fb`.
+The canonical H.264/AAC MP4 is 490.1667 seconds, 8,682,673 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`21eeca84c435ea030bc4d3de7963223c0fe4bc717e342d685be1dc6664cd6ef5`.
+Full FFmpeg decoding completed without error; video and audio stream durations
+differ by 12 ms, within one 30-fps frame. The final AAC level is -29.2 dBFS
+mean and -7.9 dBFS peak. Representative start, middle, and end frames were
+visually inspected.
+
+## Video 12 first script refresh
+
+Video 12 was rebuilt again on 2026-10-13 after the next narration and slide
+revision. The incremental Vast.ai RTX 5090 run synthesized five changed speech
+chunks, reused 23, rebuilt four timed page WAVs, reused 20, and completed the
+audio phase in 94.80 seconds without request errors or retries. The renderer
+rebuilt seven video segments and reused 17. A final cache-only pass found all
+28 speech chunks present and reused all 24 timed pages without requesting a
+DCC service.
+
+The refreshed result contains 461.0 seconds of speech and 490.8 seconds of
+timed mono, 16-bit, 24-kHz PCM narration. The 24 timed page WAV payloads
+concatenate byte-for-byte into the continuous narration WAV; both have PCM
+SHA-256
+`291236e33f9ac4fe0593d492721e7241391c97c2be85dcf6e8b5ec90f3ec6fc5`.
+The canonical H.264/AAC MP4 is 490.8000 seconds, 8,711,255 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`248353dc35f491a223db1760edbaf1e4be26b65e5e0bbabb3653c14f85d07ad9`.
+Full FFmpeg decoding completed without error; video and audio stream durations
+differ by 5 ms. The final AAC level is -29.2 dBFS mean and -7.9 dBFS peak.
+Representative start, middle, and end frames were visually inspected.
+
+## Video 13 first production cut
+
+Video 13 was built on 2026-10-17 from the reviewed transcript and slide edits,
+including the function-space qualification, the explicit finite-p sequence
+spaces, the shorter convergence-proof narration with two 0.4-second pauses,
+and the nonclosed-span example using the standard basis and infinite support.
+The DCC controller's earliest estimated start was 2026-10-18 at 11:31:58 EDT,
+so no new DCC job was submitted. Synthesis used a temporary Vast.ai RTX 5090
+with NVIDIA driver 610.43.03, PyTorch 2.9.1+cu128, CUDA 12.8, BF16, and SDPA.
+The public model revision was pinned to
+`fd4b254389122332181a7c3db7f27e918eec64e3`; the Coben hp3 x-vector reference
+and service identity `qwen3-tts-1.7b-base-coben-hp3-xvector-v1` were retained.
+
+All 30 speech chunks were newly generated. After the first cached chunk, the
+client was deliberately interrupted to reduce the server CPU thread count
+from 64 to four. This did not materially improve the approximately 1.8x
+real-time synthesis rate on the AMD EPYC 7532 host. The resumed run synthesized
+29 chunks, reused the first chunk, rebuilt all 27 timed pages, and finished in
+1159.03 seconds. Completed requests succeeded without HTTP errors. The final
+cache-only Make run reused all 30 speech chunks and all 27 timed pages without
+requesting DCC. The renderer built all 27 video segments.
+
+The result contains 654.80 seconds of speech and 689.30 seconds of timed mono,
+16-bit, 24-kHz PCM narration. The 27 timed page WAV payloads concatenate
+byte-for-byte into the continuous narration WAV; both have PCM SHA-256
+`c6f821ae2e990e46eb062464449015a43052ce5ebe8526f48c7f2b2d5fe2346d`.
+The canonical H.264/AAC MP4 is 689.3000 seconds, 11,776,777 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`648214eb47dc16458c10ee606191401ca7309507e8d0bab59b23605163952514`.
+Full FFmpeg decoding completed without error, and the reported audio and
+video stream durations match. The final AAC level is -29.0 dBFS mean and
+-7.6 dBFS peak. Representative start, middle, and end frames were visually
+inspected. Source, transcript, and lexicon hashes remained unchanged during
+the run. Essential host logs and resolved dependencies were retrieved locally.
+Vast.ai instance 56484303 was destroyed after validation; the final account
+inventory was empty. Estimated rental cost was approximately $0.50.
+
+## Video 13 Banach pronunciation and script refresh
+
+Video 13 was rebuilt on 2026-10-18 with the shared `Banach` synthesis spelling
+`bah-knock` and the instructor's current script edits. A non-submitting DCC
+plan estimated its earliest GPU start at 2026-10-19 10:06:46 EDT, so no new
+DCC job was submitted. The slide compiler exposed an undefined `\cdor`,
+corrected to `\cdot`. Production-only transcript fixes converted `[[0.4]]`
+to `[[pause 0.4]]` and the raw norm notation to spoken mathematics; other
+authored wording was retained.
+
+The selected Vast.ai machine 147982 has an RTX 5090 and i9-13900KF, was
+verified, and reported 99.70986% reliability. Machine-specific written reviews
+were not available from the CLI/public searches; generic benchmark history
+was inspected, then actual Qwen throughput was tested before production.
+Instance 56635818 passed the CUDA test before uploading the authorized private
+reference. It used NVIDIA driver 595.91.07, PyTorch 2.9.1+cu128, CUDA 12.8,
+BF16/SDPA, the same pinned public model revision and Coben hp3 service identity
+as the first cut, and four PyTorch CPU threads. The initial short request took
+1.99 seconds for 2.64 seconds of speech; the title took 9.39 seconds for
+13.52 seconds of speech (0.69 server-side real-time factor), approximately
+2.6 times faster than the previous host's approximately 1.8 factor.
+
+The incremental run synthesized 35 chunks, reused eight, rebuilt 21 timed
+pages, reused six, and finished in 416.54 seconds without request failures or
+retries. The final cache-only Make pass reused all 43 chunks and all 27 timed
+pages without contacting DCC. The renderer rebuilt 20 video segments and
+reused seven. All 12 chunks containing Banach have the new synthesis spelling.
+
+The result contains 679.12 seconds of speech and 717.92 seconds of timed mono,
+16-bit, 24-kHz PCM narration. The 27 timed page WAV payloads concatenate
+byte-for-byte into the continuous narration WAV; both have PCM SHA-256
+`63141577b978e40a2f0bd61fc2ba0c2eb9a953f970a9af2c3aa598d257bbf8cf`.
+The canonical H.264/AAC MP4 is 717.9333 seconds, 12,114,496 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`448fcdc48c798b0f681eb8cf52af0bf0e1413e97b515b5df9e62d64c8a5d5f84`.
+Full FFmpeg decoding passed. Audio and video stream durations differ by
+24.3 ms, within one frame; the MP4 differs from PCM narration by 13.3 ms.
+Final AAC levels are -29.0 dBFS mean and -6.8 dBFS peak. Representative
+start, middle, end, corrected-norm, and Banach-definition frames were visually
+inspected. These are technical/visual checks, not a subjective listening review.
+The TeX, script, and lexicon hashes remained unchanged during synthesis and
+encoding. Validation details, logs, resolved dependencies, and reuse notes are
+saved under `build/video13/vast-20261018/`.
+
+Per the instructor's request, instance 56635818 is retained for reuse rather
+than destroyed, with its pinned setup and authorized reference on disk.
+Compute was stopped after validation. The selected running rate was about
+$0.95/hour; retained 50-GB storage is $0.013889/hour, approximately $0.333/day.
+
+## Video 13 approved Banach/Schauder refresh
+
+Video 13 was rebuilt again on 2026-10-18 after the instructor auditioned and
+approved `shau-der` for Schauder and `bahnawk` for Banach. The current authored
+script edits were retained. Cache planning identified 26 changed chunks and
+17 unchanged chunks. The approved page-18 test's speech fingerprint matched
+the production settings and was copied into the production speech cache;
+the remaining 25 changed chunks were synthesized on Vast.ai instance 56642480.
+
+This verified RTX 5090/Ryzen 9950X machine (45386) reported 99.92029%
+reliability at selection. The pinned environment used NVIDIA driver 595.91.07,
+PyTorch 2.9.1+cu128, CUDA 12.8, BF16/SDPA, and four PyTorch CPU threads.
+The saved environment restarted without reinstalling packages or downloading
+the model. Coben hp3 x-vector identity and the pinned public model revision
+were unchanged. The approved sample generated 11.68 seconds of audio in
+5.24 seconds server-side (0.45 real-time factor).
+
+Production audio completed in 236.04 seconds, with 25 chunks synthesized and
+18 reused (17 unchanged plus the approved test), 22 timed pages rebuilt and
+five reused, without request failures or retries. The final cache-only Make
+pass reused all 43 speech chunks and all 27 timed pages, skipping DCC.
+The renderer rebuilt 24 video segments and reused three. Metadata checks
+confirmed all 13 Banach occurrences use `bahnawk` and all four Schauder
+occurrences use `shau-der`.
+
+The result contains 664.56 seconds of speech and 703.36 seconds of timed mono,
+16-bit, 24-kHz PCM narration. The 27 timed page WAV payloads concatenate
+byte-for-byte into the continuous narration WAV; both have PCM SHA-256
+`a3c8f5dd1f98b0bca9e83b7992228078b37340f85c4a09050429d2dbfc3b19ff`.
+The canonical H.264/AAC MP4 is 703.3667 seconds, 11,818,509 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`63f436845010f19583fd3f35b634f584175e8d7088c887414a4d22bff49b9b2f`.
+Full FFmpeg decoding passed. Video and audio stream durations differ by
+6.7 ms, within one frame. Final AAC levels are -28.9 dBFS mean and -6.9 dBFS
+peak. Representative start, middle, and end video frames were visually
+inspected. All changed speech WAVs passed PCM format and payload-length checks.
+The source, transcript, and lexicon hashes remained unchanged during production.
+
+Planning, generation logs, validation, frame checks, and page-ordered changed
+clip links are saved under `build/video13/vast-bahnawk-production-20261018/`.
+The instructor received direct chat links to all 26 changed chunks, including
+the approved test. Both retained instances are preserved rather than destroyed;
+compute was stopped after validation. Combined retained storage is approximately
+$1.333/day ($1/day for 56642480 and $0.333/day for 56635818).
+
+## Video 13 current-script and Riemann refresh
+
+Video 13 was rebuilt on 2026-10-18 after the instructor confirmed the current
+script was ready. The script, TeX, pronunciation lexicon, audio configuration,
+and matching slide PDF were snapshotted under
+`build/video13/vast-final-current-20261018/` for a stable build. The final
+lexicon uses `bahnawk` for Banach, `shau-der` for Schauder, and the instructor's
+latest choice `ree-men` for Riemann. Frozen input hashes remained unchanged
+during production, and the corresponding live source files still matched
+after encoding.
+
+The snapshot contains 49 speech chunks across 27 pages. Twelve missing chunks
+were synthesized and 37 cached chunks reused on the saved RTX 5090/i9-13900KF
+instance 56635818, using its existing pinned Qwen environment and Coben hp3
+x-vector reference. No reinstall, model download, new rental, or DCC allocation
+was needed. Audio completed in 129.62 seconds without request failures, with
+seven timed pages rebuilt and 20 reused. The final Make pass found all 49
+speech chunks cached, reused all 27 timed pages, and skipped DCC. The renderer
+rebuilt 12 video segments and reused 15.
+
+Fourteen speech chunks differ from the previous validated MP4: twelve generated
+in this run and two already cached from the preceding editing session. Their
+page-ordered chat links are also recorded in `validation.json`. Metadata checks
+verified all 13 Banach occurrences, four Schauder occurrences, and one Riemann
+occurrence use the selected spellings. Changed WAVs passed PCM format and
+payload-length checks. These checks do not constitute a subjective listening
+review of the entire narration.
+
+The result contains 681.68 seconds of speech and 722.38 seconds of timed mono,
+16-bit, 24-kHz PCM narration. The 27 timed page WAV payloads concatenate
+byte-for-byte into the continuous narration WAV; both have PCM SHA-256
+`6fde0c8fdd07a7aeabc964cd3693ee5fd3b7a1d6313aa6a8def9367e295eaff1`.
+The canonical H.264/AAC MP4 is 722.4000 seconds, 12,060,645 bytes, at 908 by
+510 and 30 fps, with mono 24-kHz AAC. Its SHA-256 is
+`a43c099fac4aa0100592f76f76208b76619f8393b66dc84e2f6c5b60e3890297`.
+Full FFmpeg decoding passed. Audio/video stream durations differ by 11 ms,
+and the MP4 differs from the PCM narration by 20 ms, both within one video
+frame. Final AAC levels are -29.0 dBFS mean and -6.9 dBFS peak. Representative
+start, middle, and end video frames were visually inspected.
+
+Both saved Vast instances are retained, not destroyed, with compute stopped
+after validation. Combined stopped storage remains approximately $1.333/day.
+
+## Video 13 Vast cleanup
+
+At the instructor's explicit request on 2026-10-18, Vast.ai instances 56635818
+and 56642480 were permanently destroyed, including their remote disks.
+The subsequent team-account instance inventory was empty, ending further
+instance compute and storage charges. Earlier retention instructions in this
+file and the archived build notes are superseded by this cleanup.
+The local canonical MP4 remains intact with SHA-256
+`a43c099fac4aa0100592f76f76208b76619f8393b66dc84e2f6c5b60e3890297`;
+local audio, reference media, pinned bootstrap scripts, and retrieved logs
+remain available. New GPU work will require a new rental and setup.

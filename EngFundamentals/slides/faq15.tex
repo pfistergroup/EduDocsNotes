@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 15: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-%\date{August 29, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -54,27 +54,26 @@ But, one can define other inner products where this is not true.
 For example, the inner product
 \[ \tinner{ \vecnot{u} }{ \vecnot{v} }_a = \sum_{i=1}^n \frac{1}{i} u_i v_i \]
 gives rise to the induced norm
-\[ \| \vecnot{u} \|_a = \left( \sum_{i=1}^n \frac{1}{i^2} \|u_i \|^2 \right)^{1/2} \]
+\[ \| \vecnot{u} \|_a = \left( \sum_{i=1}^n \frac{1}{i} |u_i|^2 \right)^{1/2} \]
 which does not equal the $\ell^2$ norm.
 But, it is a weighted $\ell^2$ norm.
-On the other hand, any separable Hilbert space $H$ has a linear isomorphism $T\colon H \to \ell^2$ that maps the space to $\ell^2$.
+On the other hand, any infinite-dimensional separable Hilbert space over $F$ is isometrically isomorphic to $\ell^2(F)$; in finite dimension the corresponding space is $F^n$.
 
 
-\paragraph{On slide 6,how do we get the term $2\mathrm{Re}\tinner{ \underline{v}}{\underline{w} }$?} 
-\begin{equation*}
-	\begin{aligned}
-		\tinner{ (\underline{w} - \underline{u}) + \underline{u}}{(\underline{w} - \underline{u}) + \underline{u} } &= 
-		\tinner{\underline{w} - \underline{u} }{ \underline{w} - \underline{u} } + \tinner{ \underline{w} - \underline{u} }{ \underline{u} } + \tinner{ \underline{u} }{ \underline{w} - \underline{u} } + \tinner{\underline{u} }{ \underline{u} } \\
-		& = \| \underline{w} - \underline{u} \|^2 +  \tinner{ \underline{w} - \underline{u} }{ \underline{u} } + \overline{\tinner{ \underline{w} - \underline{u} }{ \underline{u} }} + \| \underline{u} \|^2 \\ 
-		& = \| \underline{w} - \underline{u} \|^2 + 2\mathrm{Re}\tinner{ \underline{v}}{\underline{w} } + \| \underline{u} \|^2
-		\end{aligned}
-\end{equation*}
-Notice the fact that the sum of a complex number and its conjugate is two times the real part.
+\paragraph{On slide 6,how do we get the term $2\mathrm{Re}\tinner{ \underline{v}}{\underline{w} }$?}
+
+On slide 6, ``Projection Lemma,'' expand the squared norm using sesquilinearity and conjugate symmetry:
+\[
+\|w\|^2=\|w-u\|^2+\inner{w-u}{u}+\inner{u}{w-u}+\|u\|^2
+=\|w-u\|^2+2\mathrm{Re}\inner{w-u}{u}+\|u\|^2.
+\]
+The middle terms are a complex number and its conjugate.
+Here the course convention makes the inner product linear in its first argument.
 
 
 \paragraph{How should one think of the inner product in applications? Say, if we are going to the use SVD decomposition, does inner product play a role?}
 
-The standard inner product characterizes the angle between two vectors via \[ \cos \theta = \frac{\tinner{ \vecnot{u} }{ \vecnot{v} }}{\|u\| \|v \|}. \]
+For nonzero real vectors, the standard inner product characterizes their angle via \[ \cos \theta = \frac{\tinner{ \vecnot{u} }{ \vecnot{v} }}{\|u\| \|v \|}. \]
 A general inner product can be thought of similarly but this angle becomes more of an abstract notion.
 Still, if the angle is 90 degrees, then the vectors are orthogonal.
 In practice, least-squares problems using general inner products can be seen as weighted least squares using the standard inner product.
@@ -84,9 +83,6 @@ When determining orthgonality, it uses the standard inner product.
 However, there are weighted versions of the SVD where the idea is the same but the orthogonality of the basis vectors is determined by general inner products.
 
 
-
-
-
 \section{Sets of Orthogonal Vectors}
 
 \paragraph{Per slide 8, the standard basis is orthonormal because all standard basis vectors are linearly independent to each other, and because for each such vector only one coordinate is equal to 1 so they are also normalized. Then, is linear independence sufficient for orthogonality?}
@@ -94,7 +90,7 @@ However, there are weighted versions of the SVD where the idea is the same but t
 No, the standard basis is orthonormal under the standard inner product because inner product between all pairs of distinct vectors is 0 and the induced norm of all vectors is 1.
 There are other inner products on $\mathbb{R}^n$ where this set is neither orthogonal nor normalized.
 
-Also, orthogonality implies linear independence.
+Also, an orthogonal set of nonzero vectors is linearly independent.
 But, linear independence does not imply orthogonality. Consider $\underline{v} = (1,1)$ and $\underline{w} = (1, 0) \in \mathbb{R}^2$, $\underline{v}$ and $\underline{w}$ are linearly independent but not orthogonal under the standard inner product.
 
 \section{Linear Functionals and the Riesz Theorem}
@@ -119,7 +115,7 @@ There are a variety settings where this is true.
 For a quantum system with a finite number of states, a linear functional could be used to extract the probability amplitude of any state.  Then, the absolute value squared would give the probability of finding the system in that state for measurement that could distinguish that state from other states.
 
 It is worth noting that the theory of orthogonal projection, which we study next, probably provides a better framework for understanding measurement of quantum systems.
- 
+
 \paragraph{I've seen the Gram-Schmidt (GS) process mentioned at least once in almost every linear algebra related course I've taken, but my question is if it's actually used in practice, or if it's just a neat trick?}
 
 The idea behind GS is used regularly throughout mathematics.
@@ -127,8 +123,6 @@ For example, it provides a proof that any matrix $A \in \mathbb{R}^{m\times n}$ 
 The $i$-th column of $R$ contains the coefficients for the GS vectors needed to reconstruct the $i$-th column of $A$.
 The QR decomposition is used regularly in practice but the exact GS computation method has some numerical issues.
 Therefore, it is usually computed using a more numerically stable method.
-
-
 
 
 \end{document}

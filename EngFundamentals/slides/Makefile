@@ -21,7 +21,9 @@ QWEN_REMOTE_TIMEOUT ?= 600
 DCC_GPU_ROOT ?= /Users/hpfister/github/pfistergroup/agents/dcc
 DCC_QWEN_CONTROLLER ?= $(DCC_GPU_ROOT)/skills/dcc-gpu-service/scripts/dcc_service.py
 DCC_QWEN_CONFIG ?= $(DCC_GPU_ROOT)/services/qwen3-tts/service.json
-DCC_QWEN_START_WAIT ?= 600
+# This covers both Slurm allocation and a cold Qwen model load.  The controller
+# waits for a health-checked endpoint before the Makefile opens its SSH tunnel.
+DCC_QWEN_START_WAIT ?= 1800
 DCC_QWEN_PREPARE_WAIT ?= 10800
 DCC_QWEN_AUTOSTOP ?= 1
 DCC_QWEN_COMMAND = $(PYTHON) "$(DCC_QWEN_CONTROLLER)" --config "$(DCC_QWEN_CONFIG)"

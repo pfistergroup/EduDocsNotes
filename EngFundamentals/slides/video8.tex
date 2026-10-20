@@ -156,7 +156,7 @@
 \frametitle{2.1.4: Compactness}
 
 \begin{definition}<1->
-A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set of radius-$\epsilon$ balls that cover $X$ (i.e., $\cup_{x\in S} B_d (x,\epsilon) = X$).
+A metric space $(X,d)$ is \textcolor{blue}{totally bounded} if, for any $\epsilon > 0$, there exists a finite set $S \subseteq X$ of radius-$\epsilon$ balls that cover $X$ (i.e., $\cup_{x\in S} B_d (x,\epsilon) = X$).
 \end{definition}
 
 \begin{definition}<beamer:5-|handout:3->
@@ -342,12 +342,12 @@ Then, the subsequence $x_2,x_4,x_6,\ldots$ converges to 1.
 \begin{itemize}
 \setlength{\itemsep}{1.25mm}
 \item<1-> For $X = [a_0,b_0] \subseteq \mathbb{R}$ with $d(x,y) = |x-y|$, let $x_n^{(0)} \in X$ be the red dots$\!\!\!\!\!\!\!\!\!$
-\item<2-> Observe \textcolor{blue}{$|\{n\in \mathbb{N} \, |\, x_{n}^{(0)} \in I_0 \} | = \infty$} and split interval $I_0$ in half at $\frac{a_0+b_0}{2}$
-\item<3-> Of the two halves, \textcolor{blue}{at least one must contain infinitely many elements of $x_n^{(0)}\!\!\!\!\!\!$}
-\item<4-> \mbox{Call it $I_1$ and let $x_{n}^{(1)}$ be the subseq of $x_n^{(0)}$ in $I_1$. Then, $|\{n\in \mathbb{N} \, |\, x^{(1)}_{n} \in I_1 \} | = \infty\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$}
-\item<5-> Of the two halves of $I_1$, \textcolor{blue}{one must contain infinitely many elements of $x_n^{(1)}$}
-\item<6-> Continuing by induction, the \textcolor{blue}{length of $I_k$ is $|b_k-a_k| = 2^{-k}| b_0-a_0 |$}
-\item<7-> Using this, one can show $x^{(k)}_k$ is a  \textcolor{blue}{subsequence} of $x_n$ that is \textcolor{blue}{Cauchy}
+\item<2-> Observe \textcolor{blue}{$|\{n\in \mathbb{N} \, |\, x_{n}^{(0)} \in I_0 \} | = \infty$} and split the interval $I_0$ in half at $\frac{a_0+b_0}{2}$
+\item<3-> Of the two halves, \textcolor{blue}{infinitely many elements of $x_n^{(0)}$ must lie in one of them$\!\!\!\!\!\!$}
+\item<4-> \mbox{Call it $I_1 = [a_1,b_1]$ and let $x_{n}^{(1)}$ be the subseq of $x_n^{(0)}$ in $I_1$. Then, $|\{n\in \mathbb{N} \, |\, x^{(1)}_{n} \in I_1 \} | = \infty\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$}
+\item<5-> Split $I_1$ into halves and let $I_2$ be a half with \textcolor{blue}{infinitely many elements} of $x_n^{(1)} \!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!$
+\item<6-> After $k$ steps, induction shows the \textcolor{blue}{length of $I_k$ is $|b_k-a_k| = 2^{-k}| b_0-a_0 |$}
+\item<7-> From this, it follows that the \textcolor{blue}{diagonal subsequence} $x^{(k)}_k$ of $x_n$ is \textcolor{blue}{Cauchy}
 \end{itemize}
 
 \note{

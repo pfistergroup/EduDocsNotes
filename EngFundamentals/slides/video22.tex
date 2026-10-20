@@ -205,7 +205,7 @@ The sequence $\vecnot v_{n}$ converges to $P_{U\cap W}\vecnot v_{0}$, its projec
 
 \vspace{-5mm}
 
-The orthogonal projection of $\vecnot v\in V$ onto a 1D subspace $W=\text{span}(\vecnot w)$ is \vspace{-0.5mm}
+For $\vecnot{w}\neq\vecnot{0}$, the orthogonal projection of $\vecnot v\in V$ onto the 1D subspace $W=\text{span}(\vecnot w)$ is \vspace{-0.5mm}
 \[
 P_{W}(\vecnot v)=\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
 \]
@@ -216,8 +216,8 @@ P_{W}(\vecnot v)=\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\righ
 \vspace{2mm}
 
 \visible<2->{%
-A subset of $V$ that \textcolor{blue}{satisfies a single linear equality} of the form $\inner{ \vecnot v}{\vecnot w} =0$
-is a subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(U)=\dim(V)-1$).
+The set of vectors in $V$ \textcolor{blue}{satisfying a single linear equality} of the form $\inner{ \vecnot v}{\vecnot w} =0$
+is a subspace $U \subset V$ with \textcolor{blue}{co-dimension one} (i.e., $\dim(V/U)=1$).
 Also, $U=W^\perp$ for a 1D subspace $W$ and $U$ is a \textcolor{blue}{hyperplane} containing $\vecnot{0}$. Thus, \vspace{0.5mm}
 \[
 P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\inner{ \vecnot v}{\vecnot w} }{\left\Vert \vecnot w\right\Vert ^{2}}\vecnot w.
@@ -258,7 +258,7 @@ P_{U}(\vecnot v)=P_{W^{\perp}}(\vecnot v)=\vecnot v-\frac{\inner{ \vecnot v}{\ve
 \vspace{-5mm}
 
 \visible<1->{%
-The linear equation $\tinner{\vecnot v}{\vecnot w}=c$ defines \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} (for any $\vecnot v_{0} \in V$ satisfying $\tinner{\vecnot v_{0}}{\vecnot w}=c$) with co-dimension one (i.e., a \textcolor{blue}{hyperplane}): \vspace{-0.5mm}
+For $\vecnot{w}\neq\vecnot{0}$, the linear equation $\tinner{\vecnot v}{\vecnot w}=c$ defines \textcolor{blue}{a shifted subspace $U+\vecnot v_{0}$} (for any $\vecnot v_{0} \in V$ satisfying $\tinner{\vecnot v_{0}}{\vecnot w}=c$) with co-dimension one (i.e., a \textcolor{blue}{hyperplane}): \vspace{-0.5mm}
 \[
 \tinner{\vecnot v}{\vecnot w}=\tinner{\vecnot u+\vecnot v_{0}}{\vecnot w}=\tinner{\vecnot u}{\vecnot w}+\tinner{\vecnot v_{0}}{\vecnot w}=0+c=c.
 \]
@@ -308,13 +308,13 @@ P_{U+\vecnot v_{0}}(\vecnot v)&=\left((\vecnot v-\vecnot v_{0})-\frac{\inner{ \v
 
 \vspace{-10mm}
 
-Let $A\in\mathbb{R}^{m\times n}$ and $\vecnot b\in\mathbb{R}^{m}$ be define a set of $m$ linear equations in $n$ variables \textcolor{blue}{with at least one solution}.
+Let $A\in\mathbb{R}^{m\times n}$ have nonzero rows and let $\vecnot b\in\mathbb{R}^{m}$. Assume the $m$ linear equations $A\vecnot{x}=\vecnot{b}$ in $n$ variables have \textcolor{blue}{at least one solution}.
 
 \vspace{3mm}
 
-The goal is to use alternating projection find a solution $\vecnot x^{*}$ such that $A\vecnot x^{*}=\vecnot b$. If $\vecnot b=\vecnot 0$, then the set of solutions is a subspace equal to the null space of $A$,
+The goal is to use alternating projection to find a solution $\vecnot x^{*}$ such that $A\vecnot x^{*}=\vecnot b$. If $\vecnot b=\vecnot 0$, then the set of solutions is a subspace equal to the null space of $A$,
 \[
-\mathcal{N}(A)=\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,A\vecnot x=\vecnot 0\right\} =\bigcap_{i=1}^{m}\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,{\textstyle \sum_{j=0}^{n}}a_{i,j}x_{j}=b_i = 0\right\} .
+\mathcal{N}(A)=\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,A\vecnot x=\vecnot 0\right\} =\bigcap_{i=1}^{m}\left\{ \vecnot x\in\mathbb{R}^{n}\,|\,{\textstyle \sum_{j=1}^{n}}a_{i,j}x_{j}=b_i = 0\right\} .
 \]
 The result follows because $\mathcal{N}(A)$ is the intersection of $m$ hyperplane subspaces (i.e., subspaces of dimension $n-1$). But, what if $\vecnot b\neq\vecnot 0$?
 
@@ -329,11 +329,11 @@ The result follows because $\mathcal{N}(A)$ is the intersection of $m$ hyperplan
 
 \begin{frame}{4.6: Kaczmarz's Algorithm}
 
-The idea is to \textcolor{blue}{iteratively project a candidate vector onto linear equality constraints}. For a matrix $A\in\mathbb{R}^{m\times n}$ and vector $\vecnot b\in\mathbb{R}^{m}$, the algorithm starts from $\vecnot{v}_0 = \vecnot{0}$ and defines $\vecnot v_{i+1}$ to be the projection of $\vecnot v_{i}$ onto the set \vspace{-0.5mm}
+The idea is to \textcolor{blue}{iteratively project a candidate vector onto linear equality constraints}. For a matrix $A\in\mathbb{R}^{m\times n}$ with nonzero rows and vector $\vecnot b\in\mathbb{R}^{m}$, start from $\vecnot{v}_0 = \vecnot{0}$ and define the constraint sets \vspace{-0.5mm}
 \[
-W_{i}=\left\{ \vecnot v\in\mathbb{R}^{n}\,\middle|\:\sum_{k=1}^{n}a_{\sigma(i),k}v_{k}=b_{\sigma(i)}\right\} ,
+W_{j}=\left\{ \vecnot v\in\mathbb{R}^{n}\,\middle|\:\sum_{k=1}^{n}a_{j,k}v_{k}=b_{j}\right\} ,\qquad j=1,\ldots,m.
 \]
-where $\sigma(i)=(i\bmod m)+1$.
+At iteration $i$, use $W_{\sigma(i)}$, where $\sigma(i)=(i\bmod m)+1$.
 \vspace{3mm}
 
 \hrule
@@ -346,14 +346,14 @@ Using the previously derived projection formula, this gives  \vspace{-0.5mm}
 \end{equation*}
 where \textcolor{blue}{$s\in(0,1]$ is the step-size} and $\vecnot a_{j}$ is the $j$-th row of the matrix $A$. 
 
-\vspace{5mm}
-Note: The true projection uses $s=1$ but $s<1$ may work better if $\vecnot{b} \notin \mathcal{R}(A)$. 
+\vspace{2mm}
+Note: $s=1$ gives an exact projection; $s<1$ gives a relaxed (partial) projection. For inconsistent systems, relaxation may reduce oscillations but does not guarantee a least-squares solution.
 \end{frame}
 
 \begin{frame}{4.6: Alternating Projection onto Convex Sets}
 
 Let $C_{1},C_{2},\ldots,C_{m}$ be closed convex subsets in a Hilbert space $V$.
-The \textcolor{blue}{alternating projection algorithm finds a point in their intersection}. Starting from any $\vecnot v_{0}\in V$, the alternating projection algorithm computes 
+The \textcolor{blue}{alternating projection algorithm finds a point in $C\triangleq\cap_{i=1}^{m}C_i\neq\emptyset$}, for finite-dimensional $V$. Starting from any $\vecnot v_{0}\in V$, the algorithm computes
 \begin{align*}
 \vecnot v_{i+1} & = (1-s) \vecnot{v}_i + s\, P_{C_{\sigma(i)}}(\vecnot v_{i}),
 \end{align*}
@@ -362,8 +362,8 @@ where $\sigma(i)=(i\bmod m)+1$ and $s\in(0,1]$.
 \vspace{4mm}
 
 \begin{block}{Remark}
-The intersection of convex sets is convex, so $C \triangleq \cap_{i=1}^{m}C_{i}$ is convex set.
-Ideally, alternating projection would give $\vecnot{v}_i \to P_C (\vecnot{v}_0)$ but it does not :-(
+The intersection of convex sets is convex, so $C$ is a convex set.
+Ideally, alternating projection would give $\vecnot{v}_i \to P_C (\vecnot{v}_0)$, but this is not guaranteed.
 \end{block}
 
 \begin{theorem}[Bregman]
@@ -381,7 +381,7 @@ For finite-dimensional $V$, there is some $\vecnot v\in\cap_{i=1}^{m}C_{i}$ such
 
 \vspace{2mm}
 
-For $\vecnot{w} \in V$, let $H = \{ \vecnot{v} \in V \,|\, \tinner{\vecnot v}{\vecnot w}\geq c \}$ be a closed convex \textcolor{blue}{half space}.
+For a real Hilbert space $V$, $\vecnot{w}\neq\vecnot{0}$, and $c\in\RealNumbers$, let $H = \{ \vecnot{v} \in V \,|\, \tinner{\vecnot v}{\vecnot w}\geq c \}$ be a closed convex \textcolor{blue}{half space}.
 
 \begin{itemize}
 \item For $\vecnot v\in H$, the projection satisfies $P_{H}(\vecnot v)=\vecnot v$ 
@@ -414,7 +414,7 @@ x_{1}+2x_{3} & \geq2\\
 
 \vspace{-1.1in}
 \hspace*{3.7in}
-\includegraphics[width=2.2in]{figures/ch4_halfspace}
+\includegraphics[width=1.8in]{figures/ch4_halfspace}
 %\vspace{0.5in}
 
 \end{frame}

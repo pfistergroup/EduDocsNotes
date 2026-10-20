@@ -156,9 +156,9 @@
 
 
 
-\begin{frame}{4.2: Normal Equations}
+\begin{frame}[shrink=3]{4.2: Normal Equations}
 
-Let $W$ be a subspace of a Hilbert space $V$ that is spanned by the linearly independent (but not orthogonal) set of vectors  $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$.
+Let $W$ be a subspace of a Hilbert space $V$ that is spanned by the linearly independent (not necessarily orthogonal) set of vectors $\vecnot{w}_1, \ldots, \vecnot{w}_n \in V$.
 
 \vspace{2mm}
 
@@ -175,7 +175,7 @@ or, equivalently, the \textcolor{blue}{normal equations} \vspace{-1mm}
 = \inner{ \vecnot{v} }{ \vecnot{w}_j }. \vspace{-1mm}
 \end{equation*}
 
-The gives a system of $n$ linear equations in $n$ unknowns defined by \vspace{-1mm}
+This gives a system of $n$ linear equations in $n$ unknowns defined by \vspace{-1mm}
 \begin{equation*}
 \underbrace{\left[ \begin{array}{cccc}
 \inner{ \vecnot{w}_1 }{ \vecnot{w}_1 }
@@ -348,8 +348,7 @@ For the weighted problem, let $H=B^H B$ and write
 
 \begin{frame}{4.4.2: Linear Minimum Mean-Squared Error Estimation}
 
-Let $Y, X_1, \ldots, X_n$ be zero-mean random variables.
-% \gpt{Suggested cut/paste hypothesis: ``Let $Y,X_1,\ldots,X_n$ be zero-mean random variables with finite second moments.''  The displayed inner products and mean-squared error require this.}
+Let $Y, X_1, \ldots, X_n$ be zero-mean random variables with finite second moments.
 Linear minimum mean-squared error (LMMSE) estimation finds $s_1, \ldots, s_n$ such that
 \[ \hat{Y} = s_1 X_1 + \cdots + s_n X_n \]
 minimizes the mean squared-error $\Expect[|Y-\hat{Y}|^2]$.
@@ -378,17 +377,16 @@ G = \left[ \begin{array}{cccc}
 
 If $G$ is invertible, then $\vecnot{s} = G^{-1} \vecnot{t}$ implies $\Expect [|\hat{Y}|^2] = \vecnot{s}^H G \vecnot{s} = \vecnot{s}^H \vecnot{t}$ and
 \begin{equation*}
-%\left\| Y - \hat{Y} \right\|^2 =
-\left\| Y \right\|^2 - \left\| \hat{Y} \right\|^2 
-= \Expect \left[ |Y|^2 \right]
-- \Expect \left[ |\hat{Y}|^2 \right] = \Expect \left[ |Y|^2 \right] - \vecnot{s}^H \vecnot{t}.
+\Expect\left[|Y-\hat{Y}|^2\right]
+= \Expect\left[|Y|^2\right]-\Expect\left[|\hat{Y}|^2\right]
+= \Expect\left[|Y|^2\right]-\vecnot{s}^H\vecnot{t}.
 \end{equation*}
 
 \end{frame}
 
-\begin{frame}{4.5.1: Dual Approximation and Minimum-Norm Solutions}
+\begin{frame}[shrink=3]{4.5.1: Dual Approximation and Minimum-Norm Solutions}
 
-An underdetermined system of linear equations has an infinite number of solutions.
+A consistent underdetermined system of linear equations has infinitely many solutions.
 It often makes sense to prefer the \textcolor{blue}{minimum-norm solution}.
 
 \vspace{1.5mm}
@@ -432,7 +430,8 @@ where $s_1,s_2,\ldots,s_n$ can be found by solving \eqref{eqn:DualNormalEquation
 \begin{frame}{4.5.2: Minimum-Norm Solutions}
 
 \visible<1->{%
-For $A \in \ComplexNumbers^{m\times n}$ with $m<n$ and $\vecnot{v} \in \ComplexNumbers^m$, consider the underdetermined linear system $A \vecnot{s} = \vecnot{v}$.
+Let $A \in \ComplexNumbers^{m\times n}$ with $m<n$ have linearly independent rows.
+For $\vecnot{v} \in \ComplexNumbers^m$, consider the underdetermined linear system $A \vecnot{s} = \vecnot{v}$.
 Then, the dual approximation theorem can be applied to solve the minimum-norm problem
 \[ \min_{\vecnot{s} : A\vecnot{s} = \vecnot{v}} \| \vecnot{s} \| . \]
 }
@@ -447,7 +446,7 @@ Then, the theorem concludes that the minimum-norm solution lies in  the column s
 
 \visible<3->{%
 Using $\vecnot{s} \in \mathcal{R}(A^H)$, there is a $\vecnot{t}$ such that $\hat{\vecnot{s}} = A^H \vecnot{t}$ and the constraint gives $A (A^H \vecnot{t}) = \vecnot{v}$.
-If the rows of $A$ are linearly independent, then the columns of $B=A^H$ are linearly independent and $(B^H B)^{-1} = (A A^H)^{-1}$ exists.
+Since the rows of $A$ are linearly independent, the columns of $B=A^H$ are linearly independent and $(B^H B)^{-1} = (A A^H)^{-1}$ exists.
 
 \vspace{4mm}
 

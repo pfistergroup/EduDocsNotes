@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 12: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-%\date{August 29, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -26,7 +26,12 @@
 
 \paragraph{If a FSMC has an absorbing state, can it also have a recurrent state?}
 
-Yes.  In fact, an absorbing state is also a recurrent state.  The entire Markov chain, however, cannot be recurrent because that requires that all states are communicating.  Note: the mini-project pdf has been updated to define these terms more clearly.
+
+Yes. An absorbing state is itself recurrent: once entered, the chain stays there and returns at every subsequent step.
+Other recurrent classes may also exist.
+For example, for $P=I$, every state is absorbing and recurrent, but different states do not communicate.
+Recurrence of a state should not be confused with irreducibility of the chain.
+
 
 \paragraph{Also can there be more than one absorbing state?} Yes, consider the Markov chain with transition probability matrix
 $$P=\begin{bmatrix} 0 & 0.5 & 0.5 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}.$$
@@ -37,20 +42,25 @@ There are two kind of probabilities in a time-invariant Markov chain: (1) Transi
 
 \paragraph{On slide 6, in the Theorem, if $P_{i,j}$ changes with time $t$, will every state be recurrent and the Markov chain have a unique stationary distribution?}
 
-No, the theorem holds for a time-invariant Markov process that is irreducible and aperiodic.
-If $P_{i,j}$ changes with time, then the Markov chain is not time invariant and things are more complicated.
-For example, how would you define stationary distribution in this case?
+
+The theorem on slide 6, ``Stationary Probabilities of Recurrent Markov Chains,'' assumes a fixed transition matrix $P$ with a strictly positive power.
+For a finite chain, this is equivalent to irreducibility and aperiodicity.
+It guarantees a unique stationary distribution and convergence to it.
+For a time-varying chain, distributions evolve through products of different matrices; this theorem does not apply, and a common stationary distribution need not exist.
+
 
 \paragraph{Can the transition matrix for a Markov chain change with time? For example, every time you enter a state, the probability that you will return to that state decreases? Perhaps this would mean that a state ``converges" to an absorbing state?}
 
-Yes, a time-varying Markov chain has a transition matrix changes with time in predetermined manner.
-The example you describe seems to require more complicated changes and infinitely many transition matrices (in order for convergence to make sense).
-This is not too common.
+
+Yes, a time-inhomogeneous Markov chain may use a predetermined matrix $P^{(t)}$ at time $t$.
+If the next transition also depends on the number of previous visits to a state, the current state alone may no longer satisfy the Markov property.
+One can sometimes recover a Markov description by enlarging the state to include the visit counts.
+
 
 \paragraph{If a Markov chain has both an absorbing state and a recurrent state, will the probability of being in the recurrent state always converge? I'm thinking of the chutes and ladders example, where it is theoretically possible to be stuck in an infinite loop.}
 
 The first question is a complicated question but the basic answer is no.
-If a Markov chain is not periodic, then the matrix $P^m$ will converge as $m$ increases.
+For a finite time-homogeneous chain, $P^m$ converges if all its recurrent communicating classes are aperiodic.
 But, this doesn't mean the state will bounce between all the recurrent states.
 Consider the Markov chain defined by
 $$P=\begin{bmatrix} 0 & 0.5 & 0 & 0.5 & 0 \\ 0 & 0.75 & 0.25 & 0 & 0 \\ 0 & 0.25 & 0.75 & 0 & 0 \\ 0 & 0 & 0 & 0.1 & 0.9 \\ 0 & 0 & 0 & 0.9 & 0.1 \end{bmatrix}.$$
@@ -58,7 +68,7 @@ If it starts in state 1, then it randomly chooses between states 2,3 and states 
 After that, it stays in these subgroups forever.
 
 For chutes and ladders, an infinite loop is possible but very improbable (formally it has probability 0).
-In fact, the probability of the game taking more than $m$ turns is upper bounded by $\gamma^m$ for some $\gamma \in (0,1)$ (i.e., it has an exponential tail).
+In fact, the probability of the game taking more than $m$ turns is upper bounded by $C\gamma^m$ for suitable constants $C<\infty$ and $\gamma \in (0,1)$ (i.e., it has an exponential tail).
 
 
 \paragraph{Are there Markov chains with continuous random variables?}
@@ -84,5 +94,11 @@ Yes.
 In fact, almost all ``other distributions'' are simulated on computers via transformation of uniform random variables.
 Thus, it's unlikely you'll improve the performance.
 
+
+\paragraph{Why does the hitting-time formula use $P^m$ and require an absorbing target?}
+On slide 5, ``Hitting Time,'' the process starts at $X_1=i$, so $m$ transitions take it to $X_{m+1}$.
+If $j$ is absorbing, hitting $j$ within those $m$ transitions is equivalent to being at $j$ at time $m+1$.
+Thus $\Pr(T_{i,j}\leq m)=[P^m]_{i,j}$.
+For a nonabsorbing target, the chain can visit $j$ and leave again, so occupancy at one time is not the hitting-time distribution.
 
 \end{document}

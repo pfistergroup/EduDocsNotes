@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 0: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{August 21, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -28,22 +28,23 @@ Here we give a list of questions, and their answers, that were submitted by stud
 
 \paragraph{Could you please briefly explain what is brute force?}
 
-Brute force means using a method that doesn't exploit the structure of a problem.  For finite optimization, one can try all possibilities and then choose the best.  For differentiable optimization, one can take derivatives and enumerate all points whose gradient is zero.  Then, one can try all of them and pick the best.
+
+Brute force means systematically trying candidates without making much use of the problem's structure.
+For a finite optimization problem, one can evaluate every possibility and choose the best.
+For a differentiable problem on a continuous domain, finding stationary points can be part of the search, but one must also consider boundaries and whether a minimum is achieved.
+The examples in this course show how linear algebra and convexity can simplify such searches.
+
 
 \paragraph{What is the form of exams? Are class notes allowed to bring to the exams?}
 
-The exams will be in-person and you will be allowed one page of notes for each midterm and two pages for the final.
-Calculators are not needed and not allowed.
 
-%Since the exams will be take-home regardless of how I assign them, I am planning to allow open course notes and homework solutions.  I'm currently figuring out how to proctor.  Here are some of the options that I'm considering:
-%(1) Honor system -- You time yourself for a fixed amount of time and use only allowable resources (e.g., course notes and homework solutions but no internet)
-%(2) Honor system + video proctoring -- Same as above but you record yourself (on some website) at the same time
-%For either, I may also introduce a small post-exam oral section where I ask you about your solutions.
-%My primary goal is encourage people to study and to have fair evaluation.  This semester, the exam portion of the grade is quite reduced from previous years.
+Exams are in person. For each midterm, you may bring one side of one page of notes.
+For the final, you may bring two sides of notes.
+Calculators are not allowed.
 
 
 \paragraph{What are ways of refreshing some of the fundamentals (like matrices)?}
- 
+
 Matrices will be formally defined when we start linear algebra but used informally before that (e.g., like in the video).  For students who need more review, I suggest that you read 3.1-3.2 of the notes, the wikipedia page
 \begin{center}
 \url{https://en.wikipedia.org/wiki/Matrix_(mathematics)},
@@ -56,7 +57,10 @@ and the review in
 
 \paragraph{In example problem 2, if we know f(x), why would we get a different a0,a1,a2,a3 (as the green line) other than the blue line itself?}
 
-This is because the actual function (green line) is not a 3rd degree polynomial (i.e., there is no 3rd degree polynomial that equals f(x) on this interval).
+
+The ``Example Problem 2'' slide asks for an approximation from the four-dimensional space of polynomials of degree at most three.
+Knowing $f$ does not mean that $f$ belongs to this space.
+The coefficients minimize the integral of the squared error on $[0,1]$; they reproduce $f$ exactly only when $f$ is such a polynomial (up to equality almost everywhere for this error criterion).
 
 
 \paragraph{Can you explain more about the definition of convex and why it is not possible that f(x) is convex but has two local minima?}
@@ -65,21 +69,21 @@ The actual statement is that a convex function can't have two local minima with 
 But, in that case, the larger minima is not a local minima because one can start there and decrease the function linearly by following the chord toward the lower minima.  For a more formal definition of convex, see Chapter 5 of the notes.
 
 
-\paragraph{Is there any order we need to follow when creating a truth table? like Biconditional first, followed by Conditional.}
-
-We use the following order of operations for logic: negations are done first and then none of the other operations take precedence.  Thus parentheses are required for well-formed statements.  Because of this, you can fill an entry in the truth table with any value that is currently computable.
-
 \paragraph{Why do we need to put an upper bound on on the distance between x and x'? Why not directly have an equality with c(A')*length(E)?}
 
-For scalar this may be possible.  But, for vectors and matrices, it might not be possible to write this as an equality in this form (i.e., constant times length(E)).
+
+The ``Example Problem 1'' slide gives an upper bound that must work for all allowed perturbations $E$.
+Different perturbation directions can produce different solution errors even when $\|E\|$ is the same.
+A bound of the form $\|x-\hat{x}\|\leq c\|E\|$ describes the worst case; equality need not hold for a particular perturbation.
+
 
 \paragraph{Can you introduce the projects mentioned in syllabus of this course? Is this individual work? Would it be programming-based?}
 
-The course mini-projects are individual programming-based assignments and last year they were on
-Markov Chains,
-Least Squares Solutions,
-Principal Component Analysis, and
-Alternating Projections.
+
+Mini-projects are individual programming assignments, with Python recommended.
+You may discuss ideas with classmates, but everyone must write their own code, and AI use is not allowed.
+The current assignments and project topics are posted on Canvas.
+End-of-semester projects have different rules: you may work in groups and use AI.
 
 
 \paragraph{In what ways do you utilize vector spaces in your own research?}
@@ -98,19 +102,31 @@ One result, for which the paper received an award, was based on a deep result ab
 
 \paragraph{What will the computer-based assignments involve? Will any specific software be needed?}
 
-The idea is to write code that implements techniques that we've discussed.  I recommend Python and will support with templates and suggestions for an online IDE but almost any language is fine if you ask first
 
-Should we read all the reference material?
-No, not unless you read *really* fast.  I suggest watching the videos and reading the course notes.  If something is confusing and you need a reference, check relevant reference materials (see website for a longer list than the syllabus).  If you can solve the homework without additional references, you're doing fine.
+The mini-projects implement techniques discussed in the course, and Python is recommended.
+They are individual assignments: discussion with classmates is fine, but each student writes their own code without AI.
+End-of-semester projects may be completed in groups with AI.
+See Canvas for the assignment instructions.
+
 
 \paragraph{Are students in groups expected to work on homework problems together, or are we expected to work together on problems that are strictly not in the homework?}
 
-My suggestion is always read and consider the problems by yourself first in order to build your own problem solving skills.  You shouldn't expect to solve them all (say 50\% is fine).  Then, it makes sense to meet in a group and discuss everyone's solutions.  Maybe this gives you all but one or two.  Finally, you can use office hours, piazza, or e-mail to get help with whatever you have left.  To be clear, if another student describes their solution to you on an iPad and then you understand it and write it down yourself, that is fine.  On the other hand, copying someone's solution is against the rules.
+My suggestion is always read and consider the problems by yourself first in order to build your own problem solving skills.  You shouldn't expect to solve them all (say 50\% is fine).  Then, it makes sense to meet in a group and discuss everyone's solutions.  Maybe this gives you all but one or two.  Finally, you can use office hours or e-mail to get help with whatever you have left.  To be clear, if another student describes their solution to you on an iPad and then you understand it and write it down yourself, that is fine.  On the other hand, copying someone's solution is against the rules.
 
 
 \paragraph{How can I modify an assignment that I have submitted?}
-I have started allowing 1 resubmission on Sakai and I think gradescope also allows this.
+
+Assignments are handled on Canvas, and resubmissions are allowed.
+Late submissions may incur a penalty; check the assignment instructions for details.
 
 
-    
+\paragraph{Should we read all the reference material?}
+Start with the videos and the matching course notes.
+Use optional references when a definition or argument needs more explanation.
+The ``Learning Strategies'' slide recommends watching the video before class, then reading the notes and attempting the homework.
+
+\paragraph{Where can we find course resources and submit assignments?}
+Lecture notebooks, resources, and announcements are on the instructor's webpage.
+Assignments and submissions are on Canvas.
+
 \end{document}

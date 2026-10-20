@@ -19,7 +19,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 18: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-%\date{August 29, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -27,36 +27,45 @@
 
 \paragraph{Why do we have the normal equations in Slide 1?}
 
-The normal equations provide the matrix representation $G\underline{s}=\underline{t}$ for the best approximation problem. With this matrix representation, the solution of best approximation is derived by the pseudoinverse $(A^HA)^{-1}A^H$ of $A$ as well as the projection matrix $P=A(A^HA)^{-1}A^H$ for the range of $A$.
+
+On slide 1, ``Normal Equations,'' the residual must be orthogonal to every basis vector of the approximation subspace.
+This gives $Gs=t$ for the coefficient vector $s$.
+For a matrix $A$ with linearly independent columns and the standard inner product, $G=A^HA$ is invertible, so $s=(A^HA)^{-1}A^Hv$ and $P=A(A^HA)^{-1}A^H$ is the projection onto $\mathcal{R}(A)$.
+With dependent columns, the normal equations still characterize least squares, but the displayed inverse must be replaced by a suitable pseudoinverse formulation.
+
 
 \paragraph{On Slide 6, how can we represent the minimum mean-squared error by the inverse of $G$? I don't quite understand the second term of it.}
-Let $A = [X_1, X_2, \cdots, X_n]$, $\hat{Y}=A\underline{s}$. Then,
-\begin{equation*}
-	\begin{aligned}
-		\hat{Y}\overline{\hat{Y}} = & (A\underline{s})^H(A\underline{s}) \\
-		= & (AG^{-1}\underline{t})^H(AG^{-1}\underline{t}) \\
-		= & \underline{t}^HG^{-1}A^HAG^{-1}\underline{t} \\
-		= & \underline{t}^HG^{-1}GG^{-1}\underline{t} \\
-		= & \underline{t}^HG^{-1}\underline{t}.
-	\end{aligned}
-\end{equation*}
+
+Slide 6 is now ``Linear Minimum Mean-Squared Error Estimation''; the separate deterministic minimum-error frame is disabled in the source.
+For finite-second-moment random variables, set $G_{ij}=\Expect[X_j\overline{X_i}]$ and $t_i=\Expect[Y\overline{X_i}]$.
+If $G$ is invertible, $s=G^{-1}t$ and
+\[
+\Expect[|\hat Y|^2]=s^H Gs=t^H G^{-1}t.
+\]
+Orthogonality of $Y-\hat Y$ and $\hat Y$ then gives
+\[
+\Expect[|Y-\hat Y|^2]=\Expect[|Y|^2]-t^H G^{-1}t.
+\]
+The second term is the energy captured by the best linear estimate; the expectation is essential.
 
 
 \paragraph{How does the Gramian inverse method compare against the Moore-Penrose inverse? Are they equivalent, does one only work under certain conditions?}
 
 The Moore-Penrose inverse $A^+$ of a matrix $A$ is the generalization of the inverse matrix. In particular, if $A$ has linearly independent columns (which corresponds to the best approximation problem), then matrix $A^HA$ is invertible and $A^+$ is computed as $A^+=(A^HA)^{-1}A^H$.
-If $A$ has linearly independent rows (which corresponds to the minimum-norm solution problem), then matrix $AA^H$ is invertible and $A^+$ is computed as $A^+=A^H(A^HA)^{-1}$.
+If $A$ has linearly independent rows (which corresponds to the minimum-norm solution problem), then matrix $AA^H$ is invertible and $A^+$ is computed as $A^+=A^H(AA^H)^{-1}$.
 
 \paragraph{What is the use of projection operators? As in, what is the motivation behind needing them?}
 Conceptually, projections are used to approximate things (e.g., general functions by polynomials).
 Projection operators allow us to see that the approximation mapping is linear and to understand its properties.
 The projection matrix $P=A(A^HA)^{-1}A^H$ projects a vector $\underline{v} \notin \mathcal{R}(A)$ onto $\mathcal{R}(A)$. Notable applications includes linear regression, linear minimum mean-squared estimation, etc. Please refer to section 4.4 in lecture notes for more details.
 
-\paragraph{On Slide 8 and 9, what implies that the minimum-norm solution lies in the column space of $B=A^H$?}
-Conceptually, this is best understood using the four fundamental subspaces described in the Video 20 slides.
-The minimum-norm solution should be orthogonal to the null space of $A$ and this implies that it must lie in the range of $A^H$. 
+\paragraph{On slide 8, ``Minimum-Norm Solutions,'' what implies that the minimum-norm solution lies in the column space of $B=A^H$?}
 
-In this presentation, the result comes from the theorem on Slide 7, which states that the minimum-norm vector $\underline{w} \in V$ satisfying $\tinner{ \underline{w}}{\underline{w}_j }=c_i$ for $i=1, \cdots, n$ also satisfies $\underline{w}=\sum_{i=1}^n s_i\underline{w}_i \in W$. Let $A=[\underline{w}_1, \underline{w}_2, \cdots, \underline{w}_n]$, the matrix representation of $\tinner{ \underline{w}}{\underline{w}_j }=c_i$ is $A^H\underline{w}=\underline{c}$. The theorem states that the minimum-norm solution $\underline{w}$ for the underdetermined linear system $A^H\underline{w}=\underline{c}$ is in the column space of $A$: $W=\mathcal{R}(A)$.
+Any solution can be decomposed as $s=s_R+s_N$ with $s_R\in\mathcal{R}(A^H)$ and $s_N\in\mathcal{N}(A)$ (see Video 19).
+Since $As=As_R$ and $\|s\|^2=\|s_R\|^2+\|s_N\|^2$, a minimum-norm solution has $s_N=0$.
+In this video, the dual approximation theorem on slide 7 gives the same conclusion with $B=A^H$.
+When $A$ has full row rank, the solution is $A^H(AA^H)^{-1}v$.
+
 
 \paragraph{On Slide 3, why is $\underline{t}$ is called the cross-correlation vector?}
 
@@ -84,7 +93,7 @@ For the optimization of functions $f \colon \mathbb{R}^n \to \mathbb{R}$, the ma
 In particular, it is local minimum if $H$ is positive definite and it is not a local minimum if $H$ has a negative eigenvalue.
 If it has a zero eigenvalue, then higher-order derivatives are required to be sure.
 
-Positive-definite matrices also appear regularly as Gramian matrices $G = A^H A$ for an arbitrary $A$.
+Positive-definite matrices also appear regularly as Gramian matrices $G = A^H A$ for a full-column-rank $A$. For arbitrary $A$, the Gramian is positive semidefinite and may be singular.
 Optimization and vector spaces come together when one is minimizing the second-order expansion of a function at a point where the Hessian $H$ is positive definite.
 In this case, the answer can be viewed either as a optimization problem or as a minimum-norm projection problem using the weighted inner product defined by $H$.
 

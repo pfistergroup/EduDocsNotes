@@ -233,7 +233,7 @@ where $\Id $ is the $m\!\times\! m$ identity.  The inverse is denoted $A^{-1}=B$
 %An \textbf{elementary column operation} is the same but applied to the columns.
 
 
-\item \textbf{Fact:}  Every elementary row operation on $A \in F^{m \times n}$ can be represented by matrix multiplication (on the left) by some square matrix $E \in F^{m \times m}$
+\item \textbf{Fact:}  Every elementary row operation on $A \in F^{m \times n}$ can be represented by matrix multiplication (on the left) by some invertible square matrix $E \in F^{m \times m}$
 \[
 \text{original matrix $A$}  \qquad  \text{transformed matrix $B = EA$}
 \]
@@ -337,14 +337,25 @@ A \vecnot{x} = \vecnot{0}
 
 %\item Use row reduction to compute the RREF $R=PA$ of $A$, where $P$ is invertible.% by previous lemma.
 
-\item The columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$. For example, 
+\item Write $R=[\vecnot{r}_1,\ldots,\vecnot{r}_n]$, with pivot columns indexed by $p_1,\ldots,p_r$.  Since $R$ is in RREF, $\vecnot{r}_{p_i}$ is the $i$-th standard basis vector in $F^m$.  Thus any nonpivot column $j$ satisfies
+\[
+\vecnot{r}_j=\sum_{i=1}^r R_{ij}\vecnot{r}_{p_i}.
+\]
+Set $x_j=-1$, $x_{p_i}=R_{ij}$, and all other coordinates to zero.  Then
+\[
+R\vecnot{x}=\sum_{i=1}^r R_{ij}\vecnot{r}_{p_i}-\vecnot{r}_j=\vecnot{0},
+\qquad \vecnot{x}\neq\vecnot{0}.
+\]
+There is a nonpivot column because $m<n$.  In particular, when the last column is nonpivot, we can choose $x_n=-1$ and weight the pivot columns by the entries in the last column.
+
+\item \textbf{Example:} The columns of $R$ containing leading elements can always be combined in a linear combination to cancel any other column of $R$.  Here the pivot columns are $1$ and $3$, and $\vecnot{r}_5=2\vecnot{r}_1+\vecnot{r}_3$, so choose $\vecnot{x}=(2,0,1,0,-1)^\top$:
 \begin{align}
 %R\vecnot{x} &=
  \underbrace{\begin{bmatrix}
 1 & 0 & 0 & 1  & 2 \\
 0 & 0 & 1 & \!\!\!-\frac{1}{2} & 1  \\
 0 & 0 & 0 & 0 & 0 \\
-\end{bmatrix}}_{R = PA} \begin{bmatrix}   \!- 1 \\ 0 \\  \tfrac{1}{2}   \\1 \\ 0  \end{bmatrix}   = 0 
+\end{bmatrix}}_{R = PA} \begin{bmatrix} 2 \\ 0 \\ 1 \\ 0 \\ -1 \end{bmatrix} = \vecnot{0}
 \end{align}
 
 \item Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and observe that $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
@@ -521,6 +532,7 @@ A set  of vectors  $\mathcal{B} = \left\{ \vecnot{v}_{\alpha} \mid \alpha \in A 
 \]
 %\item If $V$ has a finite basis, it is \textbf{finite-dimensional}.
 \end{enumerate}
+The coefficients in this representation are unique: subtracting two finite expansions gives a finite linear combination of basis vectors equal to $\vecnot{0}$, so linear independence forces every coefficient difference to be zero.
 [Here, the indexing of the basis elements with  $\alpha \in A$ indicates that the set maybe finite, countably infinite, or uncountably infinite].
 
 
@@ -572,13 +584,15 @@ Every vector space has a Hamel basis. Furthermore, every Hamel basis for a vecto
 
 %\item \textbf{Proof of existence:}  The fact that vector space has a Hamel basis is implied by the Hausdorff maximal principle (which is equivalent to the axiom of choice). See textbook. 
 
-\item \textbf{Proof:} 
+\item \textbf{Proof:} (For finite dimension; see the textbook for the general case.)
 \begin{itemize}
 
-\item Existence is implied by the Hausdorff maximal principle (which is equivalent to the axiom of choice). See textbook. 
+\item Start with a finite spanning set for $V$.  If it is linearly dependent, one vector is a linear combination of the others and can be removed without changing the span.  Repeat until the remaining set is linearly independent.  This set is a basis.  For $V=\{\vecnot{0}\}$, the empty set is a basis.
 % the axiom of choice (which is equivalent to the 
 
-\item To  prove that every basis of a  \emph{finite dimensional} vector space $V$ has the same cardinality, we can use the lemma given below to see hat if  $U = \{\vecnot{u}_1, \dots, \vecnot{u}_n\}$ and $W = \{\vecnot{w}_1, \dots, \vecnot{w}_m\}$ be two bases $V$, then $|U| \le |W|$ and $|W| \le | U|$, which implies that $|U| = |W|$. 
+\item The lemma below shows that every finite linearly independent set has at most as many vectors as a finite spanning set.  Hence every basis of $V$ is finite: otherwise, it would contain a finite subset larger than such a spanning set.
+
+\item To prove that every basis of a \emph{finite dimensional} vector space $V$ has the same cardinality, we can use the lemma given below to see that if $U = \{\vecnot{u}_1, \dots, \vecnot{u}_n\}$ and $W = \{\vecnot{w}_1, \dots, \vecnot{w}_m\}$ are two bases for $V$, then $|U| \le |W|$ and $|W| \le |U|$, which implies that $|U| = |W|$.
 
 %%, following the proof Theorem 3.3.15 in the textbook. 
 %
@@ -729,6 +743,13 @@ A = A (BC) = A B C  = (AB) C  = C  \quad \implies \quad \text{$A$ is invertible 
 %
 %\item Then, there exists...
 %\item Similarly, the rows of $A$ will also form a basis for $F^n$.
+\end{itemize}
+
+\item \textbf{Alternative proof:} All three statements are equivalent to the RREF of $A$ being $\Id$.  To see this, write $R=PA$, where $P$ is invertible, and note that an $n\times n$ RREF matrix either has $n$ pivots and equals $\Id$, or has a nonpivot column and a zero row.
+\begin{itemize}
+\item \textbf{(i):} If $R=\Id$, then $A=P^{-1}$ is invertible.  Otherwise, the zero row of $R$ makes $R$ noninvertible, so $A=P^{-1}R$ is also noninvertible.
+\item \textbf{(ii):} Multiplication by $P$ preserves both linear independence and spanning, so the columns of $A$ form a basis exactly when the columns of $R$ do.  If $R=\Id$, its columns are the standard basis.  Otherwise, the zero row prevents its columns from spanning $F^n$.
+\item \textbf{(iii):} The columns of $A$ are linearly independent exactly when $A\vecnot{x}=\vecnot{0}$ has only the zero solution.  Since $P$ is invertible, this is equivalent to $R\vecnot{x}=\vecnot{0}$ having only the zero solution.  This holds if $R=\Id$; otherwise, the nonpivot-column construction above gives a nonzero solution.
 \end{itemize}
 
 
@@ -911,14 +932,28 @@ For a linear transformation $T \colon V \to W$,
 
 \end{itemize} 
 
-\item  \textbf{Theorem:}  
+\begin{samepage}
+\item \textbf{Definition: Linear extension.}
+Let $S$ be a linearly independent subset of a vector space $V$ over $F$, let $W$ be a vector space over $F$, and let $f\colon S\to W$ be any function.  Its \textbf{linear extension} to $\Span(S)$ is the map $\widetilde f\colon\Span(S)\to W$ defined by
+\[
+\widetilde f\left(\sum_{\vecnot{s}\in S}c_{\vecnot{s}}\vecnot{s}\right)
+\coloneqq\sum_{\vecnot{s}\in S}c_{\vecnot{s}}f(\vecnot{s}),
+\]
+where only finitely many coefficients are nonzero and the empty sum maps to $\vecnot{0}$.  Uniqueness of coefficients makes $\widetilde f$ well-defined.  Combining expansions shows that it is linear, and it agrees with $f$ on $S$.  Every linear extension must obey this formula, so it is unique.
+\par
+\end{samepage}
+
+\begin{samepage}
+\item  \textbf{Theorem:}
 Let $V,W$ be vector spaces over $F$ and $\mathcal{B} = \{ \vecnot{v}_{\alpha} \mid \alpha \in A \}$ be a Hamel basis for $V$.
 For each mapping $G \colon \mathcal{B} \rightarrow W$, there is a \emph{unique} linear transformation $T \colon V \rightarrow W$ such that
 \[
 T \vecnot{v}_{\alpha} = G \left( \vecnot{v}_{\alpha} \right) \quad  \text{for all $\alpha \in A$}
 \]
+\end{samepage}
 
-\item \textbf{Proof:} 
+\begin{samepage}
+\item \textbf{Proof:}
 
 \begin{itemize}
 \item \textbf{Existence:} For every $\vecnot{v} \in V$ we have
@@ -941,8 +976,21 @@ T \vecnot{v} = \sum_{i=1}^n s_{\alpha_i} G( \vecnot{v}_{\alpha_i})
 
 
 \end{itemize}
+\end{samepage}
 
-\item \textbf{Definition:}  For a linear tranform $T \colon V \to W$, 
+\item \textbf{Alternative formulation: Linear extension from a basis.}
+Let $\mathcal{B}$ be a Hamel basis of $V$, and let $G\colon\mathcal{B}\to W$ be any function.  Since $\Span(\mathcal{B})=V$, the linear extension $T=\widetilde G$ from the preceding definition is defined on all of $V$.  Explicitly, expand each vector in the basis:
+\[
+\vecnot{v}=\sum_{\vecnot{b}\in\mathcal{B}}s_{\vecnot{b}}\vecnot{b}
+\quad\Longrightarrow\quad
+T\vecnot{v}\coloneqq\sum_{\vecnot{b}\in\mathcal{B}}s_{\vecnot{b}}G(\vecnot{b}),
+\]
+where only finitely many coefficients are nonzero.  Then $T$ is the unique \textbf{linear extension} of $G$: it is linear and agrees with $G$ on $\mathcal{B}$.
+
+\item \textbf{Proof:} Apply the preceding linear-extension construction with $S=\mathcal{B}$ and $f=G$.  Since $\mathcal{B}$ is linearly independent, the extension is well-defined, linear, and unique.  Since $\mathcal{B}$ spans $V$, its domain is all of $V$.
+
+\begin{samepage}
+\item \textbf{Definition:}  For a linear tranform $T \colon V \to W$,
 \begin{itemize}
 \item The \textbf{rank} of $T$ is the dimension of  is  range, 
 \[
@@ -954,6 +1002,7 @@ T \vecnot{v} = \sum_{i=1}^n s_{\alpha_i} G( \vecnot{v}_{\alpha_i})
 \]
 
 \end{itemize}
+\end{samepage}
 %Let $V$ and $W$ be vector spaces over a field $F$, and let $T$ be a linear transformation from $V$ into $W$.
 %The \textbf{rank} of $T$ is the dimension of the range of $T$ and the \textbf{nullity} of $T$ is the dimension of the nullspace of $T$.
 
@@ -966,7 +1015,12 @@ For a finite dimensional vector space $V,$  the rank and nullity of a linear tra
 \end{equation*}
 
 
-\item \textbf{Proof:}  See textbook. 
+\item \textbf{Proof sketch:}
+\begin{itemize}
+\item Choose a basis $\vecnot{u}_1,\ldots,\vecnot{u}_k$ for $\mathcal{N}(T)$ and extend it to a basis $\vecnot{u}_1,\ldots,\vecnot{u}_k,\vecnot{v}_1,\ldots,\vecnot{v}_r$ for $V$.
+\item The vectors $T\vecnot{v}_1,\ldots,T\vecnot{v}_r$ span $\mathcal{R}(T)$, because applying $T$ to a basis expansion kills the nullspace terms.  They are also linearly independent: if $\sum_i c_iT\vecnot{v}_i=\vecnot{0}$, then $\sum_i c_i\vecnot{v}_i\in\mathcal{N}(T)$, and independence of the extended basis forces every $c_i=0$.
+\item Therefore $\Rank(T)=r$, $\Nullity(T)=k$, and $\dim(V)=k+r$.
+\end{itemize}
 
 
 
@@ -975,6 +1029,8 @@ If $A$ is an $m \times n$ matrix with entries in the field $F$, then
 \begin{equation*} 
 \mathrm{row~rank} (A) \coloneqq \dim( \mathcal{R}(A^T)) =  \dim( \mathcal{R}(A))\eqqcolon \Rank (A).
 \end{equation*}
+
+\item \textbf{Proof sketch:} Reduce $A$ to reduced row echelon form $R=EA$, where $E$ is invertible.  Elementary row operations preserve the row space, while multiplication by $E$ maps the column space of $A$ isomorphically onto the column space of $R$.  If $R$ has $r$ pivots, its $r$ nonzero rows form a basis for its row space, and its $r$ pivot columns form a basis for its column space.  Thus both ranks of $R$, and hence both ranks of $A$, equal $r$.
 
 
 
@@ -1343,10 +1399,18 @@ The \textbf{standard Schauder basis} is the countably infinite extension $\{\vec
 \item \textbf{Definition}  A \textbf{closed subspace} of a Banach space is a subspace that is a closed set in the topology generated by the norm.
 
 
-\item \textbf{Question: } Let $V$ be the $L^p$ space of functions on   $[0,1]$ and let $U$ be the subset of \emph{continuous} functions. Is the $U$ is a closed subspace? 
+\item \textbf{Question: } Let $V=L^p([0,1])$, with Lebesgue measure, and let $U$ be the subspace of equivalence classes having a \emph{continuous representative}.  Is $U$ closed?
 \begin{itemize}
 \item  If $1 \le p < \infty$ --- NO, recall that the limit of continuous functions need not be continuous. 
-\item If $p = \infty$ --- YES, the sup norm metrizes uniform convergence of functions. 
+\item If $p = \infty$ --- YES.  For every continuous $h\colon[0,1]\to\mathbb{R}$ (or $\mathbb{C}$),
+\[
+\|h\|_{L^\infty}=\operatorname*{ess\,sup}_{t\in[0,1]}|h(t)|
+=\sup_{t\in[0,1]}|h(t)|=\|h\|_{\mathrm{sup}}.
+\]
+Continuity ensures that any value below the supremum is exceeded on a set of positive measure.  Each class in $U$ has a unique continuous representative: two continuous functions equal almost everywhere on $[0,1]$ are equal everywhere.  Identifying classes with these representatives, the restricted $L^\infty$ norm is exactly the sup norm.  A Cauchy sequence in $U$ therefore converges uniformly to a continuous representative, whose class lies in $U$.  Thus $U$ is complete in the inherited norm and hence closed in $L^\infty([0,1])$.
+\begin{samepage}
+\item \textbf{Distinction:} For general measurable functions, essential sup and ordinary sup can differ.  For example, $h=\mathbf{1}_{\{0\}}$ on $[0,1]$ satisfies $\|h\|_{L^\infty}=0$ but $\|h\|_{\mathrm{sup}}=1$.  So $L^\infty$ convergence does not imply uniform convergence of arbitrary representatives.
+\end{samepage}
 \end{itemize}
 
 

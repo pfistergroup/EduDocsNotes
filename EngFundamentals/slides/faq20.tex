@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 20: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-%\date{August 29, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -27,7 +27,7 @@
 
 \paragraph{Are there cases when eigenvalues are negative?}
 
-Yes, this occurs when a matrix reverses the direction of an eigenvector.  For example, the every vector is an eigenvector of the identity $I$ with eigenvalue 1.  Likewise, every vector is an eigenvector of the negative identity $-I$ with eigenvalue -1. 
+Yes, this occurs when a matrix reverses the direction of an eigenvector.  For example, the every vector is an eigenvector of the identity $I$ with eigenvalue 1.  Likewise, every vector is an eigenvector of the negative identity $-I$ with eigenvalue -1.
 
 \paragraph{Why is it useful to have k-truncated SVD expansion?}
 
@@ -39,15 +39,15 @@ If that is true, we can increase the SNR by truncating the SVD and keeping only 
  If a matrix is diagonal some basis, then it's typically quite easy to solve problems associated with that matrix in that basis.  One example is taking powers of a matrix $A$ given its diagonalization $A= V \Lambda V^{-1}$, which is easy because
  \[ A^m = (V \Lambda V^{-1}) \cdots (V \Lambda V^{-1}) = V \Lambda^m V^{-1}.  \]
  Similarly, solving a system of linear ordinary differential equations (e.g., $n$ equations in $n$ variables) is easy via diagonalization because the answer separates into $n$ univariate problems.
- 
+
 
 
 \paragraph{What is the most important property of singular value decomposition? I am wondering why we need to do the SVD?}
 
-SVD gives the optimal approximation (in a Frobenius norm sense) of a rank-$r$ linear transform by a rank-$k$ (with $k<r$).
+Truncating the SVD after $k$ terms gives a best approximation of a rank-$r$ matrix among matrices of rank at most $k<r$, in both the Frobenius and induced $2$ norms.
 This can be used for noise reduction and/or complexity reduction for questions related to the matrix.
 
-  
+
 
 
 \paragraph{It looks like the compact SVD is a necessary generalization for matrices whose rank is smaller than their dimensions. Is this a correct statement? Because in practice, I don't think I've seen the need for a compact SVD vs the SVD.}
@@ -65,9 +65,12 @@ Similarly, columns of $V$ associated with non-zero singular values form a basis 
 
 \paragraph{Do all matrices have eigenvalues and eigenvectors?}
 
-Over $\mathbb{C}$ (i.e., an algebraically closed field), every finite-dimensional matrix has at least one eigenvector.
-But, the number of eigenvectors may not equal the size of the matrix.
-In general, this is a rather complicated topic and a thorough discussion can be found in Chapters 5 and 8 of LADR.
+
+Every square complex matrix of positive size has an eigenvalue and a nonzero eigenvector.
+It need not have enough linearly independent eigenvectors to form a basis, so it need not be diagonalizable.
+A real square matrix may have no real eigenvalues (for example, a rotation by $90$ degrees).
+Rectangular matrices have an SVD but do not have eigenvalues in the usual sense.
+
 
 \paragraph{How efficiently can we determine the SVD for a matrix currently? Are current techniques for finding it more or less "good enough", or does determining this still represent a not insignificant bottleneck?}
 
@@ -80,10 +83,13 @@ This may be significantly reduced in a number of scenarios including combination
 \end{itemize}
 
 
-
 \paragraph{Is a positive definite matrix required to be symmetric (or Hermitian)? Or does it only needs to satisfy $x^T A x > 0$ for all $x$?}
 
-In general, the term positive definite also implies symmetry but in very rare cases some authors use it more generally to only imply $x^T A x > 0$ for all $x$.
+
+In this course, positive definite means Hermitian (symmetric over $\mathbb{R}$) and $x^H A x>0$ for every nonzero $x$.
+The exclusion of $x=0$ is necessary.
+For a nonsymmetric real matrix, the quadratic form sees only $(A+A^T)/2$, which explains why a broader convention sometimes appears.
+
 
 \paragraph{Does A have to be invertible for the compact SVD of A to equal the full SVD of A?}
 
@@ -91,9 +97,20 @@ Yes, the compact SVD of $A \in F^{m\times n}$ only equals the full SVD if $m=n=\
 
 \paragraph{What is the process for finding the columns of V? Each v must live in nullspace of $A^H A - lambda I$ but that requires knowing lambda, right?}
 
-\paragraph{On slide 3, in the equation $v_j^H A^H A v_i = \delta_{i,j}$, what does the $\delta_{i,j}$ mean?}
 
-In this context, $\delta_{i,j}$ is the Kronecker delta function and it equals 0 unless $i=j$ and, if $i=j$, then it equals 1.
+Conceptually, first solve the Hermitian eigenvalue problem for $A^H A$.
+Choose an orthonormal basis of eigenvectors $v_i$; its eigenvalues are $\sigma_i^2\geq0$.
+For $\sigma_i>0$, set $u_i=Av_i/\sigma_i$; complete the remaining columns using orthonormal bases of the null spaces.
+This is the construction on slide 3. In numerical computation, explicitly forming $A^H A$ can lose accuracy; a numerical SVD routine is preferable.
+
+
+\paragraph{On slide 3, ``Singular Value Decomposition: Construction,'' what does $\delta_{i,j}$ mean?}
+The Kronecker delta is one if $i=j$ and zero otherwise.
+The normalized identity is
+\[
+u_j^H u_i=\frac{v_j^H A^H A v_i}{\sigma_i\sigma_j}=\delta_{i,j}.
+\]
+Without the normalization factors, $v_j^H A^H A v_i=\sigma_i^2\delta_{i,j}$ for orthonormal eigenvectors.
 
 \section{Principal Component Analysis}
 
@@ -118,5 +135,10 @@ PCA allows the same approach in an approximate way -- if most of the signal live
 An affine subspace is a shifted subspace.
 For a subspace $W \subseteq V$ and a non-zero vector $\vecnot{v}$, we say that $W+\vecnot{v} = \{ \vecnot{u} \in V \,|\, \vecnot{u}-\vecnot{v} \in W \}$.
 
+
+\paragraph{Should PCA use the original data or centered data?}
+For an affine approximation, first subtract the sample mean from each data vector.
+If the centered vectors are columns of $X$, the leading left singular vectors span the PCA subspace, and the mean is added back after projection.
+Without centering, the problem fits a linear subspace through the origin; that is a different constraint.
 
 \end{document}

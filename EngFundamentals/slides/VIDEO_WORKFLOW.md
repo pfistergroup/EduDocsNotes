@@ -80,7 +80,8 @@ The service definition is in `/Users/hpfister/github/pfistergroup/agents/dcc/ser
 - Voice cloning: Coben reference, x-vector mode
 - Preferred runtime: BF16 with SDPA on CUDA
 - Candidate GPUs: RTX 5000 Ada in `gpu-common` or `scavenger-gpu`, A5000 in
-  `gpu-common`, and RTX 2080 in `gpu-common`
+  `gpu-common`, RTX 2080 in `gpu-common`, and a last-resort H200 in
+  `scavenger-h200`
 - RTX 2080 fallback: FP16 with SDPA because Turing does not provide native BF16
 - CPU and memory: 4 CPUs and 32 GB
 - Time limit: 2 hours
@@ -91,10 +92,13 @@ No H200 is needed for this 1.7B service. Before submission, the controller runs
 `sbatch --test-only` for all enabled candidates. It ranks the reported start
 times after adding configurable performance penalties: zero for either RTX
 5000 Ada request, three minutes for A5000, and thirty minutes for RTX 2080.
+The scavenger H200 receives a two-hour last-resort penalty, so it is selected
+only when every ordinary candidate has a substantially longer adjusted wait.
 Thus, the 2080 is used only when its shorter queue wait outweighs its slower
-generation. The controller records the selected partition, GPU, dtype, estimate,
-and job ID in its remote state. The controller uses the SSH host `dcc`; the
-local shell alias `cluster` is not required by the Makefile.
+generation, while the H200 is reserved for unusually poor ordinary-GPU queue
+conditions. The controller records the selected partition, GPU, dtype,
+estimate, and job ID in its remote state. The controller uses the SSH host
+`dcc`; the local shell alias `cluster` is not required by the Makefile.
 
 Inspect the current decision without submitting a job:
 
@@ -192,7 +196,12 @@ title note. In a note enumeration, each note item normally controls the matched
 main slide-body reveal. `Read.` means to speak that newly revealed bullet,
 subitems, and displayed mathematics exactly; it does not mean to summarize the
 visible slide, reread earlier overlays, or create a smoother explanation. Then
-all words following `Read.` are spoken unchanged and in source order.
+all words following `Read.` are spoken unchanged and in source order. After
+that source-faithful transcription, punctuation may be added deliberately for
+TTS phrasing and timing: periods, commas, semicolons, quotation marks, and
+occasional ellipses can clarify delivery without adding or changing spoken
+words. This is part of reviewed audio authoring, not permission to rewrite the
+instructor's narration.
 
 The rendered PDF establishes the visual states, while the note establishes the
 speech. Count mismatches must be mapped explicitly. Preserve extra authored
@@ -287,6 +296,11 @@ routinely start with an article. Do not open a beat with a bare variable; add
 the lead-in that videos 3 and 4 now use — "Now, we consider ...", "We say ...",
 "The set ..." — and hyphenate what follows.
 
+The opposite failure also occurs: a sentence that begins with the article
+"A" (`A norm on V is ...`) is often read as the letter name "ay". In narration,
+write such sentence-initial articles as `Uh` (`Uh norm on V is ...`); the
+Markdown stays readable and only the sound changes. Videos 10 and 13 use this.
+
 ### Related single-letter hazards
 
 The same class of failure affects any variable whose name is also a common word.
@@ -308,7 +322,7 @@ Automatic defaults are defined in `audio_config.json`:
 | Ordinary overlay | 0.65 s | 0.20 s | 0.85 s |
 | New slide | 1.40 s | 0.50 s | 1.90 s |
 
-The final page has a 1.25-second tail. Put `Pause-after: 2.5` before `Narration:` to override one page's tail. Insert `[[pause 0.8]]` or `[[pause 0.8s]]` for exact internal silence. Punctuation remains responsible for ordinary sentence-level prosody.
+The final page has a 1.25-second tail. Put `Pause-after: 2.5` before `Narration:` to override one page's tail. Insert `[[pause 0.8]]` or `[[pause 0.8s]]` for exact internal silence. Punctuation remains responsible for ordinary sentence-level prosody, and may be adjusted after listening to control grouping and timing without changing any words. Prefer ordinary punctuation first; use an explicit pause only when a timed silent break is necessary.
 
 ## Logging and failure diagnosis
 
@@ -317,6 +331,9 @@ Remote generation prints cache hits, generated chunks, request latency, audio du
 ## Reliable remote runs
 
 - Run `make video-qwen VIDEO=N` in a persistent terminal when it will take more than a few minutes, and poll that terminal rather than starting a new invocation. DCC allocation, service readiness, and synthesis can outlive a short-lived command runner.
+- The Qwen readiness wait includes both Slurm allocation and the cold model
+  load; its Makefile default is 30 minutes. Do not open a tunnel manually until
+  the controller has written the health-checked endpoint record.
 - The controller's Slurm `--test-only` result is only a scheduling estimate. Let the configured controller select one of `scavenger`, `common`, and `rtx2080`; do not cancel and requeue a healthy request merely because an estimate is pessimistic or changes.
 - After cancelling a run, wait until the controller status reports a terminal state before resubmitting. A job in `COMPLETING` is still live to the controller and an immediate retry can be rejected as already stopping.
 - With the normal `DCC_QWEN_AUTOSTOP=1`, a successful build deliberately finishes by stopping the remote service. A final Slurm state such as `CANCELLED ...` after local encoding is therefore normal cleanup, not a failed narration run.
@@ -343,7 +360,8 @@ For a completed remote build, verify the following before treating it as the new
 2. Build `make review VIDEO=N` and verify page order and overlay states.
 3. Transcribe and audit `scripts/videoN.md` with `SCRIPT_TRANSCRIPTION.md`.
    Expand every `Read.` from the matched new reveal, retain all authored note
-   text unchanged and in order, and add no narration.
+   text unchanged and in order, add no narration, then add only the
+   delivery-oriented punctuation needed for clear synthesis.
 4. Run `make beats VIDEO=N` before synthesis to validate the Markdown/page map.
 5. Update `pronunciations.json`, pauses, and per-page seeds as needed.
 6. Run `make video VIDEO=N`. Only changed speech should require DCC inference.

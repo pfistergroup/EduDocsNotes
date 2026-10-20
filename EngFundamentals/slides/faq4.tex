@@ -20,7 +20,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 4: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 3, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -57,6 +57,16 @@ If you're looking for examples of relations, then I suggest Chapter 5 of the tex
 
 The slides used to make the video (modulo small corrections) are always posted to the website when the video is posted.  If you're having trouble finding or accessing these, please e-mail me.
 
-    
-    
+
+
+\paragraph{How is the codomain Y determined? For example, consider function: $f(x) = x^2$. Is the codomain the set of all non-negative numbers or $\mathbb{R}$.}
+
+Here, the function is not properly defined because there is no initial statement $f\colon X \to Y$ that defines the domain and codomain.
+
+\paragraph{Can you clarify the difference between range, image and codomain?}
+You can think of the domain as the set of possible inputs to $f$, and the codomain as the set in which $f$ generates outputs -- it is important to note that the domain and codomain are sets that are largely a matter of \textit{choice} (e.g. I could very well choose a function, say $f(x) = x^2$ and restrict its domain to be $\mathbb{Q}$ and its codomain to be e.g. $\mathbb{R}$).
+
+The \textit{image} of a set $A$ by a function $f$ is the set (denoted $f(A)$) of elements obtained by mapping all elements of $A$ through $f$. More precisely, $f(A) \triangleq \{f(x) | x\in A\}$.
+The \textit{range} of a function is simply the image of its domain $f(X)$ or equivalently the subset of the codomain achieved by $f$.
+
 \end{document}

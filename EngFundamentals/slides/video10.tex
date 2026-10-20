@@ -166,7 +166,7 @@
 \end{enumerate}
 \item<4-> a \textbf{binary operation called scalar multiplication}, which maps any $s \in F$ and $\vecnot{v} \in V$ to a vector $s \vecnot{v} \in V$ satisfying four conditions:
 \begin{enumerate}
-\item the identity is multiplicative identity of the field: $1 \vecnot{v} = \vecnot{v}$, $\forall \vecnot{v} \in V$
+\item the multiplicative identity of the field 1 is the identity: $1 \vecnot{v} = \vecnot{v}$, $\forall \vecnot{v} \in V$
 \item scalar multiplication is associative: $(s_1 s_2) \vecnot{v} = s_1 ( s_2 \vecnot{v} )$
 \item scalar multiplication distributes over vector addition: $s ( \vecnot{v} + \vecnot{w} ) = s \vecnot{v} + s \vecnot{w}$
 \item scalar addition distributes scalar multiplication: $(s_1 + s_2) \vecnot{v} = s_1 \vecnot{v} + s_2 \vecnot{v}$.
@@ -195,18 +195,18 @@ For $\vecnot{w} = (w_1, \ldots, w_n) \in F^n$, the sum of $\vecnot{v}$ and $\vec
 \begin{equation*}
 \vecnot{v} + \vecnot{w} = (v_1 + w_1, \ldots, v_n + w_n).
 \end{equation*}
-The scalar product of $s \in F$ and $\vecnot{v} \in V$ is defined $s \vecnot{v} = (s v_1, \ldots, s v_n)$.
+The scalar product of $s \in F$ and $\vecnot{v} \in V$ is defined by $s \vecnot{v} = (s v_1, \ldots, s v_n)$.
 \end{example}
 
 \begin{example}<2-> [General vector space of functions]
 Let $X$ be a non-empty set and let $Y$ be a vector space over $F$.
 Consider the set $V$ of all functions mapping $X$ to $Y$.
-The vector addition of two functions $f,g \in V$ is the function $(f+g)\colon X \to Y$ defined by  \vspace{-1mm}
+Define the vector addition of two functions $f,g \in V$ to be the function $(f+g)\colon X \to Y$ with  \vspace{-1mm}
 \begin{equation*}
 (f + g)(x) = f(x) + g(x) \quad \forall x \in X,
 \end{equation*}
 where the RHS is defined by vector addition in $Y$.
-The scalar product of $s \in F$ and the function $f \in V$ is the function $sf$ defined by
+Define the scalar product of $s \in F$ and the function $f \in V$  to be the function $sf$ with
 $(sf)(x) = s \, f(x)$ for all $x \in X$,
 where the RHS is defined by scalar multiplication in $Y$.
 \vspace{-1mm}
@@ -217,6 +217,7 @@ where the RHS is defined by scalar multiplication in $Y$.
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{The first cue contains the fragment ``element-wise addition. where'' and misspells ``multiplied'' as ``multiuplied.'' The production script preserves this wording pending review.}
 		\item A vector space is defined by choosing a set and rules for vector addition and scalar multiplication which satisfy the requirements. \\ [2mm] Read. "element-wise addition".  where each element of $\vecnot{v}$ is multiuplied by the scalar $s$.
 		\item Read. "point-wise addition"
 	\end{enumerate}
@@ -250,6 +251,7 @@ Then, the subset $V\subseteq F^{n \times 1}$ of vectors satisfying \textcolor{bl
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{The first cue says ``if and only it is closed''; please confirm whether ``if'' is missing. The production script preserves the source wording.}
 		\item Read.  Subspaces play an important role in vector spaces.
 		\item A subset of a vector space is a subspace if and only it is closed under vector addition and scalar multiplication. \\ [2mm] This lemma states this principle formally. Read.  This lemma also makes it easy to determine when a subset is a subspace.
 		\item Read. Try using the Lemma to prove this is a subspace.
@@ -368,9 +370,9 @@ For any $\vecnot{v} = (v_1, \ldots, v_n) \in F^n$, we have
 \vecnot{v} = \sum_{i=1}^n v_i \vecnot{e}_i.
 \end{equation}
 Thus, the collection $U = \left\{ \vecnot{e}_1, \ldots, \vecnot{e}_n \right\}$ spans $F^n$.
-Since $\vecnot{v} = \vecnot{0}$ in~\eqref{equation:StandardBasisSpan} if and only if $v_1 = \cdots = v_n = 0$, $U$ is linearly independent.
+Since $U$ is linearly independent, $\vecnot{v} = \vecnot{0}$ in~\eqref{equation:StandardBasisSpan} if and only if $v_1 = \cdots = v_n = 0$.
 Accordingly, the set $U$ is a basis for $F^{n}$.
-This basis is termed the \textcolor{blue}{standard basis} of $F^n$.
+This basis is called the \textcolor{blue}{standard basis} for $F^n$.
 \end{example}
 
 \note{
@@ -406,6 +408,7 @@ It is denoted by $\dim(V)$.
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{The first cue misspells ``independent'' as ``indepedent.'' The production script preserves the source wording pending review.}
 		\item The following theorem says that, if a space is spanned by $n$ vectors then it can contain at most $n$ linearly indepedent vectors.  Specifically, (read). \\ [2mm]
 		We can prove this theorem using our lemma from the last lecture based on the row-reduced echelon form.
 		\item Read. To see this, suppose two bases have a different number of vectors.  Then, if we let $W$ be the smaller basis and $U$ be the larger basis, we can apply the Theorem to get a contradiction.
@@ -438,6 +441,7 @@ Then $A$ is invertible.
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{The first cue says ``invertible matrices has''; please confirm whether ``has'' should be ``have.'' The production script preserves the source wording.}
 		\item Read. This shows that invertible matrices has linearly independent rows and columns.
 		\item Read. This shows a matrix is invertible if and only if its rows and columns are linearly independent.
 	\end{enumerate}
@@ -474,4 +478,3 @@ Then $A$ is invertible.
 
 
 \end{document}
-

@@ -19,7 +19,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 5: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 10, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -42,9 +42,9 @@ When discussing the complement of a subset $A \subseteq W$, one should specify c
 Any well-defined set and metric defines a metric space. Examples includes: (1) The real numbers $\mathbb{R}$ with the distance function $d(x,y) = \vert x-y\vert$ given by the absolute difference; (2) real vectors $\mathbb{R}^n$ with the Manhattan metric $d(x,y) = \sum_{i=1}^n |x_i - y_i|$; (3) the space of continuous functions $f\colon [-1,1] \to \mathbb{R}$ with the ``uniform metric'' $d(f,g) = \max_{[-1,1]} | f(x)-g(x)|$;
 %
 % Normed vector space is a metric space by defining $d(\underline{x}, \underline{y}) = \Vert \underline{x}\ - \underline{y} \Vert $ (see section 3.3 and 3.5 in notes for more about vector spaces and norms); (3) Banach space is a complete normed vector space (section 3.5 in notes); (4) Hilbert spaces is a complete inner-product space (section 3.7.1 in notes);
-% 
+%
 and (4) metric space defined on sets of strings with the metric of Levenshtein distance, which is defined as the minimal number of character deletions, insertions, or substitutions required to transform string \texttt{u} into string \texttt{v}.
-  
+
 More examples can be found on Wikipedia. \url{https://en.wikipedia.org/wiki/Metric_space#Examples_of_metric_spaces}
 
 \paragraph{Are there equivalent distance metric terminologies for statistical distributions?}
@@ -53,8 +53,8 @@ Yes, that's a very good question.
 To build a metric space of probability distributions over $X$, one typically starts with a separable complete metric space $(X,d)$ for the set $X$.
 Let $\mathcal{P}(X)$ denote the set of probability distributions on $X$.
 For $\mu,\nu \in \mathcal{P}(X)$, let $\Gamma(\mu,\nu)$ be the set of joint distributions on $X \times X$ whose marginals match $\mu$ and $\nu$.
-Then, the 1-Wasserstein metric is defined to be
-\[ d_W (\mu, \nu) = \inf_{\gamma \in \mathcal{P}(X\times X)} \int_{X\times X} d(x,y) d\gamma(x,y).  \]
+On distributions with finite first moment, the 1-Wasserstein metric is defined to be
+\[ d_W (\mu, \nu) = \inf_{\gamma \in \Gamma(\mu,\nu)} \int_{X\times X} d(x,y) d\gamma(x,y).  \]
 This equals the expected distance between pairs $(x,y) \in X \times X$ drawn according to the optimizer $\gamma^*$.
 
 If we think of a distribution on $X$ as defining the shape of a pile of sand whose height is a function of $X$, then one can compare two distributions by asking how hard it is to reshape one pile into the other.
@@ -64,11 +64,14 @@ If one measures difficulty by the average distance traveled by each grain of san
 
 \paragraph{Could you explain more about Cauchy Sequences? Maybe using examples or visualizations that could help us understand.}
 
-A sequence is Cauchy if, for each $N\in \mathbb{N}$, there is an open ball $B(y_N,\delta_N)$ such that $\forall n> N, x_n \in B(y_N,\delta_N) $ and $\delta_N \to 0$.
-Thus, all points in the tail of the sequence become arbitrarily close together.
+
+A sequence is Cauchy if, for every $\epsilon>0$, there is an $N$ such that $d(x_m,x_n)<\epsilon$ whenever $m,n\geq N$.
+Thus, the tail points become arbitrarily close to one another without first specifying a limit.
+For example, rational decimal approximations to $\sqrt{2}$ form a Cauchy sequence in $\mathbb{Q}$, although they have no limit in $\mathbb{Q}$.
+Completeness and this example are developed in Video 7.
 
 
-\paragraph{On page 4, why does convergence require the limit is in $X$?}
+\paragraph{On slide 3, ``Important Concepts in Metric Spaces,'' why does convergence require the limit is in $X$?}
 
 For a single metric space $(X,d)$, there are no other points defined except the those in $X$.
 For example, the metric space of rational numbers with absolute distance can be defined without any reference to the real numbers.
@@ -88,7 +91,6 @@ Consider $w_0 \in W$ very close to the ``boundary", let the distance between $w_
 %Now consider $w_1$ exactly at the ``boundary", the open ball $B_d(w_1, \epsilon)$ indicates that there exists some points that are not in the open set $W$. So $w_1$ at the ``boundary" of the open set is not in open set $W$.
 %
 %For the simple example, the interval $(0, 1) \in \mathbb{R}$ is an open set and interval $[0, 1] \in \mathbb{R}$ is a closed set.
-
 
 
 \paragraph{Why is the empty set an open set? In my opinion, the definition of ``$\emptyset$ is open" is equivalent to an ``if xxx, then xxx" statement. The ``if" statement is always false since no element can be found in an empty set, so logically ``if xxx, then xxx" is true, so the empty set is open. Is this argument correct?}
@@ -114,7 +116,8 @@ Yes, the empty set $\emptyset$ and $X$ both open and closed. This is called a cl
 
 \paragraph{Could you please provide some examples of whether the set is open or closed?}
 
-See the Lecture Notebook for this lecture on Sakai.
+For example, in $\mathbb{R}$ with the usual metric, $(0,1)$ is open, $[0,1]$ is closed, and $[0,1)$ is neither.
+The closure of $(0,1)$ is $[0,1]$: both endpoints are limits of sequences from $(0,1)$.
 
 \paragraph{There is a theorem saying any finite intersection of open sets is open. Could you give an example of an infinite intersection of open sets which is closed?}
 
@@ -123,7 +126,8 @@ Infinite intersection of open sets can be open or closed. $\bigcap_{n=1}^{\infty
 
 \paragraph{For limit points and closure, it would help me understand if you could have an example to visualize.}
 
-See the Lecture Notebook for this lecture on Sakai.
+For example, in $\mathbb{R}$ with the usual metric, $(0,1)$ is open, $[0,1]$ is closed, and $[0,1)$ is neither.
+The closure of $(0,1)$ is $[0,1]$: both endpoints are limits of sequences from $(0,1)$.
 
 \paragraph{What is the relation between a limit point and convergence?}
 

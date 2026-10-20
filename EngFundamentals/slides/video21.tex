@@ -168,11 +168,11 @@ Convexity is a useful property defined for sets, spaces, and functionals that si
 \begin{definition}[convex set]
 Let $V$ be a vector space over $\RealNumbers$.
 The subset $A \subseteq V$ is called a \textcolor{blue}{convex set} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in A$ and $\lambda\in(0,1)$, we have $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in A$.
-It is \textcolor{blue}{strictly convex} if, for all $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$,
+It is \textcolor{blue}{strictly convex} if, for all distinct $\vecnot{a}_1,\vecnot{a}_2 \in \Closure{A}$ and $\lambda\in(0,1)$,
 %we have
 $\lambda \vecnot{a}_1 + (1-\lambda) \vecnot{a}_2 \in \Interior{A}$.
 \end{definition}
-% \gpt{Suggested cut/paste hypothesis: work in a normed vector space and require distinct $a_1,a_2\in\overline A$ in the strict-convexity clause; the closure/interior notation needs a topology, and equal endpoints cannot yield an interior point in general.}
+% Retain the general vector-space setting; algebraic interior/closure can be used here.
 \end{minipage}
 \hfill
 \begin{minipage}{0.22\textwidth}
@@ -218,9 +218,9 @@ It is \textcolor{blue}{strictly convex} if equality implies $\vecnot{a}_1 = \vec
 \begin{frame}{5.3: Convex Optimization}
 
 \begin{definition}
-Let $(X,\|\cdot\|)$ be a normed vector space.
-Then, a real functional $f \colon X \rightarrow \RealNumbers$ achieves a \textcolor{blue}{local minimum value} at $\vecnot{x}_0 \in X$ if: \\ \hspace{3mm}  there is an $\epsilon > 0$ such that, for all $\vecnot{x}\in X$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$, we have  $f(\vecnot{x}) \geq f(\vecnot{x}_0)$.
-If this lower bound holds for all $x\in X$, then the local minimum is also a \textcolor{blue}{global minimum value}.
+Let $(X,\|\cdot\|)$ be a normed vector space and $A\subseteq X$.
+Then, a real functional $f \colon X \rightarrow \RealNumbers$ achieves a \textcolor{blue}{local minimum value} on $A$ at $\vecnot{x}_0 \in A$ if: \\ \hspace{3mm}  there is an $\epsilon > 0$ such that, for all $\vecnot{x}\in A$ satisfying $\| \vecnot{x} - \vecnot{x}_0 \| < \epsilon$, we have  $f(\vecnot{x}) \geq f(\vecnot{x}_0)$.
+If this lower bound holds for all $\vecnot{x}\in A$, then the local minimum is also a \textcolor{blue}{global minimum value} on $A$.
 \end{definition}
 
 \vspace{2mm}
@@ -278,8 +278,8 @@ If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
 
 \begin{frame}{4.6: Projection onto Convex Sets}
 
-\begin{minipage}{0.44\textwidth}
-\begin{tikzpicture}[yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
+\begin{minipage}{0.36\textwidth}
+\begin{tikzpicture}[scale=0.85,transform shape,yscale=0.9,bullet/.style={circle,fill,inner sep=1.00pt,node contents={}}]
  \draw[-latex] (0,0) node[bullet,label=left:{$P_A(\vecnot{v}) \!=\! \vecnot{u}^*$},alias=PC]  -- (15:2.2) node[midway,sloped,above=0.25mm] {$\vecnot{v}\!-\! P_A(\vecnot{v})$}
     node[bullet,label=above right:$\vecnot{v}$,alias=v];
 \draw[-latex] (PC) -- ++ (-115:2.65) node[pos=0.57,above=0.25mm,sloped]{$\vecnot{u}\!-\! P_A(\vecnot{v})$}     node[bullet,label=below left:$\vecnot{u}$];
@@ -287,22 +287,21 @@ If $f$ is strictly convex, then $\vecnot{x}_0$ is the unique minimizer over $A$.
  node[above right,opacity=1]{$A$} to[out=-75,in=180] ++ (1.25,-1) to[out=0,in=-75] node[sloped, inner xsep=10mm, inner ysep=0, opacity=1, fill=black, pos=0.999] {} cycle;
 \end{tikzpicture}
 \end{minipage}
-\begin{minipage}{0.55\textwidth}
+\begin{minipage}{0.63\textwidth}
 \hspace{3mm} The projection of vectors onto subspaces can be generalized to convex sets\\[-2mm]
 
-For Hilbert space $V$ and closed convex set $A\subseteq V$, let $P_{A}:V\rightarrow A$ denote the orthogonal projection of $\vecnot{v}\in V$ onto $A$: \vspace{-1mm}
-% \gpt{Suggested cut/paste hypothesis: require $A$ to be nonempty as well as closed and convex.  The revised book also adds the useful conclusion $\|P_A(v)-P_A(w)\|\leq\|v-w\|$.}
+For a real Hilbert space $V$ and nonempty closed convex set $A\subseteq V$, let $P_{A}:V\rightarrow A$ denote the orthogonal projection of $\vecnot{v}\in V$ onto $A$: \vspace{-1mm}
 \[
 P_A (\vecnot{v}) \triangleq \arg \min_{\vecnot u\in A}\left\Vert \vecnot u-\vecnot v\right\Vert \vspace{-1mm} 
 \]
 \end{minipage}
 
 \begin{theorem}<1->
-The orthogonal projection of $\vecnot v\in V$ onto a closed convex set $A\subseteq V$ exists and is unique.
+The orthogonal projection of $\vecnot v\in V$ onto a nonempty closed convex set $A\subseteq V$ exists and is unique.
 \end{theorem}
 
 \begin{theorem}<2->
-For any $\vecnot{v} \notin A$, we have $\vecnot{u}^* = P_A (\vecnot{v})$ iff $\tinner{ \vecnot{v}-\vecnot{u}^* \,}{\, \vecnot{u}-\vecnot{u}^* } \leq 0$ for all $\vecnot{u}\in A$.
+For $\vecnot{v}\!\notin\! A$ and $\vecnot{u}^*\!\in\! A$, we have $\vecnot{u}^*\!=\! P_A (\vecnot{v})$ iff $\tinner{\vecnot{v}\!-\!\vecnot{u}^*}{\vecnot{u}\!-\!\vecnot{u}^*}\!\leq\! 0$ for all $\vecnot{u}\!\in\! A$.
 \end{theorem}
 
 \visible<3->{Prove theorem in live session for compact $A$ via convex optimization}

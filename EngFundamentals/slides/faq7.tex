@@ -21,7 +21,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 7: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 15th, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -31,7 +31,11 @@ Here we give a list of questions, and their answers, that were submitted by stud
 
 \paragraph{I'm confused about the proof of Example 2.1.12 in the notes. Could you elaborate it more during the lecture?}
 
-I have added more information about this to the Lecture Notebook for September 3rd which is posted on Sakai.
+
+The current ``Completeness'' slide uses $x_1=2$ and $x_{n+1}=x_n/2+1/x_n$.
+Each term is rational, but the sequence converges in $\mathbb{R}$ to $\sqrt{2}$.
+It is therefore Cauchy in the inherited metric on $\mathbb{Q}$ and has no limit in $\mathbb{Q}$.
+This shows why the rational numbers are not complete.
 
 
 \paragraph{Could you expand more on isometry?}
@@ -39,11 +43,10 @@ I have added more information about this to the Lecture Notebook for September 3
 An isometry is simply a map between two spaces that preserves distances.
 Namely, for two metric spaces $(X,d_X)$ and $(Y,d_Y)$, an isometry is a map $f: X \rightarrow Y$ that satisfies $\forall a,b \in X, d_X(a,b) = d_Y(f(a),f(b))$.
 
-\paragraph{For page 4, what is $\boldsymbol{f(y)}$ in the example? and I am also confused about what does this example illustrate? And for page 6, where does these examples apply the contraction mapping theorem?  I haven't understood the idea of this theorem. Thank you!}
+\paragraph{On slide 4, ``Contractions on Metric Spaces,'' what is $\boldsymbol{f(y)}$ in the example? and I am also confused about what does this example illustrate? And on slide 7, ``Applications of the Contraction Mapping Theorem,'' where does these examples apply the contraction mapping theorem?  I haven't understood the idea of this theorem. Thank you!}
 
 The example is meant to illustrate the meaning of a contraction. Intuitively, a contraction is a mapping that "shrinks" distances. More specifically, consider a mapping $f: X \rightarrow X$ in a complete metric space $(X,d_X)$ such that, for all $a,b \in X$, we have $d_X(f(a),f(b)) \leq \gamma d(a,b)$ where $\gamma \in [0,1)$.
 Suppose now you construct a sequence $x_{n+1} = f(x_n)$ where $f$ is a contraction (i.e. if the first point in the sequence is $x_1$, then the $n$-th point is $f(...f(f(x_1)))$ where $f$ is applied $n-1$ times). The contraction mapping theorem states that such a sequence converges to a fixed point $x^*$ (defined as a point $x^*$ such that $x^* = f(x^*)$, i.e. a point ``unchanged" by $f$). Moreover, the contraction mapping theorem states that the contraction has a unique fixed point $x^*$.
-
 
 
 \paragraph{In the definition of a dense subset, you mention that a dense subset A is equivalent to the closure A (bar) being equal to X. However, I recall that X is an open set while a closure is a closed set. How can this equivalence hold between open and closed sets? Or did I perceive this statement incorrectly?}
@@ -62,33 +65,31 @@ In particular, the completion would have a new element $x$ for each irrational n
 
 \paragraph{Is the closure of the set of all rational numbers equal to the set of real numbers?}
 Yes, every real number is a limit point of rational numbers.
-So, the closure of $\mathbb{Q}$ (i.e. $\mathbb{Q}$ + its limit points) is equivalent to $\mathbb{R}$.
+So, the closure of $\mathbb{Q}$ in the ambient space $\mathbb{R}$ is $\mathbb{R}$. Its closure within $\mathbb{Q}$ itself is just $\mathbb{Q}$.
 
-\paragraph{You read the $L^2$ norm as ``energy". Is it supposed to resemble the formula signal energy?} 
-Yes, they are the same.
+\paragraph{You read the $L^2$ norm as ``energy". Is it supposed to resemble the formula signal energy?}
+
+Signal energy is $\int |f(t)|^2\,dt=\|f\|_2^2$.
+The $L^2$ norm itself is the square root of that energy.
+The metric on slide 3 measures the square root of the energy of the difference between two functions.
+
 
 \paragraph{What is meant by "converge to a continuous function"? Since I have only seen the definition of converging to a point.}
 
 Good question. You can think of functions as \textit{points} in a metric space (i.e. you can define a distance between each of these points, e.g. the L2 distance). The concept of convergence requires you to define a metric. Convergence just means getting closer and closer to some point w.r.t a metric $d$. Hence, you can think that a sequence of functions can indeed converge to a function w.r.t., say, the L2 metric.
 
 
-
-\paragraph{Can you clarify the difference between range, image and codomain?}
-You can think of the domain as the set of possible inputs to $f$, and the codomain as the set in which $f$ generates outputs -- it is important to note that the domain and codomain are sets that are largely a matter of \textit{choice} (e.g. I could very well choose a function, say $f(x) = x^2$ and restrict its domain to be $\mathbb{Q}$ and its codomain to be e.g. $\mathbb{R}$).
-
-The \textit{image} of a set $A$ by a function $f$ is the set (denoted $f(A)$) of elements obtained by mapping all elements of $A$ through $f$. More precisely, $f(A) \triangleq \{f(x) | x\in A\}$.
-The \textit{range} of a function is simply the image of its domain $f(X)$ or equivalently the subset of the codomain achieved by $f$.
-
 \paragraph{I cannot understand the example on page 3.}
 
-The example on page 3 is a counterexample to show that $C[-1,1]$ is not a complete metric space.
-It does so by providing an example of a Cauchy sequence (of functions in $C[-1,1]$) that does not converge to a function in $C[-1,1]$.
 
-More specifically, the functions converge pointwise to the function
-\[ f(t) = \begin{cases} 0,~~ \text{for}~t<0 \\ 1, ~~ \text{for}~t> 0 ,\end{cases} \] which is not continuous and therefore not in $C[-1,1]$.
-Since we have found an example of a Cauchy sequence in $C[-1,1]$ that does not converge (to a point in $C[-1,1]$), this means that $C[-1,1]$ is not complete (by definition of completeness).\\
+Slide 3, ``A Space of Continuous Functions,'' uses $C[-1,1]$ with the $L^2$ metric, not the uniform metric.
+The piecewise linear functions $f_n$ approach a step function $f$, with $f(t)=0$ for $t<0$, $f(t)=1$ for $t>0$, and, for instance, $f(0)=1/2$.
+In fact, $\|f_n-f\|_2^2=1/(6n)$, so the sequence is Cauchy.
+No continuous function can equal this step function almost everywhere, so it has no limit in $C[-1,1]$ under this metric.
+With the uniform metric, $C[-1,1]$ is complete; the choice of metric matters.
 
-\paragraph{What does it mean to be "$y$-Jacobian" invertible? Also on your last slide, what is the pink spiraling line supposed to represent?}
+
+\paragraph{What does it mean to be "$y$-Jacobian" invertible? Also on slide 6, ``Concrete Example of the Contraction Mapping Theorem,'' what is the pink spiraling line supposed to represent?}
 For a function $g \colon \mathbb{R}^n \to \mathbb{R}^n$, the Jacobian is the matrix of partial derivatives of output values with respect to input values.
 Consider a function mapping $\mathbb{R}^m \times \mathbb{R}^n$ to $\mathbb{R}^n$ defined by $z = f (x,y)$ with $z_i = f_i (x,y)$.
 Then, the $y$-Jacobian is an $n\times n$ matrix $J (x,y)$ with entries $J_{ij} (x,y) = \frac{\partial f_i (x,y)}{\partial y_j}$.
@@ -96,13 +97,13 @@ If $J(x,y)$ is invertible, then $f$ is $y$-Jacobian invertible at $(x,y)$.
 
 %with reJacobian-invertible means that the function $f$ has a Jacobian (a matrix, and the high-dimensional extension of a first derivative for multi-input multi-output functions) which is an invertible matrix.
 
-The pink spiraling line on the last slide is meant to show the path by which the sequence defined by $x_{n+1} = f(x_n)$ converges to the fixed point.
+The pink spiraling line on the concrete-example slide is meant to show the path by which the sequence defined by $x_{n+1} = f(x_n)$ converges to the fixed point.
 
 
 \paragraph{What are some signal processing and ML applications of metric space theory?}
 
 See part IV of the optional text Mathematical Methods and Algorithms for Signal Processing.
-The URL is in the Sakai resources.
+The reference is listed with the course resources on the instructor's webpage.
 
 \paragraph{There are so many new terms in this section such as ZF set theory. I tend to forget their definitions and need to google them in order to follow along. Do you have any suggestions on how to improve?}
 
@@ -113,16 +114,16 @@ My suggestion is to be patient.
 Googling and rereading the definitions will eventually give your brain what it needs to recall the essence (if not the exact definition).
 
 
-
-
 \paragraph{(Slide 2) Why do we define an isometry?  Why is the completion is unique up to isometry? Does the remark suggest to use the limits of Cauchy sequence to complete the metric space? }
 
-The term ``dense'' is used regularly in mathematical discussions.
-We define isometry primarily to define dense precisely.
-After you know the term, you will also realize that the term isometry is used somewhat regularly as well.
+
+An isometry preserves every pairwise distance and lets us compare metric spaces without relying on their element names.
+A completion embeds $X$ isometrically into a complete space in which its image is dense.
+``Unique up to isometry'' means that any two such completions admit a distance-preserving bijection that agrees with the embeddings of $X$.
+One construction uses equivalence classes of Cauchy sequences; two sequences represent the same added point when their mutual distance tends to zero.
 
 
-\paragraph{On the last slide, I am not sure how we obtain unique fixed point $\boldsymbol{x^* \approx 0.739}$.}
+\paragraph{On slide 6, ``Concrete Example of the Contraction Mapping Theorem,'' I am not sure how we obtain unique fixed point $\boldsymbol{x^* \approx 0.739}$.}
 
 One can numerically solve the fixed-point equation $\cos(x)-x=0$ for an $x\in[0,1]$.
 
@@ -134,8 +135,6 @@ But, the purple set if defined by $f$ and $A$.
 Also, the purple blob is supposed to represent the image of the blue blob.
 Finally, the orange set is defined by $f$ and $f(A)$.
 The orange blob is supposed to represent the image of the purple blob.
-
-
 
 
 \end{document}

@@ -82,6 +82,43 @@
       "term": "NC",
       "spoken": "North Carolina",
       "test_text": "The university is located in Durham, NC."
+    },
+    {
+      "term": "Banach",
+      "ipa": "ˈbɑːnɑːk",
+      "spoken": "bahnawk",
+      "test_text": "A complete normed vector space is called a Banach space."
+    },
+    {
+      "term": "Schauder",
+      "ipa": "ˈʃaʊdər",
+      "spoken": "shau-der",
+      "test_text": "Some Banach spaces do not have a Schauder basis."
+    },
+    {
+      "term": "Riemann",
+      "spoken": "ree-men",
+      "test_text": "These formulas define norms using the Riemann integral."
+    },
+    {
+      "term": "Chutes",
+      "spoken": "shoots",
+      "test_text": "Chutes and Ladders is a boardgame."
+    },
+    {
+      "term": "chutes",
+      "spoken": "shoots",
+      "test_text": "Some locations contain chutes that set you back."
+    },
+    {
+      "term": "Matrices",
+      "spoken": "may-treh-seez",
+      "test_text": "Matrices with this property are called stochastic."
+    },
+    {
+      "term": "matrices",
+      "spoken": "may-treh-seez",
+      "test_text": "These matrices represent linear transformations."
     }
   ]
 }

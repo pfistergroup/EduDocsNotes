@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 1: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{August 29, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -40,12 +40,20 @@ Thus the statement ``$P(Q,R) = (Q \wedge R) \vee (Q \wedge \neg R)$ is a tautolo
 
 \paragraph{For the examples of implication and equivalence in slide 6, are there faster ways of determining the truth of a meta statement or should we always use truth tables?}
 
-After one has verified some simple rules using truth tables, one can prove additional statement via logical arguments.  For example, consider the statement $P(Q,R,S,T,U) = Q \vee \neg Q \vee ( (R \to S) \wedge (T \to U) ) \to R$.
-Using a truth table to check if this is a tautology is quite inefficient.  Instead, one can argue that $Q \vee \neg Q \vee V$ is true for any $Q,V$.
+
+Truth tables always work, but established logical identities can shorten the calculation.
+For example, $(Q\vee\neg Q)\vee R$ is a tautology because $Q\vee\neg Q$ is always true.
+By contrast, $((Q\vee\neg Q)\vee R)\to S$ is equivalent to $S$ and is not a tautology.
+This distinction is the one used on slide 6, ``Meta Statements'': implication must hold for every valuation.
+
 
 \paragraph{If we use natural language to describe implication, is it similar to 'if..., then...'?}
 
-Before this class, you might naturally say certain things either way.  After this class, you will have learned to be more precise.  For example, in a inductive proof of $P(n)$, we need to show that $P(1)$ is true and that, if $P(n)$ is true, then $P(n+1)$ is true.  It would be impossible to prove that $P(n)$ implies $P(n+1)$ (i.e., $P(n) \Rightarrow P(n+1)$) because that would suggest that $P(n) \rightarrow P(n+1)$ holds for all $P$.
+
+Yes. The connective $P\to Q$ means ``if $P$, then $Q$'' and is false precisely when $P$ is true and $Q$ is false.
+The meta statement $R\Rightarrow S$ asserts that $R\to S$ is true for every valuation of its propositional variables.
+An inductive proof uses the assumptions and definitions of the particular predicate $P(n)$ to prove $P(n)\to P(n+1)$ for every relevant $n$; it does not assert this for an arbitrary predicate.
+
 
 \paragraph{Are meta-statements used in system design (i.e. digital logic) or are they purely for describing existing systems?}
 
@@ -53,7 +61,7 @@ As far as I know, this term is not used in digital logic.  The primary  distinct
 
 \paragraph{Are compound statements functions of abstract statements? Are meta statements functions of compound statements?}
 
-Yes, compound statements are essentially boolean (i.e., true/false) functions of boolean variables (e.g., $P(Q,R) = Q \vee R$). No, using this mindset, meta statements are essentially quantified statements about boolean functions.  For example, ``$P$ is a tautology'' could be expressed as $\forall x,y\in \{T,F\}, P(x,y)$ and this is a false statement.
+Yes, compound statements are essentially boolean (i.e., true/false) functions of boolean variables (e.g., $P(Q,R) = Q \vee R$). No, using this mindset, meta statements are essentially quantified statements about boolean functions.  For example, ``$P$ is a tautology'' could be expressed as $\forall x,y\in \{T,F\}, P(x,y)$ and its truth depends on the particular Boolean function $P$.
 
 \paragraph{Is there a symbol for XOR?}
 
@@ -65,7 +73,7 @@ I'm not sure I understand this question.  I would call $S(Q,R)$ a compound state
 
 \paragraph{Some assertions may be true under some certain conditions while false under other conditions. For example, mercury is in the form of liquid. This assertion is true when the temperature is low enough, however it does not specify this condition. Is it still a statement or is it a false statement?}
 
-In some cases, logical phrases are constructed with some implicit background assumptions that would make them true or false.  Informally, such phrases are often taken as statements. Formally, one can make this dependence explicit using predicates: $P(x)=$``mercury is a liquid at $x$ degrees Kelvin''.  My preferred answer is that this is a statement that depends on a free variable $x$.  
+In some cases, logical phrases are constructed with some implicit background assumptions that would make them true or false.  Informally, such phrases are often taken as statements. Formally, one can make this dependence explicit using predicates: $P(x)=$``mercury is a liquid at $x$ degrees Kelvin''.  My preferred answer is that this is a statement that depends on a free variable $x$.
 
 Also, propositional logic is a formal reasoning system where one has both atomic statements $P,Q,\ldots$ and compound statements $S(P,Q,\ldots), R(P,Q,\ldots)$.  In some sense, it is not concerned with whether or not the atomic statements are true or false but only how their truth values interact through the compound statements.  For example, suppose $P=$``my favorite color is blue'', $Q=$``the sun is shining'', and $R(P,Q) = Q \rightarrow P$.  Then, one can prove that $R \Leftrightarrow \neg Q \vee P$ regardless of what $P$ and $Q$ mean.
 
@@ -90,8 +98,7 @@ No, the antecedent and consequent are terms used for $P$ and $Q$ in the conditio
 
 Indeed, hidden in this question are a few mistaken assumptions and subtleties of language that make it quite confusing.  First off, the given statement is not a meta statement.  In fact, for these values of $P,Q$, the statement $P$ if and only if $Q$ (i.e., $P \leftrightarrow Q$) is true because both $P$ and $Q$ are true.
 
-The problem is that many people might interpret the English sentence as $\forall n\in \mathbb{N}, P(n) \leftrightarrow Q(n)$ where $P(n)=``n$ is odd'' and $Q(n)=``n$ is prime''.  Again, this is not a meta statement.  It is quantified logical statement that happens to be false.  To prove that it's false, we simple need to find one counterexample: $P(9)$ is true but $Q(9)$ is false.
-
+The problem is that many people might interpret the English sentence as $\forall n\in \mathbb{N}, P(n) \leftrightarrow Q(n)$ where $P(n)=``n$ is odd'' and $Q(n)=``n$ is prime''.  Again, this is not a meta statement.  It is quantified logical statement that happens to be false.  To prove that it's false, we simply need to find one counterexample: $P(9)$ is true but $Q(9)$ is false.
 
 
 \paragraph{Are biconditional statements the same as the XOR operation?}
@@ -106,5 +113,9 @@ I like thinking of them as a promise: ``If statement $P$ is true, then statement
 
 Here is a non-trivial tautology for 3 propositions: \[ \neg( \neg (P \leftrightarrow Q)  \leftrightarrow \neg (Q \leftrightarrow R) ) \leftrightarrow \neg (R \leftrightarrow P) \]
 
-    
+
+\paragraph{Is there any order we need to follow when creating a truth table? like Biconditional first, followed by Conditional.}
+
+We use the following order of operations for logic: negations are done first and then none of the other operations take precedence.  Thus parentheses are required for well-formed statements.  Because of this, you can fill an entry in the truth table with any value that is currently computable.
+
 \end{document}

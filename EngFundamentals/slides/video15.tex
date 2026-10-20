@@ -223,7 +223,7 @@ Then, $V = \Span (W)$ is a vector space over $\RealNumbers$ with inner product \
 
 \begin{theorem}
 Let $V$ be a finite-dimensional space with ordered basis $\mathcal{B} = \vecnot{w}_1, \ldots, \vecnot{w}_n$.
-Then, any inner product on $V$ is determined by the values \vspace{-1,5mm}
+Then, any inner product on $V$ is determined by the values \vspace{-1.5mm}
 \begin{equation*}
 g_{ij} = \inner{ \vecnot{w}_j }{ \vecnot{w}_i }.
 \end{equation*}
@@ -242,7 +242,7 @@ If $\vecnot{u} = \sum_{j} s_j \vecnot{w}_j$ and $\vecnot{v} = \sum_{i} t_i \vecn
 = \left[ \vecnot{v} \right]_{\mathcal{B}}^H G \left[ \vecnot{u} \right]_{\mathcal{B}}
 \end{split}
 \end{equation*}
-where $\left[ \vecnot{u} \right]_{\mathcal{B}} = (s_1,\ldots,s_n)$ and $\left[ \vecnot{v} \right]_{\mathcal{B}} = (t_1,\ldots,t_n)$ are the coordinate matrices of $\vecnot{u}$, $\vecnot{v}$ in the ordered basis $\mathcal{B}$.
+where $\left[ \vecnot{u} \right]_{\mathcal{B}} = (s_1,\ldots,s_n)^T$ and $\left[ \vecnot{v} \right]_{\mathcal{B}} = (t_1,\ldots,t_n)^T$ are the coordinate matrices of $\vecnot{u}$, $\vecnot{v}$ in the ordered basis $\mathcal{B}$.
 The matrix $G$ is called the \textcolor{blue}{weight matrix} of the inner product in the ordered basis $\mathcal{B}$.
 \end{proof}
 
@@ -257,7 +257,7 @@ The matrix $G$ is called the \textcolor{blue}{weight matrix} of the inner produc
 \end{itemize}
 
 \vspace{1mm}
-\item<2-> Using $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$, we see that $\inner{ \vecnot{v} }{ \vecnot{v} } = \vecnot{w}^H G \vecnot{w} > 0$ for all $\vecnot{w} \neq \vecnot{0}$ \vspace{0.5mm}
+\item<2-> Using $\inner{ \vecnot{v} }{ \vecnot{v} } \geq 0$, we see that $\inner{ \vecnot{v} }{ \vecnot{v} } = \vecnot{w}^H G \vecnot{w} > 0$ for all $\vecnot{w} = [\vecnot{v}]_{\mathcal{B}} \neq \vecnot{0}$ \vspace{0.5mm}
 \begin{itemize}
 \item A Hermitian matrix satisfying this is called  \textcolor{blue}{positive definite} 
 
@@ -294,7 +294,7 @@ This inner product naturally defines the \textcolor{blue}{induced norm} \vspace{
 \end{definition}
 
 \begin{definition}[Projection]<2->
-Let $\vecnot{w},\vecnot{v}$ be vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
+Let $\vecnot{w},\vecnot{v}$ be non-zero vectors in an inner-product space $V$ with inner product $\tinner{ \cdot }{ \cdot }$.
 The \textcolor{blue}{projection} of $\vecnot{w}$ onto $\vecnot{v}$ is defined to be \\[-2mm]
 \begin{tabular}{>{\centering}m{2in} m{2in}}
 $ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{v}\|^2} \vecnot{v} $ &
@@ -315,7 +315,6 @@ $ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{
 \end{tikzpicture}
 \end{tabular}
 \end{definition}
-% \gpt{Suggested cut/paste hypothesis: require $\vecnot{v}\neq\vecnot{0}$ before defining projection onto $\vecnot{v}$, since the formula divides by $\|\vecnot{v}\|^2$.}
 
 \end{frame}
 
@@ -324,7 +323,7 @@ $ \vecnot{u} = \displaystyle\frac{\inner{ \vecnot{w} }{ \vecnot{v} }}{\|\vecnot{
 \vspace{-2mm}
 
 \begin{lemma}
-Let $\vecnot{u}$ be the projection of $\vecnot{w}$ onto $\vecnot{v}$.
+Let $\vecnot{u}$ be the projection of $\vecnot{w}$ onto $\vecnot{v}\neq\vecnot{0}$.
 Then, $\tinner{ \vecnot{w}-\vecnot{u} }{ \vecnot{u} } = 0$ and \vspace{-2mm}
 \[ \|\vecnot{w}-\vecnot{u}\|^2 =  \|\vecnot{w}\|^2 - \| \vecnot{u} \|^2 = \|\vecnot{w}\|^2 - \frac{|\tinner{ \vecnot{w} }{ \vecnot{v} }|^2}{\|\vecnot{v}\|^2}. \]
 \end{lemma}
@@ -354,11 +353,10 @@ If $V$ is an inner-product space over $F$ and $\| \vecnot{v} \| \triangleq \sqrt
 \begin{enumerate}
 \item $\left\| s \vecnot{v} \right\| = |s| \left\| \vecnot{v} \right\|$
 \item $\left\| \vecnot{v} \right\| > 0$ for $\vecnot{v} \neq \vecnot{0}$
-\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$
-\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{v} = \vecnot{0}$, $\vecnot{w}=\vecnot{0}$, or $\vecnot{v} = s \vecnot{w}$.
+\item $\left| \inner{ \vecnot{v} }{ \vecnot{w} } \right| \leq \left\| \vecnot{v} \right\| \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some $s\in F$
+\item $\left\| \vecnot{v} + \vecnot{w} \right\| \leq \left\| \vecnot{v} \right\| + \left\| \vecnot{w} \right\|$ with equality iff $\vecnot{w}=\vecnot{0}$ or $\vecnot{v} = s \vecnot{w}$ for some $s\in\mathbb{R}_{\geq0}$.
 \end{enumerate}
 \end{theorem}
-% \gpt{Suggested cut/paste equality cases: Cauchy--Schwarz has equality iff the vectors are linearly dependent; triangle inequality has equality iff one vector is a nonnegative real multiple of the other (including the zero cases).  An arbitrary complex or negative scalar is too broad for the triangle equality case.}
 
 \begin{proof}[Sketch of Proof]<2->
 The first two follow immediately from definitions.
@@ -370,13 +368,13 @@ The fourth inequality is the triangle inequality for the induced norm and can be
 
 \end{frame}
 
-\begin{frame}{3.7: Sets of Orthogonal Vectors}
+\begin{frame}[shrink=5]{3.7: Sets of Orthogonal Vectors}
 
 \vspace{-1mm}
 
 \begin{definition}<1->
 Let $V$ be an inner-product space and $U,W$ be subspaces.
-Then, the subspace $U$ is an \textcolor{blue}{orthogonal} to the subspace $W$ (denoted $U \bot W$) if: \vspace{-2mm}
+Then, the subspace $U$ is \textcolor{blue}{orthogonal} to the subspace $W$ (denoted $U \bot W$) if: \vspace{-2mm}
 $$ \vecnot{u} \ \bot \, \vecnot{w} \text{  for all } \vecnot{u}\in U \text{ and } \vecnot{w}\in W. $$
 \end{definition}
 
@@ -384,13 +382,13 @@ $$ \vecnot{u} \ \bot \, \vecnot{w} \text{  for all } \vecnot{u}\in U \text{ and 
 
 \begin{definition}<2->
 A subset $W\subset V$ of vectors is an \textcolor{blue}{orthogonal set} if all distinct pairs in $W$ are orthogonal.
-A orthogonal set is \textcolor{blue}{orthonormal} if all vectors normalized.
+An orthogonal set is \textcolor{blue}{orthonormal} if all vectors are normalized.
 \end{definition}
 
 \vspace{-1mm}
 
 \begin{example}<3->
-For $\RealNumbers^n$ with standard inner product, the standard basis is an orthonormal.
+For $\RealNumbers^n$ with standard inner product, the standard basis is an orthonormal basis.
 \end{example}
 
 \vspace{-1mm}
@@ -398,7 +396,7 @@ For $\RealNumbers^n$ with standard inner product, the standard basis is an ortho
 \begin{example}<4->
 Let $V$ be the vector space (over $\ComplexNumbers$) of continuous functions $f\colon [0,1]\to\mathbb{C}$ with the standard inner product.
 Let $f_n(x) = \sqrt{2} \cos 2 \pi n x$ and $g_n (x) = \sqrt{2} \sin 2 \pi n x$.
-Then, $\{ 1, f_1, g_1, f_2, g_2, \ldots \}$ is a countably infinite orthonormal set and a Schauder basis for the closure of $V$.
+Then, $\{ 1, f_1, g_1, f_2, g_2, \ldots \}$ is a countably infinite orthonormal basis for the completion of $V$ under the induced norm.
 \end{example}
 
 \end{frame}
@@ -553,7 +551,7 @@ The set $\ell^2$ with the standard inner product is a Hilbert space  because tha
 If Hilbert space $V$ has a countable dense subset, then there is a linear transform $T:V\to \ell^2$ such that $\inner{ \vecnot{u} }{ \vecnot{v} }_V = \inner{ T\vecnot{u} }{ T\vecnot{v} }_{\ell^2}$ for all $\vecnot{u},\vecnot{v} \in V$.
 \end{theorem}
 
-\uncover<3->{Thus, any separable Hilbert space is equivalent to the Hilbert space $\ell^2$.}
+\uncover<3->{Thus, any separable Hilbert space can be isometrically embedded into a closed subspace of $\ell^2$.}
 
 %\begin{example}[Quantum Mechanics]
 %Quantum mechanics is derived in the Hilbert space $\ell^2$ because:
@@ -567,7 +565,7 @@ If Hilbert space $V$ has a countable dense subset, then there is a linear transf
 \end{frame}
 
 
-\begin{frame}{3.7: Unitary Matrices}
+\begin{frame}[shrink=2]{3.7: Unitary Matrices}
 
 \vspace{-1.5mm}
 
@@ -585,7 +583,7 @@ Then, the following conditions are equivalent:
 \setlength\itemsep{0.5mm}
 \item[(i)] The columns of $U$ form an orthonormal basis (i.e.,  $U^H U = I$),
 \item[(ii)] the rows of $U$ form an orthonormal basis (i.e.,  $U U^H = I$),
-\item[(iii)] $U$ preserves inner products (i.e., $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{u},\vecnot{v}\in V$),
+\item[(iii)] $U$ preserves inner products (i.e., $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \tinner{ \vecnot{v} }{ \vecnot{w} }$ for all $\vecnot{v},\vecnot{w}\in V$),
 \item[(iv)] $U$ is an isometry (i.e., $\| U \vecnot{v} \| = \| \vecnot{v}\|$ for all $\vecnot{v} \in V$).
 \end{enumerate}
 \end{theorem}
@@ -593,7 +591,7 @@ Then, the following conditions are equivalent:
 \vspace{-1.5mm}
 
 \begin{proof}<3->
-{\it(i)}$\Rightarrow${\it(ii)}: Orthogonal columns implies $U$ invertible and $U^H U = I$ implies $U^H = U^{-1}$.
+{\it(i)}$\Rightarrow${\it(ii)}: Orthonormal columns imply $U$ invertible and $U^H U = I$ implies $U^H = U^{-1}$.
 {\it(i)}$\Rightarrow${\it(iii)}: $\tinner{ U \vecnot{v} }{ U \vecnot{w} } = \vecnot{w}^H U^H U \vecnot{v} = \vecnot{w}^H \vecnot{v} = \tinner{ \vecnot{v} }{ \vecnot{w} }$ and $\vecnot{w}=\vecnot{v}$ gives {\it(iv)}.
 {\it(iv)}$\Rightarrow${\it(i)}:
 $\vecnot{v}^H (U^H U \!-\! I) \vecnot{v} \!=\! \| U \vecnot{v} \|^2 \!-\! \| \vecnot{v} \|^2 \!=\! 0$

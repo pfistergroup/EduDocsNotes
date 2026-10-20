@@ -17,8 +17,10 @@ source-faithful transcription task, not a narration-writing task.
   preserve its wording.
 
 An LLM may align cues with reveals, expand `Read` directions, render notation
-as faithful spoken mathematics, and detect mismatches. It must not summarize,
-paraphrase, improve, correct, smooth, elaborate, or add transitions.
+as faithful spoken mathematics, detect mismatches, and add delivery-only
+punctuation. It must not summarize, paraphrase, improve, correct, elaborate,
+or add transitions. Delivery punctuation may make the existing words easier
+for the TTS system to group and time, but it must not change their meaning.
 
 ## Normal frame-by-frame procedure
 
@@ -48,7 +50,14 @@ paraphrase, improve, correct, smooth, elaborate, or add transitions.
    quantifier order, negation scope, implication direction, parentheses when
    needed for scope, labels, and the order of displayed expressions. This is
    pronunciation of notation, not an opportunity to explain or restate it.
-9. Copy the result into the matching `## Page NNN:` section of
+9. After making the source-faithful transcript, add punctuation needed for
+   natural delivery. In practice, periods separate complete thoughts; commas,
+   semicolons, quotation marks, and ellipses group dense mathematical speech
+   or establish intended timing. These are audio directions, not new prose:
+   do not add, remove, reorder, or change a lexical word to make a sentence
+   smoother. Use `[[pause S]]` only when punctuation cannot provide the
+   intended audible break.
+10. Copy the result into the matching `## Page NNN:` section of
    `scripts/videoN.md`. Institution-dependent text uses `{{univ}}`,
    `{{mascot}}`, and `{{city}}` so the spoken and displayed versions share the
    values in `institution.tex`.
@@ -73,14 +82,17 @@ paraphrase, improve, correct, smooth, elaborate, or add transitions.
 
 ## Production annotations
 
-Pause, seed, and pronunciation controls are production metadata rather than
-new narration:
+Pause, seed, pronunciation, and delivery-punctuation controls are production
+metadata rather than new narration:
 
 - `Pause-after: S` changes the silence after one page.
 - `[[pause S]]` inserts exact internal silence between authored speech chunks.
 - `[[seed N]]` selects an alternate Qwen take without changing the words.
 - `pronunciations.json` changes synthesis spelling or phonetics while the
   readable Markdown remains faithful to the note.
+- Punctuation may be added or adjusted after listening (for example, to split
+  clauses, quote a displayed condition, or slow a formula). It may not change
+  the note's words, mathematical scope, or logical structure.
 
 These annotations may control delivery, but they must not alter, replace, or
 silently repair the authored script.
@@ -94,7 +106,9 @@ silently repair the authored script.
 - All prose around `Read` commands remains present and in source order.
 - Cue/overlay count mismatches and incomplete notes are documented, not hidden.
 - Mathematical speech preserves the displayed statement's content and scope.
-- Any words not traceable to a note or an exact displayed reveal are removed.
+- Any lexical words not traceable to a note or an exact displayed reveal are
+  removed. Delivery punctuation and the production annotations above are
+  permitted.
 
 `make extract-script VIDEO=N` is a diagnostic aid for locating notes and count
 mismatches. Its output is not automatically a production script; the reviewed

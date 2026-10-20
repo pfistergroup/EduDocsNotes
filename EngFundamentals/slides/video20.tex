@@ -163,7 +163,7 @@
 \begin{definition}<1->
 Let $V$ be a vector space over $F$ and let $T\colon V \to V$ be a linear operator.
 An \textcolor{blue}{eigenvalue} of $T$ is a scalar $\lambda \in F$ such that there exists a non-zero vector $\vecnot{v} \in V$ with $T \vecnot{v} = \lambda \vecnot{v}$.
-Any vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textcolor{blue}{eigenvector} of $T$ associated with the eigenvalue value $\lambda$.
+Any non-zero vector $\vecnot{v}$ such that $T \vecnot{v} = \lambda \vecnot{v}$ is called an \textcolor{blue}{eigenvector} of $T$ associated with the eigenvalue $\lambda$.
 \end{definition}
 
 \begin{definition}<2->
@@ -222,14 +222,13 @@ where (i) $U \in \ComplexNumbers^{m \times m}$ and $V \in \ComplexNumbers^{n \ti
 
 \vspace{1mm}
 
-The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1$ is called the \textcolor{blue}{compact SVD} of $A$.
-% \gpt{Suggested cut/paste correction: the compact SVD is $A=U_1\Sigma_1V_1^H$; the conjugate transpose is missing here.}
+The factorization $A = U \Sigma V^H$ is called the \textcolor{blue}{full SVD} of the matrix $A$ while the factorization $A = U_1 \Sigma_1 V_1^H$ is called the \textcolor{blue}{compact SVD} of $A$.
 % \gpt{Suggested addition from the August 23 book: ``The singular values are uniquely determined, but singular vectors associated with a repeated singular value are not unique.  The zero-singular-value right and left vectors may be any orthonormal bases of $\mathcal N(A)$ and $\mathcal N(A^H)$, respectively.''}
 \\[1mm] The compact SVD of a rank-$r$ matrix retains only the $r$ columns of $U,V$ associated with non-zero singular values.
 
 \end{frame}
 
-\begin{frame}{9: Singular Value Decomposition: Construction}
+\begin{frame}[shrink=5]{9: Singular Value Decomposition: Construction}
 
 Idea to find orthonormal changes of basis $U,V$ so that $U^H A V$ is diagonal
 % \gpt{Suggested numerical caveat from the August 23 book: ``This $A^HA$ construction is a conceptual proof, not the usual stable numerical algorithm: explicitly forming $A^HA$ squares the condition number and can lose small singular values.  Numerical SVD routines typically begin with bidiagonalization.''}
@@ -253,8 +252,8 @@ A A^H \vecnot{u}_i &= \frac{1}{\sigma_i} A A^H A \vecnot{v}_i = \frac{1}{\sigma_
 $ and $V_1 = [\vecnot{v}_1,\ldots,\vecnot{v}_r]$, this gives $A V_1 = U_1 \Sigma_1$ where $\Sigma_1$ is a $r \times r$ diagonal matrix with diagonal entries $\sigma_1,\ldots,\sigma_r\!\!\!\!$
 
 \item<4-> If cols of $V_2$ are an orthonormal basis for $\mathcal{N}(A)$,
-then $A[V_1 \; V_2]=U_1 [\Sigma_1 \; 0].\!\!\!\!\!\!\!\!\!\!\!$
-Thus, right multiplication by $V^H = [V_1^H \; V_2^H]$ gives the \textcolor{blue}{compact SVD} \vspace{-0.5mm} \[ \color{blue} A = U_1 \Sigma_1 V_1^H, \vspace{-1.5mm}\]
+then $A[V_1 \; V_2]=U_1 [\Sigma_1 \; 0]$.
+Thus, right multiplication by $V^H = \begin{bmatrix} V_1^H \\ V_2^H \end{bmatrix}$ gives the \textcolor{blue}{compact SVD} \vspace{-0.5mm} \[ \color{blue} A = U_1 \Sigma_1 V_1^H, \vspace{-1.5mm}\]
 where the \textcolor{blue}{columns of $U_1, V_1$ are orthonormal bases for $\mathcal{R}(A), \mathcal{R}(A^H)$}
 
 \end{itemize}
@@ -283,13 +282,13 @@ $ and $U = [\vecnot{u}_1,\ldots,\vecnot{u}_m]$, $A V = U \Sigma$ where $\Sigma \
 \begin{frame}{6.5: The Four Fundamental Subspaces: Pseudo-Inverse}
 
 \hspace*{-4mm}
-\includegraphics[width=114mm]{figures/strang_fig4}
+\includegraphics[width=106mm]{figures/strang_fig4}
 
 \let\thefootnote\relax\footnotetext{\hspace*{-4mm} {\tiny Figure from ``The Fundamental Theorem of Linear Algebra'' by Gilbert Strang, The American Mathematical Monthly, Nov. 1993 }}
 
 \end{frame}
 
-\begin{frame}{9.2: Singular Value Decomposition Example}
+\begin{frame}[shrink=3]{9.2: Singular Value Decomposition Example}
 
 \visible<1->{%
 Consider the matrix \vspace{-2mm}
@@ -338,8 +337,8 @@ Thus, we find $U_1 = A V_1 \Sigma_1^{-1}$ with \vspace{-1mm}
 \end{array} \right]
 = \left[ \begin{array}{cc}
 0 & \frac{1}{3} \\
-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
--\frac{1}{\sqrt{2}} & \frac{2}{3} 
+-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}
 \end{array} \right] \]}
 
 \vspace{-1.5mm}
@@ -349,8 +348,8 @@ Putting this all together, we have the compressed SVD \vspace{-1mm}
 \[ A = U_1 \Sigma_1 V_1^H 
 = \left[ \begin{array}{cc}
 0 & \frac{1}{3} \\
-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
--\frac{1}{\sqrt{2}} & \frac{2}{3} 
+-\frac{1}{\sqrt{2}} & \frac{2}{3}  \\
+\frac{1}{\sqrt{2}} & \frac{2}{3}
 \end{array} \right]
 \left[ \begin{array}{cc}
 \sqrt{36} & 0 \\
@@ -400,17 +399,16 @@ From the compact SVD $A = U_1 \Sigma_1 V_1^H$, one finds that $A^+ = V_1
 
 \begin{definition}
 Let $A \in \mathbb{C}^{m\times n}$ have SVD $A=U \Sigma V^H$ where $\vecnot{u}_1,\ldots,\vecnot{u}_m$ and $\vecnot{v}_1,\ldots,\vecnot{v}_n$ are the columns of $U$ and $V$.
-Then, the \textcolor{blue}{$k$-truncated SVD expansion of $A$} is \vspace{-2mm}
+For an integer $0\leq k\leq\min(m,n)$, the \textcolor{blue}{$k$-truncated SVD expansion of $A$} is \vspace{-2mm}
 \[ \mathcal{T}_k (A) \triangleq \sum_{i=1}^k \sigma_i \; \vecnot{u}_i \, \vecnot{v}_i^H \]
 \end{definition}
 
 \vspace{2mm}
 
 \begin{theorem}
-In terms of the Frobenius norm $\| A \|_F^2 \triangleq \sum_{ij} |a_{ij}|^2$, the best rank-$k$ approximation of $A \in \mathbb{C}^{m\times n}$ is given by the $k$-truncated SVD expansion: \vspace{-2mm}
-\[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)=k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
+In terms of the Frobenius norm $\| A \|_F^2 \triangleq \sum_{ij} |a_{ij}|^2$, a best approximation of $A \in \mathbb{C}^{m\times n}$ of rank at most $k$ is given by the $k$-truncated SVD expansion: \vspace{-2mm}
+\[ \min_{B \in \mathbb{C}^{m\times n}: \, \text{rank}(B)\leq k} \| A - B \|_F  = \| A - \mathcal{T}_k (A) \|_F \]
 \end{theorem}
-% \gpt{Suggested cut/paste theorem statement: minimize over $\operatorname{rank}(B)\leq k$, not only rank exactly $k$.  Also note that repeated singular values can make the singular vectors and best rank-$k$ approximant nonunique.}
 
 \vspace{2mm}
 
@@ -431,13 +429,13 @@ The Frobenius norm is induced by inner product $\tinner{ A }{ B } \triangleq \te
 
 \vspace{-1mm}
 
-Then, the problem can solved using the SVD $A=U\Sigma V^{T}$ .
+Then, the problem can be solved using the SVD $A=U\Sigma V^{T}$.
 In particular, one can define $U_{p}\triangleq[\vecnot u_{1},\ldots,\vecnot u_{p}]$ and choose $W = \textrm{span}(U_p) + \vecnot{w}_0$ so that \vspace{-1.5mm}
 \[ P_{W}(\vecnot x)=U_{p}U_{p}^{T}(\vecnot x-\vecnot w_{0})+\vecnot w_{0} . \]
 
 \vspace{-1mm}
 
-For dimension reduction, one stores $\vecnot y_{i}=U_{p}^{T}\vecnot x_{i}\in\mathbb{R}^{p}$ instead of $\vecnot x_{i}\in\mathbb{R}^{n}$.
+For dimension reduction, store the centered coordinates $\vecnot y_i=U_p^T(\vecnot x_i-\vecnot w_0)\in\mathbb{R}^p$ and reconstruct $\hat{\vecnot x}_i=U_p\vecnot y_i+\vecnot w_0$.
 
 \vspace{4mm}
 

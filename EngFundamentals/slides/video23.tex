@@ -165,7 +165,7 @@
 
 \begin{minipage}{0.45\textwidth}
 Consider the unconstrained linear optimization problem:
-\[ \min_{\vecnot{x} \in \mathbb{R}^n} \vecnot{c}^T \vecnot{x} = \begin{cases} 0 & \text{if } \vecnot{c} = \vecnot{0} \\ -\infty & \text{otherwise}. \end{cases} \]  
+\[ \inf_{\vecnot{x} \in \mathbb{R}^n} \vecnot{c}^T \vecnot{x} = \begin{cases} 0 & \text{if } \vecnot{c} = \vecnot{0} \\ -\infty & \text{otherwise}. \end{cases} \]  
 
 Figure shows labeled level sets of $\vecnot{c}^T \vecnot{x}$ for $n=2$ and $\color{red} \vecnot{c}=(1,2)$.
 
@@ -209,11 +209,11 @@ Figure shows $\color{green!40!black} \mathcal{D}$ with level sets of $\vecnot{c}
 
 \vspace{3mm}
 
-\visible<2->{ $\circ\,$~The optimal point $\color{blue} \vecnot{x}^*$ can be found using gradient descent from any initial feasible point.}
+\visible<2->{ $\circ\,$~The optimal point $\color{blue} \vecnot{x}^*$ can be found using a feasible-direction descent method from a feasible initial point.}
 
 \vspace{2mm}
 
-\visible<3->{ $\circ\,$~The \textcolor{purple!80!black}{negative gradient} is reduced by the \textcolor{green!40!black}{constraint normal} to give a \textcolor{blue}{feasible descent direction}.}
+\visible<3->{ $\circ\,$~Removing the outward normal component of the \textcolor{purple!80!black}{negative gradient} gives a \textcolor{blue}{feasible descent direction}.}
 
 \end{minipage}
 \hfill
@@ -247,8 +247,8 @@ Figure shows $\color{green!40!black} \mathcal{D}$ with level sets of $\vecnot{c}
 	}
     \only<3->{%
       \draw[purple!80!black,thick,-latex] (3,-4) -- (3-\vx/2,-4-\vy/2);
-      \draw[green!40!black,thick,->] (3,-4) -- (3+3/5,-4+3/4);
-      \draw[blue,thick,-latex] (3,-4) -- (3+2/3,-4-2/4);
+      \draw[green!40!black,thick,->] (3,-4) -- (3+33/50,-4+22/25);
+      \draw[blue,thick,-latex] (3,-4) -- (3+4/25,-4-3/25);
     }
 		
 \end{tikzpicture}
@@ -312,17 +312,17 @@ Any LP can be transformed into one of the standard $\min$ forms: \\[1mm]
 
 \vspace{4mm}
 
-\uncover<3->{One can lower bound $p^*$ by finding a \textcolor{blue}{positive linear combination of the constraints that equals the objective}.}
+\uncover<3->{One can lower bound $p^*$ by finding a \textcolor{blue}{nonnegative linear combination of the constraints that equals the objective}.}
 
 \vspace{2mm}
 
 \uncover<4->{Combining the constraints with coefs $(\lambda_1,\lambda_2,\lambda_3) = \left(\frac{52}{661},0,\frac{11}{1983}\right)$ gives \vspace{-2mm}
-\[ \textcolor{red}{x_1 + 2 x_2} \geq -\tfrac{17}{3} \approx -5.66. \]
+\[ \textcolor{red}{x_1 + 2 x_2} \geq -\tfrac{17}{3} \approx -5.67. \]
 }
 
 \vspace{-4mm}
 
-\uncover<5->{In essence, this is how \textcolor{blue}{Lagrangian duality} works and implies \textcolor{red}{$p^* \geq -5.66$}.}
+\uncover<5->{In essence, this is how \textcolor{blue}{Lagrangian duality} works and implies \textcolor{red}{$p^* \geq -\tfrac{17}{3}$}.}
 
 \end{frame}
 
@@ -406,7 +406,7 @@ Contour plot of $f_0 (x_1,x_2) = (x_1 - 1)^2 + (x_2 - 1)^2 - x_1 x_2 /2$ whose m
 
 
 
-\begin{frame}{Langrangian Formulation}
+\begin{frame}[shrink=5]{Lagrangian Formulation}
 
 Used to transform from constrained to unconstrained optimization
 
@@ -417,10 +417,10 @@ where the \textcolor{blue}{Lagrange multipliers} $\lambda_i$ and $\nu_j$ define 
 \end{definition}
 
 \begin{theorem}[{\ref{theorem:KKT}}) (Karush-Kuhn-Tucker]<2->
-If $\vecnot{x}^*$ is a constrained local optimum that satisfies a constraint qualification (e.g., mild technical conditions) and $A = \{ i\in [m] \, | \, f_i (\vecnot{x}^*)=0 \}$ is the set of active constraints at $\vecnot{x}^*$, then there exist $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$ such that
+Assume all $f_i,h_j$ are continuously differentiable near $\vecnot{x}^*$. If $\vecnot{x}^*$ is a constrained local optimum satisfying a constraint qualification and $A = \{ i\in [m] \, | \, f_i (\vecnot{x}^*)=0 \}$ is the set of active constraints at $\vecnot{x}^*$, then there exist $\vecnot{\lambda}^* \geq 0$ and $\vecnot{\nu}^*$, with $\lambda_i^*=0$ for $i\notin A$, such that
 \vspace{-2mm}
 \begin{align*}
-\nabla_\vecnot{x} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) = \nabla f_0 (\vecnot{x}^*) + \sum_{i\in A} \lambda_i^* \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_j^* \nabla h_j (\vecnot{x}^*) &= \vecnot{0}. \vspace{-1mm}
+\nabla_\vecnot{x} L(\vecnot{x}^*,\vecnot{\lambda}^*,\vecnot{\nu}^*) = \nabla f_0 (\vecnot{x}^*) + \sum_{i\in A} \lambda_i^* \nabla f_i (\vecnot{x}^*) + \sum_{j=1}^p \nu_j^* \nabla h_j (\vecnot{x}^*) &= \vecnot{0}. \vspace{-1mm}
 \end{align*}
 \end{theorem}
 
@@ -452,7 +452,7 @@ For the pictured example, the Lagrangian is given by
 
 \fi
 
-\begin{frame}{Langrangian Duality}
+\begin{frame}{Lagrangian Duality}
 
 \begin{definition}
 The \textcolor{blue}{Lagrangian dual function} is defined to be \vspace{-1.5mm}
@@ -469,10 +469,9 @@ The Lagrangian dual function is concave and the \textcolor{blue}{Lagrangian dual
 \mathrm{maximize} \quad & g(\vecnot{\lambda},\vecnot{\nu}) \\
 \mathrm{subject\,to} \quad & \vecnot{\lambda} \geq 0, \vspace{-1mm}
 \end{align*}
-has a unique max value $d^* \leq p^*$.
+has optimal value $d^*\triangleq\sup_{\vecnot{\lambda}\geq0,\vecnot{\nu}}g(\vecnot{\lambda},\vecnot{\nu})\leq p^*$.
 This property is known as \textcolor{blue}{weak duality}.
 \end{lemma}
-% \gpt{Suggested cut/paste correction: ``The dual optimal value is $d^*=\sup_{\lambda\geq0,\nu}g(\lambda,\nu)$ and satisfies $d^*\leq p^*$.''  Concavity does not imply a unique maximizer, and the supremum need not be attained.}
 
 \begin{definition}<3->
 If $d^* = p^*$, then one says that \textcolor{blue}{strong duality} holds for the problem.
@@ -484,7 +483,7 @@ If $d^* = p^*$, then one says that \textcolor{blue}{strong duality} holds for th
 
 \begin{frame}{Weak Duality Proof}
 \part{title}
-Lagrangian dual is concave because \textcolor{blue}{pointwise infimum of affine functions}:\vspace{-1mm}
+The dual is concave as a \textcolor{blue}{pointwise infimum of affine functions}. For $0<\alpha<1$:\vspace{-1mm}
 \begin{align*}
 g(\alpha\vecnot{\lambda}+&(1-\alpha)\vecnot{\lambda}',\alpha\vecnot{\nu}+(1-\alpha)\vecnot{\nu}') \\
 &= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\alpha\vecnot{\lambda}+(1-\alpha)\vecnot{\lambda}',\alpha\vecnot{\nu}+(1-\alpha) \vecnot{\nu}') \\
@@ -492,16 +491,17 @@ g(\alpha\vecnot{\lambda}+&(1-\alpha)\vecnot{\lambda}',\alpha\vecnot{\nu}+(1-\alp
 &\geq \inf_{\vecnot{x}\in \mathcal{D}} \alpha L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) + \inf_{\vecnot{x}'\in \mathcal{D}} (1-\alpha) L(\vecnot{x}',\vecnot{\lambda}',\vecnot{\nu}') \\
 &= \alpha g(\vecnot{\lambda},\vecnot{\nu}) + (1-\alpha) g(\vecnot{\lambda}',\vecnot{\nu}'). \vspace{-1mm}
 \end{align*}
-Concavity implies unique maximum value $d^*$ upper bounded by \vspace{-2mm}
+For $\vecnot{\nu}\in\mathbb{R}^p$ and $\vecnot{\lambda}\geq0$, we have \vspace{-2mm}
 \begin{align*}
 g(\vecnot{\lambda},\vecnot{\nu})
 &= \inf_{\vecnot{x}\in \mathcal{D}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu})
 \stackrel{(a)}{\leq} \inf_{\vecnot{x}\in \mathcal{F}} L(\vecnot{x},\vecnot{\lambda},\vecnot{\nu}) \\
-&\stackrel{(b)}{=} p^* + \sum_{i=1}^m \lambda_i f_i (\vecnot{x})
-\stackrel{(c)}{\leq} p^*, \vspace{-3mm}
+&\stackrel{(b)}{\leq} \inf_{\vecnot{x}\in\mathcal{F}} f_0(\vecnot{x})
+= p^*, \vspace{-3mm}
 \end{align*}
-where $(a)$ is implied by $\mathcal{F} \subseteq \mathcal{D}$, $(b)$ follows from $h_j(\vecnot{x}) = 0$ for $\vecnot{x}\in \mathcal{F}$, and $(c)$ holds by combining $f_i(\vecnot{x}) \leq 0$ for $\vecnot{x}\in \mathcal{F}$ and $\lambda_i \geq 0$.
-% \gpt{Suggested replacement proof: for any primal-feasible $x'$ and any $\lambda\geq0$, $g(\lambda,\nu)=\inf_{x\in\mathcal D}L(x,\lambda,\nu)\leq L(x',\lambda,\nu)\leq f_0(x')$.  Taking the infimum over feasible $x'$ and then the supremum over dual-feasible multipliers gives $d^*\leq p^*$.  This avoids the invalid step that pulls an unspecified feasible $x$ out of an infimum.}
+Here $(a)$ uses $\mathcal{F}\subseteq\mathcal{D}$; $(b)$ uses $h_j=0$, $f_i\leq0$ on $\mathcal{F}$, and $\lambda_i\geq0$.
+Taking the supremum over dual-feasible multipliers gives $d^*\leq p^*$.
+If $\mathcal{F}=\emptyset$, then $p^*=\infty$ and the result is immediate.
 
 \end{frame}
 

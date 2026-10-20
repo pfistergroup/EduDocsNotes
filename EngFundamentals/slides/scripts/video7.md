@@ -29,7 +29,7 @@ I should note that the standard metric space of real numbers is a complete metri
 ## Page 005: 2.1.3: Dense Subsets (overlay 1 of 4)
 
 Narration:
-A subset-A of a metric space X comma d is dense in X if every x in X is a limit point of the set A. This is equivalent to the closure of-A being equal to X.
+A subset-A of a metric space X comma d is dense in X if the closure of-A equals X. Equivalently, every nonempty open ball in X intersects A.
 
 ## Page 006: 2.1.3: Dense Subsets (overlay 2 of 4)
 

@@ -21,7 +21,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 6: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 14, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -29,7 +29,7 @@ Here we give a list of questions, and their answers, that were submitted by stud
 
 \section{Continuity}
 
-\paragraph{On the Continuity slide, you introduce a function $f$ between two metric spaces. Are the metric spaces themselves a part of the domain and codomain of $f$ or are $X$ and $Y$ exclusively the domain and the codomain? I am primarily confused as to the difference between a metric space and a set.} 
+\paragraph{On the Continuity slide, you introduce a function $f$ between two metric spaces. Are the metric spaces themselves a part of the domain and codomain of $f$ or are $X$ and $Y$ exclusively the domain and the codomain? I am primarily confused as to the difference between a metric space and a set.}
 
 Functions are defined between sets.
 So, the domain and codomain are the sets $X$ and $Y$.
@@ -59,9 +59,10 @@ For example, it is easy to verify that, if $f\colon X \to Y$ is Lipschitz-$L_f$ 
 
 As an application, recall that a contraction is Lipschitz-$\gamma$ for some $\gamma <1$.
 Thus, composing a contraction $f \colon X \to X$ with itself $n$ times gives a function that is Lipschitz-$\gamma^n$.
-In other words, contraction mapping theorem basically says that composing a contraction with itself eventually gives a Lipschitz-0 function whose output value is independent of the input value.
+On a nonempty complete invariant space, the iterates converge pointwise to the constant map whose value is the unique fixed point.
+Each finite iterate has Lipschitz constant at most $\gamma^n$; it need not become constant after finitely many iterations.
 
- 
+
 \paragraph{Could a function be Lipschitz continuous if it is not one-to-one?}
 
 Lipschitz continuous does not relate to whether a function is one-on-one. The following figure shows four functions, which are (1, red) Lipschitz continuous and one-on-one; (2, black) Lipschitz continuous but not one-on-one; (3, blue) not Lipschitz continuous but one-on-one; (4, green) neither Lipschitz continuous nor one-on-one.
@@ -92,14 +93,14 @@ Yes.
 For $A=[a,b]$ and a differentiable function $f\colon X \to \mathbb{R}$, the Lipschitz constant satisfies (by definition)
 \[ L \geq \frac{|f(y) - f(x)|}{|y-x|} \]
 for all $x,y \in A$.
-Letting $y=x+\delta$ and taking the limit as $\delta \to 0$ also shows that $L \geq f'(x)$ for all $x \in A$.
+Letting $y=x+\delta$ and taking the limit as $\delta \to 0$ also shows that $L \geq |f'(x)|$ for all $x \in A$.
 
- 
+
 
 
 \paragraph{How is Lipschitz continuity different from the plain definition of continuity?}
 
-One can show that the function $f\colon [0,\infty) \to [0,\infty)$ defined by $f(x) = \sqrt{x}$ is uniformly continuous but not Lipschitz continuous because $f'(0^+)=\infty$. 
+One can show that the function $f\colon [0,\infty) \to [0,\infty)$ defined by $f(x) = \sqrt{x}$ is uniformly continuous but not Lipschitz continuous because $f'(0^+)=\infty$.
 
 
 \iffalse
@@ -107,10 +108,7 @@ One can show that the function $f\colon [0,\infty) \to [0,\infty)$ defined by $f
 \paragraph{Dawei Xi: Why do we define three different continuous functions, continuous function, uniformly continuous, Lipschitz continuous?}
 
 
-
 \paragraph{Why is for standard metric space (e.g. used in real analysis), $X = \mathbb{R}$, and for Euclidean space $X = \mathbb{R}^n$?}
-
-
 
 
 \fi
@@ -133,7 +131,7 @@ Let's take the contrapositive of the last theorem on sequences of continuous fun
 ``$f$ is not continuous $\Rightarrow$ not all $f_n$ are continuous OR $f_n$ does not converge uniformly to $f$''.
 \item Since in your example we \textit{know} the $f_n$'s \textit{are} continuous, this means they must not \textit{uniformly} converge to $f$.
 \end{itemize}
-The take-away here is that, for the limit function $f$ to be continuous, you need 2 ingredients: $f_n$ must be continuous for all $n$, and $f_n$ must converge \textit{uniformly} to $f$.
+The take-away here is that, to guarantee that the limit function $f$ is continuous, it suffices to have two ingredients: $f_n$ must be continuous for all $n$, and $f_n$ must converge \textit{uniformly} to $f$.
 
 
 \paragraph{Is the supremum used mainly for open sets whereas the maximum can be more easily applied on a closed set?}
@@ -141,18 +139,16 @@ If you think beyond just the real line $\mathbb{R}$, there are plenty of cases w
 e.g. consider the function $f(x,y) = -(x^2 + y^2)$ over the set $A = \{(x,y) | x^2 + y^2 < 5\}$. Here, you can check that $A$ is an open set, but the supremum of $f(A)$ (and coincidentally, the maximum of $f(A)$) is $0$ and occurs at $x=y=0$.
 
 Conversely, the set $\mathbb{R}$ is itself closed, and its supremum is $+\infty$, yet its maximum is undefined.
-Later, we will see that, if a set $A\in\mathbb{R}$ is compact, then its supremum and maximum are the same.
+Later, we will see that, if a nonempty set $A\subseteq\mathbb{R}$ is compact, then its supremum and maximum are the same.
 This follows from continuous functions (such as $f(x)=x$) achieving their supremum as a maximum.
 
 
 \paragraph{What's the difference between uniform and pointwise convergence?}
 Pointwise convergence means that, for all $x$, $f_n(x)$ converges to $f(x)$ -- this means that, for every $x$ and $\epsilon>0$, we can find an $N = N(x,\epsilon)$ beyond which $d(f_n(x),f(x))<\epsilon$.
-Uniform convergence means that, for all $\epsilon>0$, we can find an $N = N(\epsilon)$ beyond which $d(f_n(x),f(x))<\epsilon$, for all $x$. Note that $N$ here does not depend on $x$, only $\epsilon$ -- intuitively, this suggests that the convergence rate of $f_n(x)$ to $f(x)$ cannot become arbitrarily slow for some $x\in X$. 
+Uniform convergence means that, for all $\epsilon>0$, we can find an $N = N(\epsilon)$ beyond which $d(f_n(x),f(x))<\epsilon$, for all $x$. Note that $N$ here does not depend on $x$, only $\epsilon$ -- intuitively, this suggests that the convergence rate of $f_n(x)$ to $f(x)$ cannot become arbitrarily slow for some $x\in X$.
 
 This is not the case for pointwise convergence (where $N$ might depend on both $x$ and $\epsilon$).
 Note that uniform convergence \textit{implies} pointwise convergence, but not vice versa.
-
-
 
 
 \paragraph{How does one properly define the "extended" real numbers? I thought that there was in issue in treating negative infinity and infinity as if they were numbers (i.e. the definition has a union of the reals with plus / minus infinity).}
@@ -167,7 +163,6 @@ In general, the extended real numbers cannot be assigned a more complicated math
 \paragraph{Why is the set of extended real numbers bigger than the set of real numbers? Isn't the set $\{-\infty, \infty\}$ a subset of the real numbers?}
 
 No, the symbols $\infty,-\infty$ are not real numbers.
-
 
 
 \end{document}

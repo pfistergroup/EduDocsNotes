@@ -20,7 +20,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 11: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 25, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -30,14 +30,12 @@ Here we give a list of questions, and their answers, that were submitted by stud
 
 \paragraph{For addition of vector spaces, if my understanding is correct, they need to have the same dimension and number of vectors right?}
 
-To add 2 subsets $U, W$ of a vector space $V$, their elements must have the same dimension (since $U+W \triangleq \{\vecnot{u}+\vecnot{w}| \vecnot{u}\in U, \vecnot{w}\in W\}$, so you need to be able to perform $\vecnot{u}+\vecnot{w}$).
+To add 2 subsets $U, W$ of a vector space $V$, their elements must belong to the same ambient vector space (since $U+W \triangleq \{\vecnot{u}+\vecnot{w}| \vecnot{u}\in U, \vecnot{w}\in W\}$, so you need to be able to perform $\vecnot{u}+\vecnot{w}$).
 But, $U$ and $W$ need not have the same number of elements -- the definition of the addition of $U$ and $W$ says that you need to perform the sum for all possible pairs $(\vecnot{u},\vecnot{w})$ in $U\times W$.
 
 Also, the slides don't actually consider adding vector spaces.
 Instead, they define the sum of \emph{subsets of vector spaces}.
 In this case, the vectors are compatible because they live in the same vector space and vector addition is already defined by that space.
-
-
 
 
 \paragraph{If we use a matrix to represent null space, is it a matrix filled with zeros?}
@@ -53,22 +51,26 @@ Also, we don't yet have a notion of the dot product or orthogonality.
 
 \paragraph{Can you please point out again what is the essential properties to prove the subspace?}
 
-A subspace $X$ has 2 properties that you should keep in mind:
+First check that $X$ is nonempty (equivalently, after the closure checks, that it contains $\vecnot{0}$). Then verify these two properties:
 \begin{itemize}
     \item It is closed under scalar multiplication, i.e. if $\vecnot{x}\in X$, then $\forall s\in F, s\vecnot{x} \in X$ (where $F$ is a field).
     \item It is closed under vector addition, i.e. if $\vecnot{x},\vecnot{y} \in X $, then $\vecnot{x}+\vecnot{y} \in X$.
 \end{itemize}
 
-\paragraph{In slide 5, the rank and nullity are all defined on T and V. What do they do with the space W?}
+\paragraph{On slide 5, ``Rank and Nullity,'' the rank and nullity are all defined on T and V. What do they do with the space W?}
 Before understanding rank and nullity, it is important to understand range and nullspace.
-Specifically, for a transformation $T:V \rightarrow W$, 
+Specifically, for a transformation $T:V \rightarrow W$,
 \begin{itemize}
     \item The range $R(T)$ \textbf{is a subset of $W$}, and rank($T$) = $\dim(R(T))$
     \item The nullspace $N(T)$ \textbf{is a subset of $V$}, and nullity($T$) = $\dim(N(T))$
 \end{itemize}
 
 \paragraph{On slide 1, does the term disjoint mean every vector in the two subspaces are linearly independent?}
-Disjoint just means that the intersection of the sets contains only the \vecnot{0} vector. You can check that this implies that, if we have 2 disjoint subspaces $X,Y$, then any $\vecnot{x}\in X$ cannot be a linear combination of elements in $Y$ (else, $\vecnot{x}$ would be in $Y$, which is a contradiction since $X$ and $Y$ are disjoint by assumption).
+
+On slide 1, ``Sums and Direct Sums,'' the intended condition is $U\cap W=\{\vecnot{0}\}$.
+This is called a trivial intersection; the sets are not disjoint in the usual set-theoretic sense because both contain zero.
+No nonzero vector of $U$ is a linear combination of vectors in $W$, and the union of a basis of $U$ with a basis of $W$ is linearly independent.
+
 
 \paragraph{I am used to the term "orthonormal basis" which means, to my knowledge, essentially the same thing as the definition given for ordered basis.  Is there a key difference here I am missing?}
 

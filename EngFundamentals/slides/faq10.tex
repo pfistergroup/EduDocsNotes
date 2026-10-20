@@ -1,6 +1,6 @@
 \documentclass[10pt,english]{article}
 
-\usepackage{amsfonts,url,tikz}
+\usepackage{amsfonts,url,tikz,amsmath}
 
 % Paper setup
 \evensidemargin=0in
@@ -18,7 +18,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 10: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 25, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -39,7 +39,7 @@ Many properties are similar to vector spaces if the ring is nice enough (e.g., i
 I should note that modules are not commonly used (as far as I know) in engineering mathematics.
 I have only used them once in my research.
 
-\paragraph{For slide 2, I don't quite understand the idea of a general vector space of functions.}
+\paragraph{For slide 2, ``Vector Space Examples,'' I don't quite understand the idea of a general vector space of functions.}
 
 This is a vector space $V$ where each element of the space is a function that maps $X$ to $Y$.
 To make the construction work, the set $Y$ must also be equipped with a vector space structure (so that function evaluations can be added together).
@@ -70,8 +70,8 @@ I don't know of any formal connection between these two concepts.
 \end{itemize}
 
 
-\paragraph{On slide 3, does the lemma require that subset $W$ has the same scalar field $F$ as $V$?}
-Yes. % But may need more explanation.
+\paragraph{On slide 3, ``Subspaces,'' does the lemma require that subset $W$ has the same scalar field $F$ as $V$?}
+Yes. A subspace inherits the operations and scalar field of its ambient space. Changing the field can change the dimension; for example, $\mathbb{C}$ has dimension one over $\mathbb{C}$ and dimension two over $\mathbb{R}$.
 
 
 \paragraph{When proving the example on slide 3, would it be sufficient to say that one could use elementary row operations on $A\underline{v}$ and still satisfy the equation $A\underline{v}=\underline{0}$, and thereby construct the $s\underline{w}_1 + \underline{w}_2$ in $W$ requirement for $A\underline{v}=\underline{0}$ to be a subspace?}
@@ -80,7 +80,7 @@ In the first part, I assume that you are referring to elementary row operations 
 By doing this, you would be changing $A$ in way that preserves the set of vectors mapped to $\vecnot{0}$.
 Thus, elementary row operations  show that many matrices have exactly the same null space.
 
-On the other hand, I do not see how elementary row operations can be used to prove that $V$ is a subspace.
+Preservation of the null space alone does not establish the subspace criterion; one must check that the solution set is nonempty and closed under the required operations. It is nonempty because it contains $\vecnot{0}$.
 Instead, one can apply the lemma in slide 3.
 For every pair $\underline{v}_1, \underline{v}_2 \in V$, we have $A\underline{v}_1=\underline{0}$ and $A\underline{v}_2=\underline{0}$. For every scalar $s\in F$, $A(s\underline{v}_1+\underline{v}_2) = sA\underline{v}_1 + A\underline{v}_2 = \underline{0}$. So $s\underline{v}_1+\underline{v}_2 \in V$. From the lemma, $V\subseteq F^{n \times 1}$ is a subspace of $F^{n \times 1}$.
 
@@ -95,13 +95,16 @@ But, if $m>n$, the $m$ row vectors of length $n$ cannot be linearly independent.
 \section{Basis}
 
 \paragraph{For an invertible matrix, the columns form a basis,and the rows form another basis. Are these two bases the same?}
- 
+
 If the matrix is symmetric, the two bases are the same.
 Otherwise, they are bases for the same space (e.g., $F^n$) but the two ordered lists of basis vectors are not identical.
 
 
 \paragraph{Does a vector space have only one unique basis?}
-No. For a vector space with dimension $n$, any linearly independent set with size $n$ is a Hamel basis. In this sense, a vector space can have infinitely many distinct bases.
+
+No. A basis is a linearly independent spanning set.
+For a vector space of finite dimension $n$, any $n$ linearly independent vectors form a basis.
+Over $\mathbb{R}$ or $\mathbb{C}$, a nonzero finite-dimensional space has infinitely many bases, although over a finite field the number of bases is finite.
 
 
 \paragraph{Could you explain more on the Hamel basis and how it is different from the case in real vectors?}
@@ -110,14 +113,17 @@ For a vector space with dimension $n$, any linearly independent set with size $n
 
 
 \paragraph{What is the difference between a Hamel basis and a standard basis?}
-The standard basis of a vector space is the set of vectors whose coordinates are all zero, except one that equals 1. The standard basis is orthonormal whereas a Hamel basis only requires linear independence of the basis.
-For example, $(1,0)$ and $(1,1)$ form a Hamel basis for $\mathbb{R}^2$.
+
+A Hamel basis is linearly independent and spans the space using finite linear combinations.
+The standard basis of $F^n$ is the particular Hamel basis $e_1,\ldots,e_n$.
+For $F=\mathbb{R}$ or $\mathbb{C}$, it is orthonormal under the standard inner product, but orthonormality is additional structure and is not required of a Hamel basis.
+For example, $(1,0)$ and $(1,1)$ form a Hamel basis of $\mathbb{R}^2$.
 
 
 \paragraph{Given a finite-dimensional vector space $V$ and set of vectors $W$, what algorithm can determine if $W$ is a basis of $V$?}
-One only needs to check the size of $W$ and that the vectors in $W$ are linearly independnet.
+Check that $W$ consists of $\dim(V)$ vectors in $V$ and that these vectors are linearly independent.
 For the space $V=F^n$, one can form a matrix where each row is a vector in $W$ and then use Gaussian elimination to put the matrix in reduced row-echelon form.
-If the resulting matrix does not have an all-zero row, then $W$ forms a basis for $V$.
+Provided that $W$ contains exactly $n$ vectors, a pivot in every row (and column) shows that $W$ is a basis of $F^n$. Fewer than $n$ independent vectors do not span $F^n$.
 
 \section{Dimension}
 
@@ -134,10 +140,12 @@ In engineering, the most common examples are functions (e.g., the set of all $f\
 
 \paragraph{Is it possible that an infinite-dimensional matrix is invertible?}
 
-Yes, an ``infinite-dimensional matrix $A$'' is an array $a_{ij} \in \mathbb{R}$ for $i,j \in \mathbb{N}$.
-First, one needs to generalize our notion of matrix multiplication to use an infinite sum with convergence defined using the standard metric space of the real numbers.
-Then, the standard definition of invertibility still applies: An infinite-dimensional matrix $A$ is invertible if there is an infinite-dimensional matrix $B$ such that $AB = BA = I$ (where all implied limits must exist).
-There is one new element: a finite-dimensional matrix is invertible if it is non-singular (e.g., it does not map any non-zero vector to $\vecnot{0}$) but this is not sufficient for infinite-dimensional matrices.
+
+Yes, but one must first specify the vector space on which the array acts and how its sums converge.
+The identity on $\ell^2$ is a simple invertible example.
+Unlike a square matrix in finite dimensions, an injective operator in infinite dimensions need not be surjective.
+For instance, the right shift $(x_1,x_2,\ldots)\mapsto(0,x_1,x_2,\ldots)$ on $\ell^2$ is injective but misses every sequence with a nonzero first coordinate.
+An inverse must be defined on the intended codomain; for a bounded bijection between Banach spaces, it is also bounded.
 
 
 \section{Other questions}

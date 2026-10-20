@@ -19,7 +19,7 @@
 
 \title{ECE 586: Vector Space Methods \\ Lecture 3: Frequently Asked Questions}
 \author{Henry D. Pfister \\ \univ}
-\date{September 5th, 2020}
+\date{Revised October 18, 2026}
 
 \maketitle
 
@@ -27,7 +27,7 @@
 
 \section{Set Theory}
 
-\paragraph{Could you explain more in depth how we go from the logic expression to the set expression in De Morgan's Identity in Slide 7?}
+\paragraph{Could you explain more in depth how we go from the logic expression to the set expression in De Morgan's identity on slide 7, ``De Morgan, Infinite Operations, and Negation,''?}
 
 Consider two logical statements $P$: $x \in A$ and $Q$: $x \in B$. Note that the negation of $P$ indicates $x \notin A$ which is identical as $x \in A^c$. So, the logical statement $P \vee Q$ is equivalent to $x \in A \cup B$ and the negation of $P \vee Q$ is equivalent to $x \in (A \cup B)^c$. Applying De Morgan's identity to $P \vee Q$ results in $\neg (P \vee Q) \Leftrightarrow \neg P \wedge \neg Q$. Here, $\neg P \wedge \neg Q$ is equivalent to $x \in A^c \cap B^c$. Thus, $(A \cup B)^c = A^c \cap B^c$.
 
@@ -39,11 +39,11 @@ The cardinality of a set is also called its size, when no confusion with other n
 
 First, let's consider a matrix $A_{i,j}$ where $i,j \in \mathbb{N}$.
 For such a matrix, one could make a 2D grid (e.g., picture graph paper) and write $A_{i,j}$ in the box associated with row $i$ and column $j$.
-If we let $A_{i,j}$ equal the rational number $(j-1)/i$, then any countable enumeration of the entries in $A_{i,j}$ would give a countable enumeration of the non-negative rational numbers.
+If we let $A_{i,j}$ equal the rational number $(j-1)/i$, then an enumeration of its entries along successive diagonals lists all non-negative rational numbers. Discard repeated fractions to obtain a list without repetitions, and interleave the positive and negative values to enumerate all of $\mathbb{Q}$.
 
 For an infinite matrix like this, there are many enumeration orders that work but also some that do not.
 For example, enumerating row by row does not work because the first row (i.e., the natural numbers) is infinite and we'd never get to any rational numbers with denominators greater than 1.
-Instead, for $n=1,2,\ldots$ in that order, we could enumerate all $i,j$ such that $|i|+|j|=n$. 
+Instead, for $n=1,2,\ldots$ in that order, we could enumerate all $i,j$ such that $|i|+|j|=n$.
 Using this order, any entry of the matrix (e.g., any fixed non-negative rational number) will eventually be enumerated.
 This idea can be generalized to show that the Cartesian product of finitely-many countable sets is also countable.
 
@@ -53,7 +53,7 @@ In applications, one can really only compute with mathematical objects that are 
 I consider an object $A$ to be ``essentially finite'' if $A \in X$ for a metric space $(X,d)$ and there is a sequence $A_n \in X$ of finite objects such that $A_n \to A$.
 This means that $A$ can be approximated arbitrarily well by finite objects.
 As an example, consider approximating a continuous function $f\colon [-1,1] \to \mathbb{R}$ by a sequence $f_n$ of piecewise linear functions with $n$ pieces.
- 
+
 In proofs, it does not come up too often but here is an example that exposes some differences between finite dimensional real vectors, countably infinite vectors (e.g., indexed by $\mathbb{N}$), and uncountably infinite real vectors (e.g., indexed by $[0,1]$).
 Here, it is worth noting that all of these can be viewed as real functions $f\colon X \to \mathbb{R}$.
 For $n$-dimensional vectors, we have $X =  \{1,2,\ldots,N\}$.
@@ -67,9 +67,10 @@ For $i=1,2,\dots,n$, the $i$-th use extracts the subsequence (of the previous su
 Induction is sometimes called ``finite induction'' because it only proves $P(n)$ for all finite $n$.
 It does not prove ``$\lim_{n\to\infty} P(n)$'' (assuming this limiting statement even makes sense).
 
-Still, using a more complicated argument, one can extend the Bolzano-Weierstrass Theorem to countably infinite vectors.
-But, that's it.
-The Bolzano-Weierstrass Theorem is not true for all sequences $f_n$ of functions mapping $[0,1]$ to $\mathbb{R}$. 
+For countably many coordinates, a diagonal subsequence argument works if each coordinate sequence is bounded; it gives coordinatewise convergence.
+This need not give convergence in a norm such as $\ell^2$.
+For example, the standard unit vectors in $\ell^2$ have pairwise distance $\sqrt{2}$, so no subsequence converges in norm.
+One must specify the metric or topology before extending a compactness claim to an infinite-dimensional function or sequence space.
 
 \paragraph{Can you explain the infinite unions/intersections in more detail?}
 
@@ -94,7 +95,7 @@ Since $n \in S_d^c$ iff $\neg P(n,d)=$``for all $d \in I$, $d=n$ or $d$ does not
 This shows two standard definitions of a prime number are equivalent: ``a number greater than 1 that is not composite'' and ``a number greater than 1 that is divisible only by 1 and itself''.
 
 It is important to note that De Morgan's law for set complements only makes sense if the complement of each set in the collection is well-defined.
-This occurs whenever all sets are subsets of some common universal set (e.g., $\mathbb{N}$ is the above example).
+This occurs whenever all sets are subsets of some common universal set (e.g., $I=\{2,3,\ldots\}$ in the above prime-number example).
 
 
 \paragraph{What would be an example of an axiom in axiomatic set theory?}
@@ -129,7 +130,7 @@ But, one would expect that some do (e.g., ``the set of all sets'' should contain
 Now, consider the set of all type 2 sets and call this $R$.
 If $R$ is type 2 (i.e., it does not contain itself), then (by construction of $R$) it should be a member of $R$.
 Thus, $R$ should contain itself.
-Similarly, if $R$ is type 1 (i.e., it does contain itself), then it is not type 2 and it should not be in $R$.  
+Similarly, if $R$ is type 1 (i.e., it does contain itself), then it is not type 2 and it should not be in $R$.
 Thus, $R$ should not contain itself.
 
 \paragraph{Can we just disallow the Russell's paradox to make naive set theory consistent?}
@@ -155,14 +156,13 @@ In this case, we implicitly used the ZF axioms to prove that consistency (with r
 There is no foundational issue here because we used a strong theory (e.g., ZF) to prove a simple statement that is not self-referential.
 
 
-\paragraph{How is the codomain Y determined? For example, consider function: $f(x) = x^2$. Is the codomain the set of all non-negative numbers or $\mathbb{R}$.}
-
-Here, the function is not properly defined because there is no initial statement $f\colon X \to Y$ that defines the domain and codomain.
-
 \paragraph{Do we have to form groups for projects by ourselves?}
 
-No, the mini-projects (which are really just longer computer assignments) are assigned individually.
-You are welcome to discuss ideas with other students but you must write the code and report yourself.
+
+Mini-projects are individual assignments, so no group is required.
+You may discuss ideas with classmates, but each student writes their own code without AI.
+End-of-semester projects may be completed in groups and may use AI.
+
 
 \paragraph{The video screen blocks part of the slide so I can't see the full sentence.}
 

@@ -211,6 +211,7 @@ $F$ forms a \textcolor{blue}{field} if the two operations satisfy:
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{Speaker note says "placing element next to each other"; please confirm the intended wording.}
 		\item Read.  Multiplication is denoted by placing element next to each other.
 		\item A field satisfies all the standard multiplicative and additive properties of the real numbers.  They are listed here for your review but you do not need to memorize them.
 	\end{enumerate}
@@ -245,6 +246,7 @@ For prime $p$, set $\{0,1,\ldots,p-1\}$ with add. and mult. modulo $p$ is a fiel
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
 		\setlength\itemsep{3mm}
+		% \gpt{Speaker note says "Such fields are be useful"; please confirm the intended wording.}
 		\item Read.  The last example is a field with a finite number of elements.  Such fields are be useful in communications and computing. 
 	\end{enumerate}
 }
@@ -253,7 +255,7 @@ For prime $p$, set $\{0,1,\ldots,p-1\}$ with add. and mult. modulo $p$ is a fiel
 
 \begin{frame}<1-2> \frametitle{3.2: Matrices}
 
-Consider finding $n$ scalars $x_1, \ldots, x_n \in F$ that satisfy these conditions \vspace{-0.5mm}
+Consider finding $n$ scalars $x_1, \ldots, x_n \in F$ that satisfy the following conditions: \vspace{-0.5mm}
 \begin{equation*} \begin{array}{ccccccccc}
 a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & y_1 \\
 a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & y_2 \\
@@ -350,7 +352,7 @@ A matrix $A \in F^{m\times n}$ is in \textcolor{blue}{row echelon form} if:
 \item For all rows with non-zero entries, the leading coefficient (i.e., the first non-zero element from the left) is strictly to the right of the leading coefficient of the row above it.
 \end{enumerate}
 Thus, the entries below the leading coefficient in a column are zero. \\
-$A$ is in \textcolor{blue}{column echelon form} if $A^T$ is in row echelon form.
+Also, $A$ is in \textcolor{blue}{column echelon form} if $A^T$ is in row echelon form.
 \end{definition}
 
 \begin{definition}<2->
@@ -359,7 +361,7 @@ A matrix $B \in F^{m\times n}$ is in \textcolor{blue}{reduced row echelon form} 
 \item in row echelon form with every leading coefficient equal to 1, and
 \item every leading coefficient is the only non-zero element in its column.
 \end{enumerate}
-$B$ is \textcolor{blue}{reduced column echelon form} if $B^T$ is in reduced row echelon form.
+Also, $B$ is \textcolor{blue}{reduced column echelon form} if $B^T$ is in reduced row echelon form.
 \end{definition}
 
 \uncover<1->{\begin{tikzpicture}[overlay,remember picture,shift={(13.3,3.6)}]
@@ -407,7 +409,7 @@ An \textcolor{blue}{elementary row operation} on an $m \times n$ matrix consists
 \item swapping two rows, or
 \item adding a scalar multiple of one row to another row.
 \end{enumerate}
-An \textcolor{blue}{elementary column operation} is the same but applied to the columns.
+An \textcolor{blue}{elementary column operation} is the same but applied to columns.
 \end{definition}
 
 
@@ -453,11 +455,12 @@ For any $m\times n$ matrix $A$ over $F$, there is an invertible $m \times m$ mat
 \item<2-> For $A\in F^{m \times n}$, define the augmented matrix $A' = [A \;\; I]$
 \item<3-> Use elementary row operations to transform $A'$ into RREF as $R'$
 \item<4-> Elementary row operations imply that $R' = P A'$ for some invertible $P$
-\item<5-> Then, $R' = [R \;\; P]$ where $R=PA$ is in RREF \qedhere
+\item<5-> Then, $R' = P [A \;\; I] = [R \;\; P]$ implies $R=PA$ is in RREF \qedhere
 \end{itemize}
 \end{proof}
 
 \note{
+% \gpt{This five-overlay proof frame has only three speaker-note cues. The production script conservatively reads the newly revealed text on overlays 4 and 5; add notes if a different explanation is intended.}
 	\vspace{2mm}
 	\begin{enumerate}[<alert@+>]
 		\footnotesize
@@ -481,9 +484,9 @@ Then, there exists a length-$n$ column vector $\vecnot{x} \neq \vecnot{0}$ (over
 
 \begin{proof}<2->
 \begin{itemize}
-\item<2-> Use row reduction to compute the reduced row echelon form $R=PA$ of $A$, where $P$ is invertible by previous lemma.
+\item<2-> Use row reduction to compute the reduced row echelon form of $A$ giving $R=PA$, where $P$ is invertible by the previous lemma.
 
-\item<3-> Observe that the columns of $R$ containing leading elements can be combined in a linear combination to cancel any other column of $R$.
+\item<3-> Observe that the columns of $R$ containing leading elements can be combined in linear combination to cancel any other column of $R$.
 
 \item<4-> Thus, one can construct a vector $\vecnot{x}$ satisfying $R\vecnot{x}=\vecnot{0}$ and observe that $A \vecnot{x} = P^{-1} R \vecnot{x} = \vecnot{0}$. \hfill \qedhere
 \end{itemize}

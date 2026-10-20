@@ -184,7 +184,7 @@
 \begin{frame}<1-4> \frametitle{Markov Chains}
 
 \begin{definition}<1->
-A \textcolor{blue}{finite-state Markov chain (FSMC)} with $n$ states is a sequence of random variables $X_{1},X_{2},X_{3},\ldots$ where each $X_{i}\in[n]\triangleq\left\{ 1,2,\ldots,n\right\} $ and \vspace{-2mm}
+A \textcolor{blue}{finite-state Markov chain (FSMC)} with $n$ states is a sequence of random variables $X_{1},X_{2},X_{3},\ldots$ where $X_{t}\in[n]\triangleq\left\{ 1,\ldots,n\right\} $ is the state at time $t$ and\vspace{-2mm}
 \[
 \Pr\left(X_{t+1}=j\,\middle|\,X_{t}=i,X_{1},X_{2},\ldots,X_{t-1}\right)=\Pr\left(X_{t+1}=j\,\middle|\,X_{t}=i\right).
 \]
@@ -198,7 +198,7 @@ For a time-invariant FSMC, let $P\in\mathbb{R}^{n\times n}$\\ denote the \textco
 
 \vspace{2mm}
 
-\uncover<3->{Since each row of $P$ is a probability distribution, $P_{i,j}\geq0$ and\\ $\sum_{j=1}^{n}P_{i,j}=1$.  Matrices with this property are called \textcolor{blue}{stochastic}}
+\uncover<3->{Since each row of $P$ is a probability distribution, $P_{i,j}\geq0$ and\\ $\sum_{j=1}^{n}P_{i,j}=1$.  Matrices with this property are called \textcolor{blue}{stochastic}.}
 
 \uncover<4->{%
 \begin{tikzpicture}[overlay,remember picture,shift={(10.75,1.0)},->, >=stealth', auto, semithick, node distance=3cm]
@@ -273,7 +273,7 @@ Using the notation $\vecnot{\pi}^{(t)}=(\pi_{1}^{(t)},\ldots,\pi_{n}^{(t)})$ wit
 
 \begin{frame} \frametitle{Simulating a Markov Chain}
 
-Let $X \in [n]$ be a rv with pmf $\Pr (X=i) = p_i$ and cdf $F_X (j) = \sum_{i=1}^j p_i $
+Let $X \in [n]$ be a rv with $\Pr (X=i) = p_i$ and cdf $F_X (j) = \sum_{i=1}^j p_i $
 \vspace{4mm}
 
 \begin{itemize}
@@ -322,16 +322,17 @@ Let $X \in [n]$ be a rv with pmf $\Pr (X=i) = p_i$ and cdf $F_X (j) = \sum_{i=1}
 		\item Read.
 	\end{enumerate}
 }
+% \gpt{Speaker-note transcription gap: this frame renders six overlays but has only two note cues. Overlays 3--6 use the conservative exact-new-reveal fallback in scripts/video12.md.}
 
 \end{frame}
 
 \begin{frame}<1-3> \frametitle{Hitting Time}
 
-\begin{definition}For a Markov chain starting from state $i$, the first \textcolor{blue}{hitting time} of state $j$ is a random variable $T_{i,j}$ with distribution \vspace{-2mm}
+\begin{definition}For a Markov chain starting from state $i$, the first \textcolor{blue}{hitting time} of state $j$ is a random variable $T_{i,j}$ where \vspace{-2mm}
 \[
 \Pr\left(T_{i,j}=m\right)=\Pr\left(X_{m+1}=j,X_{m}\neq j,X_{m-1}\neq j,\ldots,X_{2}\neq j\,\middle|\,X_{1}=i\right).
 \]
-By convention, $\Pr\big(T_{i,j}=0\big)=\delta_{i,j}$ where $\delta_{i,j}$ is Kronecker delta function and,  if state $j$ is not reachable from state $i$, then $T_{i,j} = \infty$.
+By convention, $\Pr\big(T_{i,j}\!=\!0\big)\!=\!\delta_{i,j}$ where $\delta_{i,j}$ is the Kronecker delta function and,  if state $j$ is not reachable from state $i$, then $T_{i,j} = \infty$.
 Alternatively, we have
 \vspace{-2mm}
 \[
@@ -364,6 +365,7 @@ If $j$ is an absorbing state, then getting to state $j$ means staying in state $
 		\item Read.
 	\end{enumerate}
 }
+% \gpt{Speaker-note transcription gap: this frame renders three overlays but has only two note cues. Overlay 3 uses the conservative exact-new-reveal fallback in scripts/video12.md.}
 
 \end{frame}
 
